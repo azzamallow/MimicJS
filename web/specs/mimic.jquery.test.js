@@ -1,14 +1,8 @@
-var Map = function() {}
-var Application = function () {
-	this.map;
-};
-
-var map, application;
+var $;
 
 Screw.Unit(function() {
 	describe('jquery', function() {
 		before(function() {
-			map = mimic(new Map());
 			$ = mimic(jQuery);
 		});
 		
