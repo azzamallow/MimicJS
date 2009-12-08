@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="mimic" default="package" basedir=".">
+	<target name="package" description="Compress Javascript source code">
+	    <delete file="target/mimic.js"/>	
+		<apply executable="java" parallel="false" failonerror="true">
+	    	<arg value="-jar"/>
+            <arg file="${lib.dir}/yuicompressor-2.4.2.jar"/>
+            <arg value="--nomunge"/>
+            <arg value="--type"/>
+            <arg value="js"/>
+            <arg value="--preserve-semi"/>
+            <arg value="--charset"/>
+            <arg value="ISO-8859-1"/>
+            <arg value="-o"/>
+            <targetfile/>
+            <srcfile/>
+            <fileset dir="target/web/scripts">
+                <include name="**/*.js"/>
+                <exclude name="**/*-min.js"/>
+            </fileset>
+            <mapper type="glob" from="*.js" to="target/scripts/*-min.js"/>
+        </apply>
+        
+		<concat destfile="target/script.js">
+			 <fileset dir="target/scripts">
+                <include name="**/*-min.js"/>
+            </fileset>	
+		</concat>
+		
+		<delete failonerror="false">
+            <fileset dir="target/scripts">
+                <include name="**/*-min.js"/>
+            </fileset>
+        </delete>
+    </target>
+</project>
