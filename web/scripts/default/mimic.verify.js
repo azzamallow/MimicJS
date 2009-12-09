@@ -14,8 +14,8 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 			throw ('The function "' + name + '" was called, but was not expected to be called');
 		}
 		
-		if (expectations[i].throws != null) {
-			throw(expectations[i].throws);
+		if (expectations[i].throwz != null) {
+			throw(expectations[i].throwz);
 		}
 		
 		if (typeof expectations[i].callCount != 'number') {

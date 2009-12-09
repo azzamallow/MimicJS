@@ -51,7 +51,7 @@ Mimic.Expectation = function(name, callExpected, parameterCount, callCount) {
 	this.parameterCount = parameterCount;
 	this.parameters = [];
 	this.returns = null;
-	this.throws = null;
+	this.throwz = null;
 	
 	this.once = function() {
 		return this.exactly(1, time);
@@ -71,7 +71,7 @@ Mimic.Expectation = function(name, callExpected, parameterCount, callCount) {
 	};
 	
 	this.andThrow = function(value) {
-		this.throws = value;
+		this.throwz = value;
 	};
 	
 	this.using = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {

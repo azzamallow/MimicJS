@@ -4,7 +4,7 @@
 	    <delete file="target/mimic.js"/>	
 		<apply executable="java" parallel="false" failonerror="true">
 	    	<arg value="-jar"/>
-            <arg file="${lib.dir}/yuicompressor-2.4.2.jar"/>
+            <arg file="lib/yuicompressor-2.4.2.jar"/>
             <arg value="--nomunge"/>
             <arg value="--type"/>
             <arg value="js"/>
@@ -14,21 +14,27 @@
             <arg value="-o"/>
             <targetfile/>
             <srcfile/>
-            <fileset dir="target/web/scripts">
-                <include name="**/*.js"/>
-                <exclude name="**/*-min.js"/>
+            <fileset dir="web/scripts">
+				<include name="**/*.js"/>
+				<exclude name="**/*-min.js"/>
             </fileset>
-            <mapper type="glob" from="*.js" to="target/scripts/*-min.js"/>
+            <mapper type="glob" from="*.js" to="web/scripts/*-min.js"/>
         </apply>
         
 		<concat destfile="target/script.js">
-			 <fileset dir="target/scripts">
-                <include name="**/*-min.js"/>
+			<fileset dir="web/scripts">
+				<include name="*-min.js"/>
+            </fileset>
+			<fileset dir="web/scripts/default">
+				<include name="*-min.js"/>
+            </fileset>
+			<fileset dir="web/scripts/jquery">
+				<include name="*-min.js"/>
             </fileset>	
 		</concat>
 		
 		<delete failonerror="false">
-            <fileset dir="target/scripts">
+            <fileset dir="web/scripts">
                 <include name="**/*-min.js"/>
             </fileset>
         </delete>
