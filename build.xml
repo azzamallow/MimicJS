@@ -21,7 +21,7 @@
             <mapper type="glob" from="*.js" to="web/scripts/*-min.js"/>
         </apply>
         
-		<concat destfile="target/script.js">
+		<concat destfile="target/mimic.js">
 			<fileset dir="web/scripts">
 				<include name="*-min.js"/>
             </fileset>
