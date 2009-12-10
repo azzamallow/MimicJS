@@ -5,8 +5,12 @@ Mimic.Verify.JQuery = function(mimic) {
 		var expectation = mimic._expect.expectations[i];
 		
 		var failedSelector = expectation.hasFailedSelectorFrom(calls);
-		if (failedSelector == true) {
-			throw ('The selector "' + expectation.selector +'" was expected but was not used!');
+		if (failedSelector != false) {
+			if (failedSelector.never == true) {
+				throw ('The selector "' + expectation.selector +'" was expected to never be used, however it was!');
+			} else {
+				throw ('The selector "' + expectation.selector +'" was expected but was not used!');
+			}
 		}
 		
 		var failedExpectations = expectation.hasFailedExpectationsFrom(calls);

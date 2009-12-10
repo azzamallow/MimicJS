@@ -1,12 +1,11 @@
 function Mimic() {
 	this.mimics = [];
+	this.jQuery = null;
 	this._value = null;
 	
 	this.reset = function() {
-		for (var i = 0; i < this.mimics.length; i++) {
-			if (this.mimics[i]._reset != null && typeof this.mimics[i]._reset == 'function') {
-				this.mimics[i]._reset();
-			}
+		if (this.jQuery != null) {
+			this.jQuery._reset();
 		}
 		
 		this.mimics = [];
@@ -29,6 +28,10 @@ function Mimic() {
 		for (var mimic in this.mimics) {
 			Mimic.Verify(this.mimics[mimic]);
 		}
+		
+		if (this.jQuery != null) {
+			Mimic.Verify(this.jQuery);
+		}
 	};
 };
 
@@ -38,7 +41,7 @@ function mimic(object) {
 	var mimic;
 	if (object.fn && object.fn.jquery) {
 		mimic = Mimic.Object.JQuery;
-		Mimic.mimics.push(mimic());
+		Mimic.jQuery = mimic();
 	} else {
 		mimic = new Mimic.Object();
 		mimic._inject(object);

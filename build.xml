@@ -14,27 +14,27 @@
             <arg value="-o"/>
             <targetfile/>
             <srcfile/>
-            <fileset dir="web/scripts">
+            <fileset dir="src/scripts">
 				<include name="**/*.js"/>
 				<exclude name="**/*-min.js"/>
             </fileset>
-            <mapper type="glob" from="*.js" to="web/scripts/*-min.js"/>
+            <mapper type="glob" from="*.js" to="src/scripts/*-min.js"/>
         </apply>
         
 		<concat destfile="target/mimic.js">
-			<fileset dir="web/scripts">
+			<fileset dir="src/scripts">
 				<include name="*-min.js"/>
             </fileset>
-			<fileset dir="web/scripts/default">
+			<fileset dir="src/scripts/default">
 				<include name="*-min.js"/>
             </fileset>
-			<fileset dir="web/scripts/jquery">
+			<fileset dir="src/scripts/jquery">
 				<include name="*-min.js"/>
             </fileset>	
 		</concat>
 		
 		<delete failonerror="false">
-            <fileset dir="web/scripts">
+            <fileset dir="src/scripts">
                 <include name="**/*-min.js"/>
             </fileset>
         </delete>

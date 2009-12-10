@@ -13,11 +13,16 @@ Mimic.Expectation.JQuery = function(selector, context) {
 	this.selector = selector;
 	this.context = context;
 	this.functions = [];
+	this.neverBeCalled = false;
+	
+	this.neverHappens = function() {
+		this.neverBeCalled = true;
+	};
 	
 	this.should = function(name) {
 		return this.and(name);
-	},
-	
+	};
+
 	this.and = function(name) {
 		this.functions.push({'name': name, 'value': []});
 		
@@ -37,8 +42,16 @@ Mimic.Expectation.JQuery = function(selector, context) {
 		
 		for (var i = 0; i < calls.length; i++) {
 			if (this.selector == calls[i].selector) {
-				return false;
+				if (this.neverBeCalled == true) {
+					return {'call': calls[i], 'never': true};
+				} else {
+					return false;					
+				}
 			}
+		}
+		
+		if (this.neverBeCalled == true) {
+			return false;
 		}
 		
 		return true;
@@ -57,9 +70,10 @@ Mimic.Expectation.JQuery = function(selector, context) {
 					if (Mimic.Util.equals(this.functions[i], calls[j].call)) {
 						expectationMet = true;
 					} else {
-						if (this.functions[i].name == calls[j].call.name && 
-							!Mimic.Util.equals(this.functions[i].value, calls[j].call.value)) {
-							brokenCall = calls[j].call;
+						if (this.functions[i].name == calls[j].call.name) {
+							if (!Mimic.Util.equals(this.functions[i].value, calls[j].call.value)) {
+								brokenCall = calls[j].call;
+							}
 						}
 					}
 				}

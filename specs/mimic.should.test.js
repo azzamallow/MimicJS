@@ -69,6 +69,15 @@ Screw.Unit(function() {
 			given.	that(original.zoomLevels).is([1, 2, 3, 4]);
 			then.	expect(map.zoomLevels).to(equal, [1, 2, 3, 4]);
 		});
+		
+		it('should be able to reference variables defined in the spec', function() {
+			var theVariableDefinedInTheSpec = {'defined': true};
+			
+			given.	theVariableDefinedInTheSpec.defined = false;
+			when.	theVariableDefinedInTheSpec.defined = false;
+			then.	theVariableDefinedInTheSpec.defined = false;
+			and.	theVariableDefinedInTheSpec.defined = false;
+		});
 	});
 });
 //	describe('using new operator with prototype', function() {
