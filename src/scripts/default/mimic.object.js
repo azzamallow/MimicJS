@@ -18,29 +18,34 @@ Mimic.Object = function(nested) {
 			this._injectInto = null;
 		};
 
-		this.should = function(theFunction) {
+		this.should = function(callString) {
 			var parameterCount = 0;
-			if (this[theFunction] != null) {
-				var parameters = Mimic.Util.parametersFrom(this[theFunction]);
+			var theFunction  = eval('this.' + callString);
+			if (theFunction != null) {
+				var parameters = Mimic.Util.parametersFrom(theFunction);
 				if (parameters != '') {
 					parameterCount = parameters.split(',').length;
 				}
 			}
 
-			return this._expect.add(theFunction, true, parameterCount, -1);
+			return this._expect.add(callString, true, parameterCount, -1);
 		};
 
-		this.does = function(theFunction) {
-			return this.should(theFunction);
+		this.does = function(callString) {
+			return this.should(callString);
 		};
 
-		this.shouldNot = function(theFunction) {
+		this.shouldNot = function(callString) {
 			var parameterCount = 0;
-			if (this[theFunction] != null) {
-				parameterCount = Mimic.Util.parametersFrom(this[theFunction]).split(',').length;
+			var theFunction  = eval('this.' + callString);
+			if (theFunction != null) {
+				var parameters = Mimic.Util.parametersFrom(theFunction);
+				if (parameters != '') {
+					parameterCount = parameters.split(',').length;
+				}
 			}
 
-			return this._expect.add(theFunction, false, parameterCount, -1);
+			return this._expect.add(callString, false, parameterCount, -1);
 		};
 	}
 	
@@ -63,12 +68,17 @@ Mimic.Object = function(nested) {
 			 		'    }' +
 			 		'}';
 				eval(theFunction);
-			} else if (typeof object[member] == 'object' && object[member].join == null) {
+			} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
 				eval('this.' + member + ' =  childMimic(object[member], root, callString);');
 			} else {
 				eval('this.' + member + ' =  object[member];');
 			}
 		}
+	};
+	
+	this._reset = function() {
+		this._called = [];
+		this._expect = new Mimic.Expectations();
 	};
 };
 

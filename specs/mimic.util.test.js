@@ -21,6 +21,10 @@ Screw.Unit(function() {
 			it('should evaluate up to ten parameters', function() {
 				expect(Mimic.Util.evalParameters(0,1,2,3,4,5,6,7,8,9)).to(equal, [0,1,2,3,4,5,6,7,8,9]);
 			});
+			
+			it('should evaluate nulls', function() {
+				expect(Mimic.Util.evalParameters(null, null)).to(equal, [null, null]);
+			});
 		});
 		
 		describe('when taking parameters from the string representation of a function', function() {
@@ -36,8 +40,12 @@ Screw.Unit(function() {
 		});
 		
 		describe('when checking if an array contains an object', function() {
-			it('should return true because the array was found in the array', function() {
+			it('should return a number because the array was found in the array', function() {
 				expect(Mimic.Util.contains([[1, {}], [2, 'left'], []], [2, 'left'])).to(equal, 1);
+			});
+			
+			it('should return false because the parameter is not contained in the array', function() {
+				expect(Mimic.Util.contains([[1, {}], [2, 'left'], ['z']], [null, null])).to(be_false);
 			});
 		});
 		

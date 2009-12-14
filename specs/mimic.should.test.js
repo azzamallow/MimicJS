@@ -6,6 +6,9 @@ Map = function() {
 	this.draw = function() { return true; };
 	this.zoom = function() { this.iveZoomed = true; };
 	this.pan = function(distance, directions) { };
+	this.layers = {
+		markerLayer: function(layer) {}
+	};
 }
 
 var mimicJQuery;
@@ -41,6 +44,11 @@ Screw.Unit(function() {
 		it('should pass as the function given returned the provided value', function() {
 			when.	map.should('draw').andReturn('map was drawn');
 			then.	expect(map.draw()).to(equal, 'map was drawn');
+		});
+		
+		it('should pass as the variable given returned the provided value', function() {
+			when.	map.should('iveZoomed').andReturn(true);
+			then.	expect(map.iveZoomed).to(be_true);
 		});
 		
 		it('should throw an exception when the function given is called', function() {

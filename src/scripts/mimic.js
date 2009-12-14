@@ -4,11 +4,14 @@ function Mimic() {
 	this._value = null;
 	
 	this.reset = function() {
+		for (var mimic in this.mimics) {
+			this.mimics[mimic]._reset();
+		}
+
 		if (this.jQuery != null) {
 			this.jQuery._reset();
 		}
-		
-		this.mimics = [];
+		// this.mimics = [];
 	};
 	
 	this.that = function(value) {

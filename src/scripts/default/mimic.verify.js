@@ -29,7 +29,7 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 		}
 		
 		if (expectations[i].parameters.length > 0 && expectations[i].parameterCount == 0) {
-			throw('Your specification did not pass!<br/><p><b>' + name + '()</b> does not accept any parameters. You must remove the parameters from in the specification from <b>' + name + '()</b>');
+			throw('Your specification did not pass!<br/><p><b>' + name + '()</b> does not accept any parameters. You must remove the parameters from the specification <b>' + name + '()</b>');
 		} else if (expectations[i].parameters.length > expectations[i].parameters.slice(0, expectations[i].parameterCount).length) {
 			throw('Your specification did not pass!<br/><p>The specification executed <b>' + name + '()</b> with <b>' + expectations[i].parameters.length + '</b> parameters, however the specification expected <b>' + name + '()</b> with <b>' + expectations[i].parameters.slice(0, expectations[i].parameterCount).length + '</b> parameters');
 		}
@@ -65,9 +65,9 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 	var message = [];
 	for (var i in failedExpectations) {
 		if (message.length == 0) {
-			message.push('Your specification did not pass!<br/><p>The specification executed <b>' + name + '(' + parameters[0].join(', ') + ')</b>, however the specification expected <b>' + name + '(' + failedExpectations[i].parameters.join(', ') + ')</b>');
+			message.push('Your specification did not pass!<br/><p>The specification executed <b>' + name + '(' + Mimic.Util.toString(parameters[0]) + ')</b>, however the specification expected <b>' + name + '(' + Mimic.Util.toString(failedExpectations[i].parameters) + ')</b>');
 		} else {
-			message.push(' or <b>' + name + '(' + failedExpectations[i].parameters.join(', ') + ')</b>');
+			message.push(' or <b>' + name + '(' + Mimic.Util.toString(failedExpectations[i].parameters) + ')</b>');
 		}
 	}
 	

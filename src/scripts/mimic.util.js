@@ -4,18 +4,21 @@ Mimic.Util = {
 			return false;
 		}
 		
-		var contains = false;
   		for (var i = 0; i < array1.length; i++) {
     		if (this.arrayEquals(array1[i], array2) == true) {
       			return i;
     		}
   		}
 		
-  		return contains;
+  		return false;
   	},
 	
 	arrayEquals: function(array1, array2) {
 		if (array1 == null || array2 == null) {
+			return false;
+		}
+		
+		if (array1.length != array2.length) {
 			return false;
 		}
 		
@@ -62,7 +65,9 @@ Mimic.Util = {
 		var string = [];
 				
 		for (var key in object) {
-			if (typeof object[key] == 'object') {
+			if (object[key] == null) {
+				string.push('null');
+			} else if (typeof object[key] == 'object') {
 				if (object[key].join != null) {
 					string.push('[' + this.toString(object[key]) + ']');
 				} else {
@@ -85,7 +90,7 @@ Mimic.Util = {
 	evalParameters: function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
 		var parameters = [];
 		for (var i = 0; i < 10; i++) {
-			if (eval('arg' + i) != undefined) {
+			if (typeof eval('arg' + i) != 'undefined') {
 				parameters.push(eval('arg' + i));
 			}
 		}
