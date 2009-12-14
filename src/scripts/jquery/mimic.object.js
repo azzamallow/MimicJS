@@ -66,9 +66,9 @@ Mimic.JQuery = function() {
 	this._inject = function(object) {
 		for(var member in object) {
 			if (typeof object[member] == 'function') {
-				var theFunction = 'this.' + member + ' = function(' + Mimic.Util.parametersFrom(object[member]) + ') { ' +
+				var theFunction = 'this.' + member + ' = function(arg0, arg1, arg2, arg3, arg4) { ' +
 					'    var call = new Mimic.Call.JQuery(); ' +
-					'	 call.set("' + member + '", Mimic.Util.evalParameters(' + Mimic.Util.parametersFrom(object[member]) + '));' +
+					'	 call.set("' + member + '", Mimic.Util.evalParameters(arg0, arg1, arg2, arg3, arg4));' +
 					'	 this._called.push(call);' + 
 			 		'    return this;' +
 			 		'}';

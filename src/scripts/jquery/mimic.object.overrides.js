@@ -169,7 +169,7 @@ Mimic.Object.JQuery.findElements = function( t, context ) {
 					// Do a quick check for the existence of the actual ID attribute
 					// to avoid selecting by the name attribute in IE
 					// also check to insure id is a string to avoid selecting an element with the name of 'id' inside a form
-					if ( (originalJQueryy.browser.msie||originalJQuery.browser.opera) && oid && typeof oid.id == "string" && oid.id != m[2] )
+					if ( (originalJQuery.browser.msie||originalJQuery.browser.opera) && oid && typeof oid.id == "string" && oid.id != m[2] )
 						oid = jQuery('[@id="'+m[2]+'"]', elem)[0];
 
 					// Do a quick check for node name (where applicable) so

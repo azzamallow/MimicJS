@@ -110,5 +110,10 @@ Screw.Unit(function() {
 			when.	jQuery().using('.enqueued').should('attr').using({'key':'value'}, 'theName', [1,2,3,'4']);
 			then.	it.should.say('The function "attr" was expected to be called with ({"key": "value"}, "theName", [1, 2, 3, "4"]) but was called with ({"k3y": "valu3"}, "theNam3", [1, 2, 3, "4"])');
 		});
+		
+		it('should allow calls to jquery objects with up to four parameters', function() {
+			when.	jQuery('.enqueued').addClass('passed', 1);
+			then.	jQuery().using('.enqueued').should('addClass').using('passed', 1);
+		});
 	});
 });

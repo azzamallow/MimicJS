@@ -18,7 +18,7 @@ function Mimic() {
 	
 	this.is = function(value) {
 		if (this._value != value && !Mimic.Util.equals(this._value, value)) {
-			throw('they dont equal');
+			throw('The value ' + value + ' was expected to equal ' + this._value + ', but does not.');
 		}
 		
 		this._value = null;
@@ -44,7 +44,7 @@ function mimic(object) {
 		Mimic.jQuery = mimic();
 	} else {
 		mimic = new Mimic.Object();
-		mimic._inject(object);
+		mimic._inject(object, mimic);
 		Mimic.mimics.push(mimic);
 	}
 
@@ -54,6 +54,7 @@ function mimic(object) {
 function times(){};
 function time(){};
 function anything(){};
+function never(){};
 
 window.given = window;
 window.when = window;

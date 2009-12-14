@@ -78,6 +78,47 @@ Screw.Unit(function() {
 			then.	theVariableDefinedInTheSpec.defined = false;
 			and.	theVariableDefinedInTheSpec.defined = false;
 		});
+		
+		it('should be able to play nice with nested objects in a mimic', function() {
+			EMS = {
+	          Services: {
+	              communicationMode: "",
+	              Map: function(divName, others) {
+	                this.addControl = function() {};
+	                this.events = new Object();
+	                this.events.register = function() {};
+	                this.pan = function(dx, dy) {};
+	              },
+	              Geocoder: function() {
+	                  this.findAddress = function(street, suburb, state, callback) {
+	                        geocoder_findAddress_calledWith = { street: street,
+	                                suburb: suburb, state: state, callback: callback };
+	                  };
+	              }
+	          },
+	          Control: {
+	              Copyright: function() {},
+	              Scale: function() {},
+	              MouseDefaults: function() { this.name = "MouseDefaults"; },
+	              ZoomBar: function() { this.name = "ZoomBar"; },
+	              PanButton: function(direction) { this.name = ("PanButton-" + direction); }
+	          },
+	          Bounds: function(left, bottom, right, top) { return [left, bottom, right, top]; },
+	          Popup: function() {
+	              this.setSize = function(s) {
+	                  this.size = s;
+	              }
+	          },
+	          LonLat: function(lon, lat) {
+	              this.longitude = lon;
+	              this.latitude = lat;
+	          }
+	        };
+	
+			EMS = mimic(EMS);
+			given.	EMS.Services.Geocoder();
+			then.	EMS.should('Services.Geocoder');
+		});
 	});
 });
 //	describe('using new operator with prototype', function() {
