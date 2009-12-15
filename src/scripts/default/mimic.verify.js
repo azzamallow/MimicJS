@@ -5,6 +5,8 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 		} else if (expectations[0].callExpected == true) {
 			throw ('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> was expected but did not get called!');
 		}
+		
+		return;
 	}
 	
 	var name = called.name;
@@ -52,10 +54,10 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 		}
 		
 		for (var j = 0; j < count; j++) {
-			var position = Mimic.Util.contains(parameters, expectations[i].parameters);
+			var position = Mimic.Util.Array.contains(parameters, expectations[i].parameters);
 			if (typeof position == 'number') {
 				parameters[position] = null;
-				parameters = Mimic.Util.clean(parameters);
+				parameters = Mimic.Util.Array.clean(parameters);
 	  		} else {
 	  			failedExpectations.push(expectations[i]);
 	  		}
@@ -65,9 +67,9 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 	var message = [];
 	for (var i in failedExpectations) {
 		if (message.length == 0) {
-			message.push('Your specification did not pass!<br/><p>The specification executed <b>' + name + '(' + Mimic.Util.toString(parameters[0]) + ')</b>, however the specification expected <b>' + name + '(' + Mimic.Util.toString(failedExpectations[i].parameters) + ')</b>');
+			message.push('Your specification did not pass!<br/><p>The specification executed <b>' + name + '(' + Mimic.Util.Object.toString(parameters[0]) + ')</b>, however the specification expected <b>' + name + '(' + Mimic.Util.Object.toString(failedExpectations[i].parameters) + ')</b>');
 		} else {
-			message.push(' or <b>' + name + '(' + Mimic.Util.toString(failedExpectations[i].parameters) + ')</b>');
+			message.push(' or <b>' + name + '(' + Mimic.Util.Object.toString(failedExpectations[i].parameters) + ')</b>');
 		}
 	}
 	

@@ -20,7 +20,7 @@ function Mimic() {
 	};
 	
 	this.is = function(value) {
-		if (this._value != value && !Mimic.Util.equals(this._value, value)) {
+		if (this._value != value && !Mimic.Util.Object.equals(this._value, value)) {
 			throw('The value ' + value + ' was expected to equal ' + this._value + ', but does not.');
 		}
 		

@@ -22,7 +22,7 @@ Mimic.Object = function(nested) {
 			var parameterCount = 0;
 			var theFunction  = eval('this.' + callString);
 			if (theFunction != null) {
-				var parameters = Mimic.Util.parametersFrom(theFunction);
+				var parameters = Mimic.Util.Parameters.arguments(theFunction);
 				if (parameters != '') {
 					parameterCount = parameters.split(',').length;
 				}
@@ -39,7 +39,7 @@ Mimic.Object = function(nested) {
 			var parameterCount = 0;
 			var theFunction  = eval('this.' + callString);
 			if (theFunction != null) {
-				var parameters = Mimic.Util.parametersFrom(theFunction);
+				var parameters = Mimic.Util.Parameters.arguments(theFunction);
 				if (parameters != '') {
 					parameterCount = parameters.split(',').length;
 				}
@@ -57,12 +57,12 @@ Mimic.Object = function(nested) {
 			}
 			
 			if (typeof object[member] == 'function') { 
-				var theFunction = 'this.' + member + ' = function(' + Mimic.Util.parametersFrom(object[member]) + ') { ' +
+				var theFunction = 'this.' + member + ' = function(' + Mimic.Util.Parameters.arguments(object[member]) + ') { ' +
 					'    if (root._called["' + callString + '"] == null) { root._called["' + callString + '"] = new Mimic.Call("' + callString + '"); } ' +  
 			 		'    root._called["' + callString + '"].incrementCallCount();' +
-					'	 root._called["' + callString + '"].parameters.push(Mimic.Util.evalParameters(' + Mimic.Util.parametersFrom(object[member]) + '));' +
-			 		'    if (root._expect.returnFor("' + member + '", Mimic.Util.clean([' + Mimic.Util.parametersFrom(object[member]) + '])) != null) { ' +
-			 		'    	return root._expect.returnFor("' + member + '", Mimic.Util.clean([' + Mimic.Util.parametersFrom(object[member]) + ']));' + 
+					'	 root._called["' + callString + '"].parameters.push(Mimic.Util.Parameters.evaluate(' + Mimic.Util.Parameters.arguments(object[member]) + '));' +
+			 		'    if (root._expect.returnFor("' + member + '", Mimic.Util.Array.clean([' + Mimic.Util.Parameters.arguments(object[member]) + '])) != null) { ' +
+			 		'    	return root._expect.returnFor("' + member + '", Mimic.Util.Array.clean([' + Mimic.Util.Parameters.arguments(object[member]) + ']));' + 
 			 		'    } else {' +
 			 		'    	return object[member];' +
 			 		'    }' +

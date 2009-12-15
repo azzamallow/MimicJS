@@ -55,7 +55,7 @@ Mimic.JQuery = function() {
 		return this;
 	};
 	
-	this.using = function(selector, context) {
+	this.usingSelector = function(selector, context) {
 		return this._expect.add(selector, context);
 	};
 	
@@ -68,7 +68,7 @@ Mimic.JQuery = function() {
 			if (typeof object[member] == 'function') {
 				var theFunction = 'this.' + member + ' = function(arg0, arg1, arg2, arg3, arg4) { ' +
 					'    var call = new Mimic.Call.JQuery(); ' +
-					'	 call.set("' + member + '", Mimic.Util.evalParameters(arg0, arg1, arg2, arg3, arg4));' +
+					'	 call.set("' + member + '", Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4));' +
 					'	 this._called.push(call);' + 
 			 		'    return this;' +
 			 		'}';

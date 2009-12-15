@@ -7,7 +7,7 @@ Mimic.Expectations = function() {
 				this.expectations[i] = null;
 			}
 		}
-		this.expectations = Mimic.Util.clean(this.expectations);
+		this.expectations = Mimic.Util.Array.clean(this.expectations);
 		
 		var expectation = new Mimic.Expectation(name, callExpected, parameterCount, callCount);
 		this.expectations.push(expectation);
@@ -16,7 +16,7 @@ Mimic.Expectations = function() {
 	
 	this.returnFor = function(name, parameters) {
 		for (var i in this.expectations) {
-			if (this.expectations[i].name == name && Mimic.Util.arrayEquals(this.expectations[i].parameters, parameters)) {
+			if (this.expectations[i].name == name && Mimic.Util.Array.equals(this.expectations[i].parameters, parameters)) {
 				return this.expectations[i].returns;
 			}
 		}
@@ -79,7 +79,7 @@ Mimic.Expectation = function(name, callExpected, parameterCount, callCount) {
 			return;
 		}
 		
-		this.parameters = Mimic.Util.evalParameters(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+		this.parameters = Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 		return this;
 	};
 };

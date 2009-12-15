@@ -30,7 +30,7 @@ Mimic.Expectation.JQuery = function(selector, context) {
 	};
 	
 	this.using = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
-		this.functions[this.functions.length - 1].value = Mimic.Util.evalParameters(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+		this.functions[this.functions.length - 1].value = Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 		
 		return this;
 	};
@@ -67,11 +67,11 @@ Mimic.Expectation.JQuery = function(selector, context) {
 			
 			for (var j = 0; j < calls.length; j++) {
 				if (calls[j].call != null) {
-					if (Mimic.Util.equals(this.functions[i], calls[j].call)) {
+					if (Mimic.Util.Object.equals(this.functions[i], calls[j].call)) {
 						expectationMet = true;
 					} else {
 						if (this.functions[i].name == calls[j].call.name) {
-							if (!Mimic.Util.equals(this.functions[i].value, calls[j].call.value)) {
+							if (!Mimic.Util.Object.equals(this.functions[i].value, calls[j].call.value)) {
 								brokenCall = calls[j].call;
 							}
 						}

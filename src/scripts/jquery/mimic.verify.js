@@ -18,7 +18,7 @@ Mimic.Verify.JQuery = function(mimic) {
 			if (failedExpectations[0].call == null) {
 				throw ('The function "' + failedExpectations[0].expectation.name + '" was expected but did not get called!');				
 			} else if (failedExpectations[0].expectation.name == failedExpectations[0].call.name) { 
-				throw ('The function "' + failedExpectations[0].expectation.name + '" was expected to be called with (' + Mimic.Util.toString(failedExpectations[0].expectation.value) + ') but was called with (' + Mimic.Util.toString(failedExpectations[0].call.value) + ')');
+				throw ('The function "' + failedExpectations[0].expectation.name + '" was expected to be called with (' + Mimic.Util.Object.toString(failedExpectations[0].expectation.value) + ') but was called with (' + Mimic.Util.Object.toString(failedExpectations[0].call.value) + ')');
 			}
 		}
 	}
