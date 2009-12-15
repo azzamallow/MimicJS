@@ -13,18 +13,19 @@ Screw.Unit(function() {
 
 		it('should pass as the function given was not received', function() {
 			given.	map.draw();
-			then.	map.shouldNot('zoom');
+			when.	map.shouldNot('zoom');
+			then.	it.should.pass();
   		});
 		
 		it('should not pass as the function given was received', function() {
 			when.	map.draw();
 			and.	map.shouldNot('draw');
-			then.	it.should.say('The function "draw" was called, but was not expected to be called');
+			then.	it.should.say('Your specification did not pass!<br/><p><b>draw()</b> was called, but was not expected to be called');
   		});
 		
 		it('should not pass as the function expected does not exist', function() {
 			when.	map.shouldNot('doAnything');
-			then.	it.should.say('The function "doAnything" does not exist');
+			then.	it.should.say('Your specification did not pass!<br/><p><b>doAnything()</b> does not exist, however it is referenced in the specification');
 		});
 	});
 });

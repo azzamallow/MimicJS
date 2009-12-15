@@ -3,7 +3,7 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 		if (mimic[expectations[0].name] == null) {
 			throw('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> does not exist, however it is referenced in the specification');
 		} else if (expectations[0].callExpected == true) {
-			throw ('The function "' + expectations[0].name + '" was expected but did not get called!');
+			throw ('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> was expected but did not get called!');
 		}
 	}
 	
@@ -11,7 +11,7 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 	var totalExpectedCallCount = 0;
 	for (var i in expectations) {
 		if (expectations[i].callExpected == false) {
-			throw ('The function "' + name + '" was called, but was not expected to be called');
+			throw('Your specification did not pass!<br/><p><b>' + name + '()</b> was called, but was not expected to be called')
 		}
 		
 		if (expectations[i].throwz != null) {

@@ -65,6 +65,7 @@ window.then = window;
 window.and = window;
 window.it = window;
 window.should = window;
+window.pass = function() {};
 window.that = Mimic.that;
 window.expect = Screw.Matchers.expect;
 
