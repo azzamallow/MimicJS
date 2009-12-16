@@ -142,3 +142,15 @@ Mimic.Util.Parameters = {
 		return theFunction.toString().replace(/ /g, "").split("(")[1].split(")")[0];
 	}
 }
+
+Mimic.Util.Error = {
+	prefix: 'Your specification did not pass!<br/><p>',
+	
+	say: function(message, noPrefix) {
+		if (noPrefix) {
+			throw(message);
+		}
+		
+		throw this.prefix + message;
+	}
+}

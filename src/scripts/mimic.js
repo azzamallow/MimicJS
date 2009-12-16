@@ -11,7 +11,10 @@ function Mimic() {
 		if (this.jQuery != null) {
 			this.jQuery._reset();
 		}
-		// this.mimics = [];
+	};
+	
+	this.clear = function() {
+		this.mimics = [];
 	};
 	
 	this.that = function(value) {
@@ -54,6 +57,21 @@ function mimic(object) {
 	return mimic;
 }
 
+function restore(mimic) {
+	if (mimic == null) { return; }
+	
+	var object = mimic._originalObject;
+	
+	for (var i = 0; i < Mimic.mimics.length; i++) {
+		if (Mimic.mimics[i] == mimic) {
+			Mimic.mimics[i] = null;
+			Mimic.mimics = Mimic.Util.Array.clean(Mimic.mimics);
+		}
+	}
+	
+	return object;
+}
+
 function times(){};
 function time(){};
 function anything(){};
@@ -65,12 +83,12 @@ window.then = window;
 window.and = window;
 window.it = window;
 window.should = window;
-window.pass = function() {};
 window.that = Mimic.that;
 window.expect = Screw.Matchers.expect;
+window.pass = function() {};
+window.say = function(exception) {
+	thrown = exception;
+	return window;
+};
 
-window.As = window;
-window.a = window;
-window.I = window;
-window.want = window;
-window.so = window;
+var thrown;

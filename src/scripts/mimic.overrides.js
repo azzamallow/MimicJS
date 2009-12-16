@@ -1,3 +1,4 @@
+// Override ScrewUnit "it" to hook in Mimic verification
 Screw.Specifications.itOriginal = Screw.Specifications.it;
 Screw.Specifications.it = function(name, fnOriginal) {
 	Screw.Specifications.itOriginal(name, function() {
@@ -23,23 +24,7 @@ Screw.Specifications.it = function(name, fnOriginal) {
 	});
 };
 
-Screw.Specifications.title = function(fn) {};
-
-$(Screw).bind('loaded', function() {
-	$('.it').unbind('failed');
-	$('.it').bind('failed', function(e, reason) {
-      $(this).addClass('failed').append($('<p class="error">').html(reason.toString()))
-
-      var file = reason.fileName || reason.sourceURL;
-      var line = reason.lineNumber || reason.line;          
-      if (file || line) {
-        $(this).append($('<p class="error">').text('line ' + line + ', ' + file));
-      }
-    })
-});
-
-say = function(exception) {
-	thrown = exception;
-};
-
-var thrown;
+// Override jQuery "text" so that error messages appear as html
+jQuery.fn.text = function(text) {
+	return this.html(text);
+}

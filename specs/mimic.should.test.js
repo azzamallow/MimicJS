@@ -3,11 +3,14 @@ var Map, map;
 Map = function() {
 	this.iveZoomed = false;
 	this.zoomLevels = [1, 2, 3, 4];
-	this.draw = function() { return true; };
+	this.draw = function() { 
+		$('select').show();
+		return true; };
 	this.zoom = function() { this.iveZoomed = true; };
 	this.pan = function(distance, directions) { };
 	this.layers = {
-		markerLayer: function(layer) {}
+		markerLayer: function(layer) {
+		}
 	};
 }
 
@@ -24,8 +27,9 @@ Screw.Unit(function() {
 		});
 		
 		it('should pass as the function given was received', function() {
-			when.	map.draw();
-			then.	map.should('draw');
+			given.	map.draw();
+			when.	map.should('draw');
+			then.	it.should.pass();
   		});
 		
 		it('should not pass as the function given was not received', function() {
@@ -77,20 +81,19 @@ Screw.Unit(function() {
 			then.	expect(map.zoomLevels).to(equal, [1, 2, 3, 4]);
 		});
 		
-		it('should be able to reference variables defined in the spec', function() {
-			var theVariableDefinedInTheSpec = {'defined': true};
-			
-			given.	theVariableDefinedInTheSpec.defined = false;
-			when.	theVariableDefinedInTheSpec.defined = false;
-			then.	theVariableDefinedInTheSpec.defined = false;
-			and.	theVariableDefinedInTheSpec.defined = false;
-		});
-		
 		it('should be able to play nice with nested objects in a mimic', function() {
 			deepObject = mimic(DeepObject);
 			
 			given.	deepObject.First.Second();
 			then.	deepObject.should('First.Second');
+		});
+		
+		it('should assert an exception without the given, when, then', function() {
+			throwing = function() {
+				throw('an exception was thrown');
+			}
+			
+			this.should.say('an exception was thrown').when.throwing();
 		});
 	});
 });

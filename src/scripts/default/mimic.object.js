@@ -1,8 +1,9 @@
-Mimic.Object = function(nested) {
-	if (nested != true) {
+Mimic.Object = function(isChild) {
+	if (isChild != true) {
 		this._called = [];
 		this._expect = new Mimic.Expectations();
 		this._injectInto = null;
+		this._originalObject = null;
 
 		this.is = this;
 
@@ -74,6 +75,10 @@ Mimic.Object = function(nested) {
 				eval('this.' + member + ' =  object[member];');
 			}
 		}
+		
+		if (root == null || this == root) {
+			this._originalObject = object;
+		}
 	};
 	
 	this._reset = function() {
@@ -83,10 +88,8 @@ Mimic.Object = function(nested) {
 };
 
 function childMimic(object, root, callPrefix) {
-	var mimic = new Mimic.Object(nested);
+	var mimic = new Mimic.Object(true);
 	mimic._inject(object, root, callPrefix);
 
 	return mimic;
 }
-
-var nested = true;

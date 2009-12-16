@@ -1,0 +1,37 @@
+h1. What is Mimic?
+
+Mimic is a specification framework for Javascript designed with Behaviour Driven Development (BDD) and agile in mind. Rather than simply providing the mechanics of most frameworks (such as stubbing, mocking), Mimic allows a developer to clearly specify the behaviour of an object using its natural syntax, making their unit tests concise and easy to read.
+
+On top of this, Mimic provides the developer with the ability to assert the behaviour of jQuery. A developer can "mimic" the jQuery object, and any use of the object will be recorded and can be asserted in a specification.
+
+Mimic is being developed more and more each day, and the effort will continue until Mimic is complete & consistent.
+
+Mimic was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
+
+h1. Mission Statement
+
+The primary goals for Mimic:
+ * Bring the goodness of BDD, such as ubiquitous language and readable error messages, closer to the code base,
+ * Force the developer to provide function and variable names that make the specification readable, hence making the codebase more meaningful,
+ * Deter the use of technical grammar in the specification,
+ * Become the preferred specification framework for Javascript.
+
+h1. Technology
+
+Mimic is built with raw javascript and does not rely on any Javascript framework to be fully functional.
+
+As it currently stands, Mimic is best used in conjunction with the ScrewUnit testing framework. For the best experience it is recommended that Mimic is used with ScrewUnit, however Mimic is not limited to ScrewUnit and can be used with other testing frameworks out there (such as JSSpec).
+
+Mimic currently works with all Webkit browsers (such as Safari and Google Chrome) and Gecko (Mozilla Firefox).
+
+h1. Contributing
+
+The following are some areas that the community could work on:
+ * Allow Mimic to work with Internet Explorer
+ * Allow Mimic to work seamlessly with JSSpec (like it does with ScrewUnit)
+
+h1. Resources
+
+ * Wikipedia BDD (http://en.wikipedia.org/wiki/Behavior_Driven_Development)
+ * jQuery (http://jquery.com/)
+ * ScrewUnit (http://github.com/nkallen/screw-unit)

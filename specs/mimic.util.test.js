@@ -191,5 +191,18 @@ Screw.Unit(function() {
 				expect(Mimic.Util.Array.clean([2, undefined, "3"])).to(equal, [2, "3"]);
 			});
 		});
+		
+		describe('when producing an error message', function() {
+			it('should prefix the error message correctly', function() {
+				this.should.say('Your specification did not pass!<br/><p>here is my error message');
+				Mimic.Util.Error.say('here is my error message');
+			});
+			
+			it('should not prefix the error message', function() {
+				this.should.say('here is my error message');
+				Mimic.Util.Error.say('here is my error message', true);
+			});
+			
+		});
 	});
 });
