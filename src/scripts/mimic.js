@@ -50,7 +50,7 @@ function mimic(object) {
 		Mimic.jQuery = mimic();
 	} else {
 		mimic = new Mimic.Object();
-		mimic._inject(object, mimic);
+		mimic.mimic(object);
 		Mimic.mimics.push(mimic);
 	}
 

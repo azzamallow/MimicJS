@@ -1,4 +1,7 @@
 Mimic.Object = function(isChild) {
+	
+	this.language = ['should', 'shouldNot'];
+	
 	if (isChild != true) {
 		this._called = [];
 		this._expect = new Mimic.Expectations();
@@ -48,6 +51,43 @@ Mimic.Object = function(isChild) {
 
 			return this._expect.add(callString, false, parameterCount, -1);
 		};
+	}
+	
+	this.mimic = function(object) {
+		for (var i = 0; i < this.language.length; i++) {
+			var languageFunction = [];
+			var functionString = eval('this.' + this.language[i] + '.toString()');
+			
+			languageFunction.push('object.');
+			languageFunction.push(this.language[i]);
+			languageFunction.push(' = ');
+			languageFunction.push(functionString);
+			
+			eval(languageFunction.join(''));
+		}
+		
+		for (var member in object) {
+			if (typeof object[member] == 'function') { 
+				var realFunction = object[member].toString();
+				var instrumentedFunction = [];
+				instrumentedFunction.push('object.');
+				instrumentedFunction.push(member);
+				instrumentedFunction.push(' = function(');
+				instrumentedFunction.push(Mimic.Util.Parameters.arguments(object[member]));
+				instrumentedFunction.push(') { }');
+				
+				var instrumentedFunction =  'this.' + member + ' = function(' + Mimic.Util.Parameters.arguments(object[member]) + ') { ' +
+					'    if (root._called["' + callString + '"] == null) { root._called["' + callString + '"] = new Mimic.Call("' + callString + '"); } ' +  
+			 		'    root._called["' + callString + '"].incrementCallCount();' +
+					'	 root._called["' + callString + '"].parameters.push(Mimic.Util.Parameters.evaluate(' + Mimic.Util.Parameters.arguments(object[member]) + '));' +
+			 		'    if (root._expect.returnFor("' + member + '", Mimic.Util.Array.clean([' + Mimic.Util.Parameters.arguments(object[member]) + '])) != null) { ' +
+			 		'    	return root._expect.returnFor("' + member + '", Mimic.Util.Array.clean([' + Mimic.Util.Parameters.arguments(object[member]) + ']));' + 
+			 		'    } else {' +
+			 		'    	return object[member];' +
+			 		'    }' +
+			 		'}';
+			}	
+		}
 	}
 	
 	this._inject = function(object, root, callPrefix) {
