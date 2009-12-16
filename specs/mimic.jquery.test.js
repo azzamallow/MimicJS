@@ -42,6 +42,7 @@ Screw.Unit(function() {
 		it('should allow for multiple assertions in one should', function() {
 			when.	jQuery('.enqueued').show().hide();
 			then.	jQuery().usingSelector('.enqueued').should('show').and('hide');
+			//a change
 		});
 		
 		it('should fail when allowing for multiple assertions in one should', function() {
