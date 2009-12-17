@@ -1,3 +1,4 @@
+Mimic.Object = {};
 Mimic.Object.JQuery = function(selector, context) {
 	return _jQueryMimic.mimicInit(selector, context);
 };

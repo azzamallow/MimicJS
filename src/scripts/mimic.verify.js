@@ -1,11 +1,11 @@
 Mimic.Verify = function(mimic) {
-	if (mimic._expect.grouped != null) {
-		var grouped = mimic._expect.grouped();
+	if (Mimic.Default && Mimic.Default.Log.expectations.grouped != null) {
+		var grouped = Mimic.Default.Log.expectations.grouped();
 		for (var i in grouped) {
 			var expectations = grouped[i];
-			var call = mimic._called[expectations[0].name];
+			var call = Mimic.Default.Log.calls[expectations[0].name];
 			
-			Mimic.Verify.Default(mimic, call, expectations);
+			Mimic.Default.Verify(mimic, call, expectations);
 		}
 	} else {
 		Mimic.Verify.JQuery(mimic);

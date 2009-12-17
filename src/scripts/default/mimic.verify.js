@@ -1,4 +1,4 @@
-Mimic.Verify.Default = function(mimic, called, expectations) {
+Mimic.Default.Verify = function(mimic, called, expectations) {
 	if (called == null) { 
 		if (mimic[expectations[0].name] == null) {
 			throw('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> does not exist, however it is referenced in the specification');

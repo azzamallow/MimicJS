@@ -41,7 +41,11 @@ Mimic.Expectations = function() {
 		}
 		
 		return groups;
-	}
+	};
+	
+	this.empty = function() {
+		this.expectations = [];
+	};
 };
 
 Mimic.Expectation = function(name, callExpected, parameterCount, callCount) {

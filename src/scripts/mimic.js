@@ -4,10 +4,10 @@ function Mimic() {
 	this._value = null;
 	
 	this.reset = function() {
-		for (var mimic in this.mimics) {
-			this.mimics[mimic]._reset();
+		if (Mimic.Default) {
+			Mimic.Default.Log.empty();			
 		}
-
+		
 		if (this.jQuery != null) {
 			this.jQuery._reset();
 		}
@@ -56,31 +56,17 @@ function mimic(object) {
 	if (object.fn && object.fn.jquery) {
 		mimic = Mimic.Object.JQuery;
 		Mimic.jQuery = mimic();
+		
+		return mimic;
 	} else {
 		if (Mimic.isMimic(object)) {
 			mimic = object;
 		} else {
-			mimic = new Mimic.Object();
-			mimic._inject(object, mimic);
-			Mimic.mimics.push(mimic);
+			Mimic.Instrument(object);
+			Mimic.mimics.push(object);
 		}
 	}
 
-	return mimic;
-}
-
-function restore(mimic) {
-	if (mimic == null) { return; }
-	
-	var object = mimic._originalObject;
-	
-	for (var i = 0; i < Mimic.mimics.length; i++) {
-		if (Mimic.mimics[i] == mimic) {
-			Mimic.mimics[i] = null;
-			Mimic.mimics = Mimic.Util.Array.clean(Mimic.mimics);
-		}
-	}
-	
 	return object;
 }
 
