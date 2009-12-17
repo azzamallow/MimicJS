@@ -24,6 +24,10 @@ As it currently stands, Mimic is best used in conjunction with the ScrewUnit tes
 
 Mimic currently works with all Webkit browsers (such as Safari and Google Chrome) and Gecko (Mozilla Firefox).
 
+h1. Examples
+
+Basic examples of how to use Mimic have been provided in the /examples folder. There are more complex examples on how to use Mimic the specs/ folder.
+
 h1. Contributing
 
 The following are some areas that the community could work on:

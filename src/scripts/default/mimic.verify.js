@@ -21,7 +21,7 @@ Mimic.Verify.Default = function(mimic, called, expectations) {
 		}
 		
 		if (typeof expectations[i].callCount != 'number') {
-			throw('A number must be provided when specifying the number of occurances');
+			throw('A number must be provided when specifying the number of occurrences');
 		}
 		
 		if (expectations[i].callCount == -1) {

@@ -35,5 +35,12 @@ Screw.Unit(function() {
 			expect(Mimic.mimics.length).to(equal, 0);
 			expect(Mimic.Util.Object.equals(map, newMap)).to(be_true);
 		});
+		
+		it('should return itself if the developer tries to mimic an object which is already a mimic object', function() {
+			var firstMimic = mimic(new Map());
+			var secondMimic = mimic(firstMimic);
+			
+			expect(Mimic.Util.Object.equals(firstMimic, secondMimic)).to(be_true);
+		});
 	});
 });

@@ -26,7 +26,8 @@ Mimic.Util.Array = {
 		
 		for (var i = 0; i < array1.length; i++) {
 			if (typeof array1[i] == 'object' && typeof array2[i] == 'object') {
-				if (array1[i].join != null && array2[i].join != null) {
+				if (array1[i] != null && array1[i].join != null && 
+					array2[i] != null && array2[i].join != null) {
 					if (this.equals(array1[i], array2[i]) == false) {
 						return false;
 					}					
@@ -58,16 +59,31 @@ Mimic.Util.Array = {
 
 Mimic.Util.Object = {
 	equals: function(object1, object2) {
+		if (typeof object1 == 'object' && object1 == null && 
+			typeof object2 == 'object' && object2 == null) {
+			return true;
+		}
+		
+		if (typeof object1 == 'undefined' && object1 == undefined && 
+			typeof object2 == 'undefined' && object2 == undefined) {
+			return true;
+		}
+		
 		if (object1 == null || object2 == null) {
 			return false;
 		}
 		
 		for (var i in object1) {
-			if ((typeof object1[i] == 'object' && typeof object2[i] == 'object') ||
-			 	(typeof object1[i] == 'function' && typeof object2[i] == 'function')) {
+			if (object1 == object1[i] && typeof object1 == typeof object1[i]) {
+				continue;
+			}
+			
+			if (typeof object1[i] != typeof object2[i]) {
+				return false;
+			} else if (typeof object1[i] == 'object' || typeof object1[i] == 'function') {
 				if (this.equals(object1[i], object2[i]) == false) {
 					return false;
-				}
+				}	
 			} else if (object1[i] != object2[i]) {
 				return false;
 			}
@@ -140,17 +156,5 @@ Mimic.Util.Parameters = {
 	
 	arguments: function(theFunction) {
 		return theFunction.toString().replace(/ /g, "").split("(")[1].split(")")[0];
-	}
-}
-
-Mimic.Util.Error = {
-	prefix: 'Your specification did not pass!<br/><p>',
-	
-	say: function(message, noPrefix) {
-		if (noPrefix) {
-			throw(message);
-		}
-		
-		throw this.prefix + message;
 	}
 }

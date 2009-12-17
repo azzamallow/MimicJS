@@ -9,7 +9,7 @@ Screw.Specifications.it = function(name, fnOriginal) {
 			if (thrown != null) {
 				var expected = thrown;
 				thrown = null;
-				throw('An exception was expected to thrown and was not. The exception is: ' + expected);
+				throw('An exception was expected to thrown and was not. The exception expected is: ' + expected);
 			}
 		} catch(exception) {
 			Mimic.reset();

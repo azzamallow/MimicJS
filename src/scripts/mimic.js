@@ -39,6 +39,14 @@ function Mimic() {
 			Mimic.Verify(this.jQuery);
 		}
 	};
+	
+	this.isMimic = function(mimic) {
+		if (mimic._inject != null) {
+			return true;
+		}
+		
+		return false;
+	}
 };
 
 Mimic = new Mimic();
@@ -49,9 +57,13 @@ function mimic(object) {
 		mimic = Mimic.Object.JQuery;
 		Mimic.jQuery = mimic();
 	} else {
-		mimic = new Mimic.Object();
-		mimic.mimic(object);
-		Mimic.mimics.push(mimic);
+		if (Mimic.isMimic(object)) {
+			mimic = object;
+		} else {
+			mimic = new Mimic.Object();
+			mimic._inject(object, mimic);
+			Mimic.mimics.push(mimic);
+		}
 	}
 
 	return mimic;

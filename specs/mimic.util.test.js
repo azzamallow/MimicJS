@@ -192,17 +192,109 @@ Screw.Unit(function() {
 			});
 		});
 		
-		describe('when producing an error message', function() {
-			it('should prefix the error message correctly', function() {
-				this.should.say('Your specification did not pass!<br/><p>here is my error message');
-				Mimic.Util.Error.say('here is my error message');
+		describe('when checking the equality of two objects', function() {
+			it('should work with complex objects', function() {
+				var object = {
+					'here': function() {
+						this.something = 'more';
+						this.array = [1, 2, 3, 4];
+						
+						return '3';
+					}, 
+					'array': [1,2,3,{
+						'deeper': 'object',
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+								this.isCool = true;
+								[1,2,3,4,5].join(geometry, this);
+							}
+						}],
+					'object': {
+						'object': { 'more': 'yep!'},
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+							this.isCool = true;
+						}
+					},
+					'null': null,
+					'id': Array.prototype.join.apply(this, ['arguments'])
+				}
+				
+				expect(Mimic.Util.Object.equals(object, object)).to(be_true);
 			});
 			
-			it('should not prefix the error message', function() {
-				this.should.say('here is my error message');
-				Mimic.Util.Error.say('here is my error message', true);
+			it('should see two null values of the right type as equal', function() {
+				expect(Mimic.Util.Object.equals(undefined, null)).to(be_false);
+				expect(Mimic.Util.Object.equals(null, null)).to(be_true);
 			});
 			
+			it('should see two undefined values as equal', function() {
+				expect(Mimic.Util.Object.equals(undefined, undefined)).to(be_true);
+			});
+			
+			it('should see two NaN values of the right type as equal', function() {
+				expect(Mimic.Util.Object.equals(NaN, NaN)).to(be_true);
+			});
+			
+			it('should ignore attributes is assigned to itself', function() {
+				var objectWithRecursiveValue = function() {
+					this.as = this;
+					this.something = 'cool!';
+				};
+				
+				var objectWithoutRecursiveValue = function() {
+					this.something = 'cool!';
+				};
+				
+				expect(Mimic.Util.Object.equals(new objectWithRecursiveValue(), new objectWithoutRecursiveValue())).to(be_true);
+			});
+			
+			it('should equate kinda complex objects as equal', function() {
+				expect(Mimic.Util.Object.equals({'name': 'show', 'value':['speed']}, {'name': 'show', 'value':['sp33d']})).to(be_false);
+			});
+		});
+		
+		describe('when checking the equality of two arrays', function() {
+			it('should work with complex arrays', function() {
+				var array = [
+					function() {
+						this.something = 'more';
+						this.array = [1, 2, 3, 4];
+					}, 
+					[1,2,3,{
+						'deeper': 'object',
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+							this.isCool = true;
+							[1,2,3,4,5].join(geometry, this);
+						}
+					}],
+					{
+						'object': { 'more': 'yep!'},
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+							this.isCool = true;
+						}
+					},
+					null,
+					Array.prototype.join.apply(this, ['arguments'])
+				]
+				
+				expect(Mimic.Util.Array.equals(array, array)).to(be_true);
+			});
+			
+			it('should be false if an array given is not valid', function() {
+				expect(Mimic.Util.Array.equals([], null)).to(be_false);
+				expect(Mimic.Util.Array.equals([], undefined)).to(be_false);
+			});
+			
+			it('should be true if the array contains nothing but nulls', function() {
+				expect(Mimic.Util.Array.equals([null, null], [null, null])).to(be_true);
+			});
+
+			it('should be true if the array contains nothing but undefined', function() {
+				expect(Mimic.Util.Array.equals([undefined, undefined], [undefined, undefined])).to(be_true);
+			});
 		});
 	});
 });

@@ -95,5 +95,10 @@ Screw.Unit(function() {
 			
 			this.should.say('an exception was thrown').when.throwing();
 		});
+		
+		it('should error when the user tries to provide more than one parameter for should function', function() {
+			this.	should.say('Only one parameter can be provided for <b>should()</b>. To provide extra parameters try the following:<br/><p><b>should("pan").using(5000, ...)</b></p>');
+			when.	map.should('pan', 5000);
+		});
 	});
 });
