@@ -22,7 +22,51 @@ Mimic.Expectations = function() {
 		}
 	};
 	
-	this.grouped = function() {
+	this.countFor = function(name) {
+		var expectedCount = 0;
+		for (var i = 0; i < this.expectations.length; i++) {
+			if (this.expectations[i].callCount == -1) {
+				expectedCount = -1;
+			} else {
+				if (expectedCount == -1) {
+					expectedCount = 0;
+				}
+				expectedCount += this.expectations[i].callCount;
+			}
+		}
+		
+		return expectedCount;
+	};
+	
+	this.failedParametersFrom = function(calls) {
+		var failedParametersForExpectations = [];
+		var groupedCalls = calls.groupByName();
+		
+		for (var i in groupedCalls) {
+			var groupedParameters = [];
+			for (var j = 0; j < groupedCalls[i].length; j++) {
+				groupedParameters.push(groupedCalls[i][j].parameters);
+			}
+			
+			for (var j = 0; j < this.expectations.length; j++) {
+				var position = Mimic.Util.Array.contains(groupedParameters, this.expectations[j].parameters);
+				if (typeof position == 'boolean' && position == false) {
+		  			failedParametersForExpectations.push({'call': groupedCalls[i][0], 'expectation': this.expectations[j]});
+		  		} else {
+					groupedParameters[position] = null;
+					groupedParameters = Mimic.Util.Array.clean(groupedParameters);
+				}
+			}
+			
+			if (failedParametersForExpectations.length > 0) {
+				return failedParametersForExpectations;
+			}
+		}
+		
+		return failedParametersForExpectations;
+	};
+	
+	this.group = function() {
 		var groups = [];
 		
 		for (var i in this.expectations) {

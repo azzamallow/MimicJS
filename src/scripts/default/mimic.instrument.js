@@ -2,18 +2,6 @@ Mimic.Instrument = function(object, root, callPrefix) {
 	var language = new Mimic.Language();	
 	var originalObject = object;
 	
-	for (var member in language) {
-		var languageFunction = [];
-		var functionString = eval('language.' + member + '.toString()');
-		
-		languageFunction.push('object.');
-		languageFunction.push(member);
-		languageFunction.push(' = ');
-		languageFunction.push(functionString);
-		
-		eval(languageFunction.join(''));
-	}
-	
 	for (var member in object) {
 		var callString = member;
 		if (callPrefix != null) {
@@ -28,14 +16,26 @@ Mimic.Instrument = function(object, root, callPrefix) {
 		 		'    } else {' +
 		 		'    	return object[member];' +
 		 		'    }' +
-				'	 // The actual implementation' +
-				object[member].toString() + '();'
+				// '	 // The actual implementation' +
+				// 				object[member].toString() + '();'
 		 		'}';
 		
 			eval(instrumentedFunction);
 		} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
 			Mimic.Instrument(object[member], root, callString);
 		}
+	}
+	
+	for (var member in language) {
+		var languageFunction = [];
+		var functionString = eval('language.' + member + '.toString()');
+		
+		languageFunction.push('object.');
+		languageFunction.push(member);
+		languageFunction.push(' = ');
+		languageFunction.push(functionString);
+		
+		eval(languageFunction.join(''));
 	}
 	
 	object.originalObject = originalObject;

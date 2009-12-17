@@ -8,7 +8,7 @@ Mimic.Language = function() {
 		}
 		
 		var parameterCount = 0;
-		var theFunction  = eval('this.' + callString);
+		var theFunction  = this[callString];
 		if (theFunction != null) {
 			var parameters = Mimic.Util.Parameters.arguments(theFunction);
 			if (parameters != '') {

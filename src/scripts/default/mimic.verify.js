@@ -1,80 +1,59 @@
-Mimic.Default.Verify = function(mimic, called, expectations) {
-	if (called == null) { 
-		if (mimic[expectations[0].name] == null) {
-			throw('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> does not exist, however it is referenced in the specification');
-		} else if (expectations[0].callExpected == true) {
-			throw ('Your specification did not pass!<br/><p><b>' + expectations[0].name + '()</b> was expected but did not get called!');
-		}
-		
-		return;
-	}
+Mimic.Default.Verify = function(mimic) {
+	var expectations = Mimic.Default.Log.expectations;
+	var calls = Mimic.Default.Log.calls;
 	
-	var name = called.name;
-	var totalExpectedCallCount = 0;
-	for (var i in expectations) {
-		if (expectations[i].callExpected == false) {
-			throw('Your specification did not pass!<br/><p><b>' + name + '()</b> was called, but was not expected to be called')
+	for (var i = 0; i < Mimic.Default.Log.expectations.expectations.length; i++) {
+		var expectation = Mimic.Default.Log.expectations.expectations[i];
+		
+		if (mimic[expectation.name] == null) {
+			throw('Your specification did not pass!<br/><p><b>' + expectation.name + '()</b> does not exist, however it is referenced in the specification');
 		}
 		
-		if (expectations[i].throwz != null) {
-			throw(expectations[i].throwz);
+		if (expectation.throwz) {
+			throw(expectation.throwz);
 		}
 		
-		if (typeof expectations[i].callCount != 'number') {
+		if (typeof expectation.callCount != 'number') {
 			throw('A number must be provided when specifying the number of occurrences');
 		}
 		
-		if (expectations[i].callCount == -1) {
-			totalExpectedCallCount = -1;
-		} else {
-			totalExpectedCallCount += expectations[i].callCount;
+		var callCount = calls.withName(expectation.name).length;
+		if (callCount == 0) {
+			throw('Your specification did not pass!<br/><p><b>' + expectation.name + '()</b> was expected but did not get called!');
 		}
 		
-		if (expectations[i].parameters.length > 0 && expectations[i].parameterCount == 0) {
-			throw('Your specification did not pass!<br/><p><b>' + name + '()</b> does not accept any parameters. You must remove the parameters from the specification <b>' + name + '()</b>');
-		} else if (expectations[i].parameters.length > expectations[i].parameters.slice(0, expectations[i].parameterCount).length) {
-			throw('Your specification did not pass!<br/><p>The specification executed <b>' + name + '()</b> with <b>' + expectations[i].parameters.length + '</b> parameters, however the specification expected <b>' + name + '()</b> with <b>' + expectations[i].parameters.slice(0, expectations[i].parameterCount).length + '</b> parameters');
-		}
-	}
-	
-	if (totalExpectedCallCount != -1 && called.callCount != totalExpectedCallCount) {
-		throw('Your specification did not pass!<br/><p>The specification executed <b>' + name + '() ' + called.callCount + '</b> times, however the specification expected <b>' + name + '()</b> to be executed <b>' + totalExpectedCallCount + '</b> times');
-	}
-	
-	var parameters = called.parameters;
-	var failedExpectations = [];
-	for (var i in expectations) {
-		if (expectations[i].parameters.length == 0) {
-			continue;
+		var expectedCount = expectations.countFor(expectation.name);
+		if (expectedCount != -1 && expectedCount != callCount) {
+			throw('Your specification did not pass!<br/><p>The specification executed <b>' + expectation.name + '() ' + callCount + '</b> times, however the specification expected <b>' + expectation.name + '()</b> to be executed <b>' + expectation.callCount + '</b> times');
 		}
 		
-		var count = expectations[i].callCount;
-		if (count == -1) {
-			count = 1;
+		if (expectation.parameters.length > 0 && expectation.parameterCount == 0) {
+			throw('Your specification did not pass!<br/><p><b>' + expectation.name + '()</b> does not accept any parameters. You must remove the parameters from the specification <b>' + expectation.name + '()</b>');
+		} else if (expectation.parameters.length > expectation.parameters.slice(0, expectation.parameterCount).length) {
+			throw('Your specification did not pass!<br/><p>The specification executed <b>' + expectation.name + '()</b> with <b>' + expectation.parameters.length + '</b> parameters, however the specification expected <b>' + expectation.name + '()</b> with <b>' + expectation.parameters.slice(0, expectation.parameterCount).length + '</b> parameters');
 		}
 		
-		for (var j = 0; j < count; j++) {
-			var position = Mimic.Util.Array.contains(parameters, expectations[i].parameters);
-			if (typeof position == 'number') {
-				parameters[position] = null;
-				parameters = Mimic.Util.Array.clean(parameters);
-	  		} else {
-	  			failedExpectations.push(expectations[i]);
-	  		}
+		var failedParametersForExpectations = expectations.failedParametersFrom(calls);
+		var message = [];
+		for (var j = 0; j < failedParametersForExpectations.length; j++) {
+			if (message.length == 0) {
+				message.push('Your specification did not pass!<br/><p>The specification executed <b>' + expectation.name + '(' + Mimic.Util.Object.toString(failedParametersForExpectations[j]['call'].parameters) + ')</b>, however the specification expected <b>' + expectation.name + '(' + Mimic.Util.Object.toString(failedParametersForExpectations[j]['expectation'].parameters) + ')</b>');
+			} else {
+				message.push(' or <b>' + expectation.name + '(' + Mimic.Util.Object.toString(failedParametersForExpectations[j]['expectation'].parameters) + ')</b>');
+			}
 		}
-	}
-	
-	var message = [];
-	for (var i in failedExpectations) {
-		if (message.length == 0) {
-			message.push('Your specification did not pass!<br/><p>The specification executed <b>' + name + '(' + Mimic.Util.Object.toString(parameters[0]) + ')</b>, however the specification expected <b>' + name + '(' + Mimic.Util.Object.toString(failedExpectations[i].parameters) + ')</b>');
-		} else {
-			message.push(' or <b>' + name + '(' + Mimic.Util.Object.toString(failedExpectations[i].parameters) + ')</b>');
+		
+		if (message.length > 0) {
+			message.push('</p>');
+			throw(message.join(''));
 		}
-	}
-	
-	if (message.length > 0) {
-		message.push('</p>');
-		throw(message.join(''));
+
+		// for(var j = 0; j < Mimic.Default.Log.calls.calls.length; j++) {
+		// 			var call = Mimic.Default.Log.calls.calls[j];
+		// 			
+		// 			if (call.name != expectation.name) {
+		// 				throw('Your specification did not pass!<br/><p><b>' + expectation.name + '()</b> was called, but was not expected to be called');
+		// 			}
+		// 		}
 	}
 }
