@@ -192,17 +192,39 @@ Screw.Unit(function() {
 			});
 		});
 		
-		describe('when producing an error message', function() {
-			it('should prefix the error message correctly', function() {
-				this.should.say('Your specification did not pass!<br/><p>here is my error message');
-				Mimic.Util.Error.say('here is my error message');
+		describe('when checking the equality of two objects', function() {
+			it('should work with complex objects', function() {
+				var object = {
+					'here': function() {
+						this.something = 'more';
+						this.array = [1, 2, 3, 4];
+					}, 
+					'array': [1,2,3,{
+						'deeper': 'object',
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+								this.isCool = true;
+								[1,2,3,4,5].join(geometry, this);
+							}
+						}],
+					'object': {
+						'object': { 'more': 'yep!'},
+						'anotherArray': [1,2,3,4,5,6],
+						'function': function() {
+							this.isCool = true;
+						}
+					},
+					'null': null,
+					'id': Array.prototype.join.apply(this, ['arguments'])
+				}
+				
+				expect(Mimic.Util.Object.equals(object, object)).to(be_true);
 			});
 			
-			it('should not prefix the error message', function() {
-				this.should.say('here is my error message');
-				Mimic.Util.Error.say('here is my error message', true);
+			it('should see two null values of the right type as equal', function() {
+				expect(Mimic.Util.Object.equals(undefined, null)).to(be_false);
+				expect(Mimic.Util.Object.equals(null, null)).to(be_true);
 			});
-			
 		});
 	});
 });

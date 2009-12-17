@@ -58,6 +58,11 @@ Mimic.Util.Array = {
 
 Mimic.Util.Object = {
 	equals: function(object1, object2) {
+		if (typeof object1 == 'object' && object1 == null && 
+			typeof object2 == 'object' && object2 == null) {
+			return true;
+		}
+		
 		if (object1 == null || object2 == null) {
 			return false;
 		}
@@ -140,17 +145,5 @@ Mimic.Util.Parameters = {
 	
 	arguments: function(theFunction) {
 		return theFunction.toString().replace(/ /g, "").split("(")[1].split(")")[0];
-	}
-}
-
-Mimic.Util.Error = {
-	prefix: 'Your specification did not pass!<br/><p>',
-	
-	say: function(message, noPrefix) {
-		if (noPrefix) {
-			throw(message);
-		}
-		
-		throw this.prefix + message;
 	}
 }
