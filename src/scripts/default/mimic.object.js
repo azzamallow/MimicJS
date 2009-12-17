@@ -19,7 +19,11 @@ Mimic.Object = function(isChild) {
 			this._injectInto = null;
 		};
 
-		this.should = function(callString) {
+		this.should = function(callString, ignoreArg) {
+			if (ignoreArg != undefined) {
+				throw('Only one parameter can be provided for <b>should()</b>. To provide extra parameters try the following:<br/><p><b>should("'+ callString +'").using(' + ignoreArg + ', ...)</b></p>');
+			}
+			
 			var parameterCount = 0;
 			var theFunction  = eval('this.' + callString);
 			if (theFunction != null) {

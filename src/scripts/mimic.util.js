@@ -26,7 +26,8 @@ Mimic.Util.Array = {
 		
 		for (var i = 0; i < array1.length; i++) {
 			if (typeof array1[i] == 'object' && typeof array2[i] == 'object') {
-				if (array1[i].join != null && array2[i].join != null) {
+				if (array1[i] != null && array1[i].join != null && 
+					array2[i] != null && array2[i].join != null) {
 					if (this.equals(array1[i], array2[i]) == false) {
 						return false;
 					}					
@@ -60,6 +61,11 @@ Mimic.Util.Object = {
 	equals: function(object1, object2) {
 		if (typeof object1 == 'object' && object1 == null && 
 			typeof object2 == 'object' && object2 == null) {
+			return true;
+		}
+		
+		if (typeof object1 == 'undefined' && object1 == undefined && 
+			typeof object2 == 'undefined' && object2 == undefined) {
 			return true;
 		}
 		
