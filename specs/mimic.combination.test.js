@@ -41,7 +41,7 @@ Screw.Unit(function() {
 			given.	map.pan(2, 'left');
 			and.	map.pan(3, 'left');
 			and.	map.pan(3, 'left');
-			when.	map.does('pan').exactly(3, times).using(3, 'left');
+			when.	map.should('pan').exactly(3, times).using(3, 'left');
 			then.	it.should.say('Your specification did not pass!<br/><p>The specification executed <b>pan(2, "left")</b>, however the specification expected <b>pan(3, "left")</b></p>');
 		});
 		
@@ -63,7 +63,7 @@ Screw.Unit(function() {
 		it('should not pass using a combination of specifying parameters and two occurrences', function() {
 			given.	map.pan(3, 'left');
 			and.	map.pan(2, 'left');
-			when.	map.does('pan').using(2, 'left').twice();
+			when.	map.should('pan').using(2, 'left').twice();
 			then.	it.should.say('Your specification did not pass!<br/><p>The specification executed <b>pan(3, "left")</b>, however the specification expected <b>pan(2, "left")</b></p>');
 		});
 		

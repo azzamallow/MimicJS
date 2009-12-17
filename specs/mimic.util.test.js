@@ -198,6 +198,8 @@ Screw.Unit(function() {
 					'here': function() {
 						this.something = 'more';
 						this.array = [1, 2, 3, 4];
+						
+						return '3';
 					}, 
 					'array': [1,2,3,{
 						'deeper': 'object',
@@ -232,6 +234,23 @@ Screw.Unit(function() {
 			
 			it('should see two NaN values of the right type as equal', function() {
 				expect(Mimic.Util.Object.equals(NaN, NaN)).to(be_true);
+			});
+			
+			it('should ignore attributes is assigned to itself', function() {
+				var objectWithRecursiveValue = function() {
+					this.as = this;
+					this.something = 'cool!';
+				};
+				
+				var objectWithoutRecursiveValue = function() {
+					this.something = 'cool!';
+				};
+				
+				expect(Mimic.Util.Object.equals(new objectWithRecursiveValue(), new objectWithoutRecursiveValue())).to(be_true);
+			});
+			
+			it('should equate kinda complex objects as equal', function() {
+				expect(Mimic.Util.Object.equals({'name': 'show', 'value':['speed']}, {'name': 'show', 'value':['sp33d']})).to(be_false);
 			});
 		});
 		

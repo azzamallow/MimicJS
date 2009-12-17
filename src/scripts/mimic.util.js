@@ -74,11 +74,16 @@ Mimic.Util.Object = {
 		}
 		
 		for (var i in object1) {
-			if ((typeof object1[i] == 'object' && typeof object2[i] == 'object') ||
-			 	(typeof object1[i] == 'function' && typeof object2[i] == 'function')) {
+			if (object1 == object1[i] && typeof object1 == typeof object1[i]) {
+				continue;
+			}
+			
+			if (typeof object1[i] != typeof object2[i]) {
+				return false;
+			} else if (typeof object1[i] == 'object' || typeof object1[i] == 'function') {
 				if (this.equals(object1[i], object2[i]) == false) {
 					return false;
-				}
+				}	
 			} else if (object1[i] != object2[i]) {
 				return false;
 			}

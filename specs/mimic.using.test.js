@@ -21,7 +21,7 @@ Screw.Unit(function() {
 		
 		it('should not pass as the function given is not called with the right parameters', function() {
 			given.	map.pan(3, 'right');
-			when.	map.does('pan').using(2, 'left');
+			when.	map.should('pan').using(2, 'left');
 			then.	it.should.say('Your specification did not pass!<br/><p>The specification executed <b>pan(3, "right")</b>, however the specification expected <b>pan(2, "left")</b></p>');
 		});
 		
@@ -48,7 +48,7 @@ Screw.Unit(function() {
 		
 		it('should not pass when too many parameters are specified', function() {
 			given.  map.pan(2, 'left');
-			when.	map.does('pan').using(3, 'left', 'shouldnt be here', {}, []);
+			when.	map.should('pan').using(3, 'left', 'shouldnt be here', {}, []);
 			then.	it.should.say('Your specification did not pass!<br/><p>The specification executed <b>pan()</b> with <b>5</b> parameters, however the specification expected <b>pan()</b> with <b>2</b> parameters');
 		});
 		
@@ -59,7 +59,7 @@ Screw.Unit(function() {
 		
 		it('should not pass when a parameter is specified for a function that does not accept parameters', function() {
 			given.	map.draw();
-			when.	map.does('draw').using([], {}, 'something');
+			when.	map.should('draw').using([], {}, 'something');
 			then.	it.should.say('Your specification did not pass!<br/><p><b>draw()</b> does not accept any parameters. You must remove the parameters from the specification <b>draw()</b>');
 		});
 		

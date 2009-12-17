@@ -36,7 +36,7 @@ Screw.Unit(function() {
 			given.	map.draw();
 			and.	map.draw();
 			and.	map.draw();
-			when.	map.does('draw').exactly(4, times);
+			when.	map.should('draw').exactly(4, times);
 			then.	it.should.say('Your specification did not pass!<br/><p>The specification executed <b>draw() 3</b> times, however the specification expected <b>draw()</b> to be executed <b>4</b> times');
 		});
 		
@@ -52,7 +52,7 @@ Screw.Unit(function() {
 		
 		it('should only allow a number to be passed in when specifying number of occurrences', function() {
 			when.	map.draw();
-			and.	map.does('draw').exactly([], times);
+			and.	map.should('draw').exactly([], times);
 			then.	it.should.say('A number must be provided when specifying the number of occurrences');
 		});
 	});

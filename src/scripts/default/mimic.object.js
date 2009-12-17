@@ -36,10 +36,6 @@ Mimic.Object = function(isChild) {
 			return this._expect.add(callString, true, parameterCount, -1);
 		};
 
-		this.does = function(callString) {
-			return this.should(callString);
-		};
-
 		this.shouldNot = function(callString) {
 			var parameterCount = 0;
 			var theFunction  = eval('this.' + callString);
