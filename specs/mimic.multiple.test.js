@@ -39,7 +39,7 @@ Screw.Unit(function() {
 		});
 		
 		it('should handle nested mimics in a single specification', function() {
-			given.	map.does('zoom').andReturn(form);
+			given.	map.should('zoom').andReturn(form);
 			and.	map.zoom().submit();
 			then.	form.should('submit');	
 		});
