@@ -49,12 +49,20 @@ Mimic.Expectations = function() {
 			}
 			
 			for (var j = 0; j < this.expectations.length; j++) {
-				var position = Mimic.Util.Array.contains(groupedParameters, this.expectations[j].parameters);
-				if (typeof position == 'boolean' && position == false) {
-		  			failedParametersForExpectations.push({'call': groupedCalls[i][0], 'expectation': this.expectations[j]});
-		  		} else {
-					groupedParameters[position] = null;
-					groupedParameters = Mimic.Util.Array.clean(groupedParameters);
+				
+				var count = this.expectations[j].callCount;
+				if (count == -1) {
+					count = 1;
+				}
+				
+				for (var k = 0; k < count; k++) {
+					var position = Mimic.Util.Array.contains(groupedParameters, this.expectations[j].parameters);
+					if (typeof position == 'boolean' && position == false) {
+			  			failedParametersForExpectations.push({'call': groupedCalls[i][0], 'expectation': this.expectations[j]});
+			  		} else {
+						groupedParameters[position] = null;
+						groupedParameters = Mimic.Util.Array.clean(groupedParameters);
+					}
 				}
 			}
 			
