@@ -22,6 +22,9 @@ Mimic.Instrument = function(object, root, callPrefix) {
 		
 			eval(instrumentedFunction);
 		} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
+			if (root == null) {
+				root = object;
+			}
 			Mimic.Instrument(object[member], root, callString);
 		}
 	}
@@ -41,6 +44,10 @@ Mimic.Instrument = function(object, root, callPrefix) {
 		
 			eval(languageFunction.join(''));
 		}
+	}
+	
+	if (root != null) {
+		object._root = root;
 	}
 	
 	object.originalObject = originalObject;

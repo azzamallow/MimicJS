@@ -15,9 +15,12 @@ Map = function() {
 }
 
 DeepObject = {
-  First: {
-      Second: function() {}
-  }
+  	First: {
+      	Second: function() {}
+  	},
+  	Third: {
+		Fourth: function() {}
+	}
 };
 
 Screw.Unit(function() {
