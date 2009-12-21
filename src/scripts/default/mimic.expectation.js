@@ -1,7 +1,7 @@
 Mimic.Expectations = function() {
 	this.expectations = [];
 	
-	this.add = function(name, callExpected, parameterCount, callCount) {
+	this.add = function(mimic, name, callExpected, parameterCount) {
 		for (var i in this.expectations) {
 			if (this.expectations[i].name == name && this.expectations[i].callExpected != callExpected) {
 				this.expectations[i] = null;
@@ -9,7 +9,7 @@ Mimic.Expectations = function() {
 		}
 		this.expectations = Mimic.Util.Array.clean(this.expectations);
 		
-		var expectation = new Mimic.Expectation(name, callExpected, parameterCount, callCount);
+		var expectation = new Mimic.Expectation(mimic, name, callExpected, parameterCount);
 		this.expectations.push(expectation);
 		return expectation;
 	};
@@ -22,16 +22,26 @@ Mimic.Expectations = function() {
 		}
 	};
 	
+	this.copy = function(expectationToCopy) {
+		var expectation = new Mimic.Expectation(expectationToCopy.mimic, expectationToCopy.name, expectationToCopy.callExpected, expectationToCopy.parameterCount);
+		expectation.unlimited = expectationToCopy.unlimited;
+		expectation.parameters = Mimic.Util.Object.clone(expectationToCopy.parameters);
+		expectation.returns = expectationToCopy.returns;
+		expectation.throwz = expectationToCopy.throwz;
+		
+		return expectation;
+	}
+	
 	this.countFor = function(name) {
 		var expectedCount = 0;
 		for (var i = 0; i < this.expectations.length; i++) {
-			if (this.expectations[i].callCount == -1) {
-				expectedCount = -1;
-			} else {
+			if (this.expectations[i].unlimited == false) {
 				if (expectedCount == -1) {
 					expectedCount = 0;
 				}
-				expectedCount += this.expectations[i].callCount;
+				expectedCount++;
+			} else {
+				expectedCount = -1;
 			}
 		}
 		
@@ -39,60 +49,18 @@ Mimic.Expectations = function() {
 	};
 	
 	this.failedParametersFrom = function(calls) {
-		var failedParametersForExpectations = [];
-		var groupedCalls = calls.groupByName();
+		var failedExpectations = [];
 		
-		for (var i in groupedCalls) {
-			var groupedParameters = [];
-			for (var j = 0; j < groupedCalls[i].length; j++) {
-				groupedParameters.push(groupedCalls[i][j].parameters);
-			}
-			
-			for (var j = 0; j < this.expectations.length; j++) {
-				
-				var count = this.expectations[j].callCount;
-				if (count == -1) {
-					count = 1;
-				}
-				
-				for (var k = 0; k < count; k++) {
-					var position = Mimic.Util.Array.contains(groupedParameters, this.expectations[j].parameters);
-					if (typeof position == 'boolean' && position == false) {
-			  			failedParametersForExpectations.push({'call': groupedCalls[i][0], 'expectation': this.expectations[j]});
-			  		} else {
-						groupedParameters[position] = null;
-						groupedParameters = Mimic.Util.Array.clean(groupedParameters);
-					}
-				}
-			}
-			
-			if (failedParametersForExpectations.length > 0) {
-				return failedParametersForExpectations;
-			}
-		}
-		
-		return failedParametersForExpectations;
-	};
-	
-	this.group = function() {
-		var groups = [];
-		
-		for (var i in this.expectations) {
-			var currentGroup = null;
-			for (var j in groups) {
-				if (groups[j][0].name == this.expectations[i].name) {
-					currentGroup = groups[j];
-				}
-			}
-			
-			if (currentGroup == null) {
-				groups.push([this.expectations[i]]);
+		for (var i = 0; i < this.expectations.length; i++) {
+			var call = calls.withParameters(this.expectations[i].mimic, this.expectations[i].parameters);
+			if (call != null) {
+				call.checked = true;
 			} else {
-				currentGroup.push(this.expectations[i]);
+				failedExpectations.push(this.expectations[i]);						
 			}
 		}
 		
-		return groups;
+		return failedExpectations;
 	};
 	
 	this.empty = function() {
@@ -100,42 +68,13 @@ Mimic.Expectations = function() {
 	};
 };
 
-Mimic.Expectation = function(name, callExpected, parameterCount, callCount) {
+Mimic.Expectation = function(mimic, name, callExpected, parameterCount) {
+	this.mimic = mimic;
 	this.name = name;
 	this.callExpected = callExpected;
-	this.callCount = callCount;
 	this.parameterCount = parameterCount;
+	this.unlimited = false;
 	this.parameters = [];
 	this.returns = null;
 	this.throwz = null;
-	
-	this.once = function() {
-		return this.exactly(1, time);
-	};
-	
-	this.twice = function() {
-		return this.exactly(2, times);
-	};
-	
-	this.exactly = function(callCount, times) {
-		this.callCount = callCount;
-		return this;
-	};
-	
-	this.andReturn = function(value) {
-		this.returns = value;
-	};
-	
-	this.andThrow = function(value) {
-		this.throwz = value;
-	};
-	
-	this.using = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
-		if (arg0 == anything) {
-			return;
-		}
-		
-		this.parameters = Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-		return this;
-	};
 };

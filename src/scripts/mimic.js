@@ -31,9 +31,11 @@ function Mimic() {
 	};
 	
 	this.verify = function() {
-		for (var mimic in this.mimics) {
-			Mimic.Verify(this.mimics[mimic]);
-		}
+		
+		Mimic.Verify();
+		// for (var mimic in this.mimics) {
+		// 	Mimic.Verify(this.mimics[mimic]);
+		// }
 		
 		if (this.jQuery != null) {
 			Mimic.Verify(this.jQuery);

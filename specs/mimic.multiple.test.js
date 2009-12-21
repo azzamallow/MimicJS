@@ -8,7 +8,8 @@ var Form = function(){ };
 Form.prototype = {
 	submit: function() { return 'ive submitted' },
 	directions: function() { this.directionsClicked = true },
-	input: function(key, value) { }
+	input: function(key, value) { },
+	zoom: function() {}
 }
 
 var Application = function () { 
@@ -39,7 +40,7 @@ Screw.Unit(function() {
 		});
 		
 		it('should handle nested mimics in a single specification', function() {
-			given.	map.does('zoom').andReturn(form);
+			given.	map.should('zoom').andReturn(form);
 			and.	map.zoom().submit();
 			then.	form.should('submit');	
 		});
@@ -48,6 +49,20 @@ Screw.Unit(function() {
 			given.	application.map = map;
 			when.	application.mapping();
 			then.	map.should('zoom');
+		});
+		
+		it('should not mix up should expectation between two mimic objects', function() {
+			given.	map.zoom();
+			when.	form.should('zoom');
+			then.	it.should.say('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
+		});
+		
+		it('should not mix up exactly expectation between two mimic objects', function() {
+			given.	map.zoom();
+			and.	map.zoom();
+			and.	map.zoom();
+			when.	form.should('zoom').exactly(3, times);
+			then.	it.should.say('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
 		});
 	});
 });

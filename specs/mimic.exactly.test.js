@@ -52,8 +52,8 @@ Screw.Unit(function() {
 		
 		it('should only allow a number to be passed in when specifying number of occurrences', function() {
 			when.	map.draw();
-			and.	map.should('draw').exactly([], times);
-			then.	it.should.say('A number must be provided when specifying the number of occurrences');
+			this.	should.say('A number must be provided when specifying the number of occurrences');
+			then.	map.should('draw').exactly([], times);
 		});
 	});
 });

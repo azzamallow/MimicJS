@@ -9,10 +9,10 @@ Mimic.Calls = function() {
 		this.calls = [];
 	};
 	
-	this.withName = function(name) {
+	this.withName = function(mimic, name) {
 		var calls = [];
 		for (var i = 0; i < this.calls.length; i++) {
-			if (this.calls[i].name == name) {
+			if (this.calls[i].mimic == mimic && this.calls[i].name == name) {
 				calls.push(this.calls[i]);
 			}
 		}
@@ -20,22 +20,22 @@ Mimic.Calls = function() {
 		return calls;
 	};
 	
-	this.groupByName = function() {
-		var groupedByName = {};
-		
+	this.withParameters = function(mimic, parameters) {
 		for (var i = 0; i < this.calls.length; i++) {
-			if (groupedByName[this.calls[i].name] == null) {
-				groupedByName[this.calls[i].name] = [this.calls[i]];
-			} else {
-				groupedByName[this.calls[i].name].push(this.calls[i])
+			if (this.calls[i].mimic == mimic &&
+				Mimic.Util.Array.equals(parameters, this.calls[i].parameters) && 
+				this.calls[i].checked == false) {
+				return this.calls[i];
 			}
 		}
 		
-		return groupedByName;
+		return null;
 	};
 };
 
-Mimic.Call = function(name, parameters) {
+Mimic.Call = function(mimic, name, parameters) {
+	this.mimic = mimic;
 	this.name = name;
 	this.parameters = parameters;
+	this.checked = false;
 };
