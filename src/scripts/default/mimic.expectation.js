@@ -1,17 +1,14 @@
 Mimic.Expectations = function() {
 	this.expectations = [];
 	
-	this.add = function(mimic, name, callExpected, parameterCount) {
+	this.add = function(expectation) {
 		for (var i in this.expectations) {
-			if (this.expectations[i].name == name && this.expectations[i].callExpected != callExpected) {
+			if (this.expectations[i].name == expectation.name && this.expectations[i].callExpected != expectation.callExpected) {
 				this.expectations[i] = null;
 			}
 		}
 		this.expectations = Mimic.Util.Array.clean(this.expectations);
-		
-		var expectation = new Mimic.Expectation(mimic, name, callExpected, parameterCount);
 		this.expectations.push(expectation);
-		return expectation;
 	};
 	
 	this.returnFor = function(name, parameters) {

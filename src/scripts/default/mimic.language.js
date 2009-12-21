@@ -19,9 +19,11 @@ Mimic.Language = function() {
 			}
 		}
 		
+		var expectation = new Mimic.Expectation(this, callString, true, parameterCount);
+		expectation.unlimited = true;
+		Mimic.Default.Log.expectations.add(expectation);
 		this._activeExpectations = [];
-		this._activeExpectations.push(Mimic.Default.Log.expectations.add(this, callString, true, parameterCount));
-		this._activeExpectations[0].unlimited = true;
+		this._activeExpectations.push(expectation);
 
 		return this;
 	};
@@ -36,9 +38,11 @@ Mimic.Language = function() {
 			}
 		}
 		
+		var expectation = new Mimic.Expectation(this, callString, false, parameterCount);
+		expectation.unlimited = true;
+		Mimic.Default.Log.expectations.add(expectation);
 		this._activeExpectations = [];
-		this._activeExpectations.push(Mimic.Default.Log.expectations.add(this, callString, false, parameterCount));
-		this._activeExpectations[0].unlimited = true;
+		this._activeExpectations.push(expectation);
 		
 		return this;
 	};
@@ -71,7 +75,7 @@ Mimic.Language = function() {
 		this._activeExpectations[0].unlimited = false;
 		for (var i = 0; i < callCount - 1; i++) {
 			var expectation = Mimic.Default.Log.expectations.copy(this._activeExpectations[0]);
-			Mimic.Default.Log.expectations.expectations.push(expectation);
+			Mimic.Default.Log.expectations.add(expectation);
 			this._activeExpectations.push(expectation);
 		}
 		
