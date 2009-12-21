@@ -50,6 +50,4 @@ Mimic.Instrument = function(object, parentMimic, callPrefix) {
 	if (callPrefix != null) {
 		object._callPrefix = callPrefix;
 	}
-	
-	object.originalObject = originalObject;
 };

@@ -44,10 +44,18 @@ Mimic.Language = function() {
 	};
 	
 	this.once = function() {
+		if (this._activeExpectations.length == 0) {
+			throw('The function "once" can only be used when the function "should" precedes it');
+		}
+		
 		return this.exactly(1, time);
 	};
 	
 	this.twice = function() {
+		if (this._activeExpectations.length == 0) {
+			throw('The function "twice" can only be used when the function "should" precedes it');
+		}
+		
 		return this.exactly(2, times);
 	};
 	
@@ -57,7 +65,7 @@ Mimic.Language = function() {
 		}
 		
 		if (this._activeExpectations.length == 0) {
-			throw('not good');
+			throw('The function "exactly" can only be used when the function "should" precedes it');
 		}
 		
 		this._activeExpectations[0].unlimited = false;
@@ -72,7 +80,7 @@ Mimic.Language = function() {
 	
 	this.andReturn = function(value) {
 		if (this._activeExpectations.length == 0) {
-			throw('not good');
+			throw('The function "andReturn" can only be used when the function "should" precedes it');
 		}
 		
 		for (var i = 0; i < this._activeExpectations.length; i++) {
@@ -82,7 +90,7 @@ Mimic.Language = function() {
 	
 	this.andThrow = function(value) {
 		if (this._activeExpectations.length == 0) {
-			throw('not good');
+			throw('The function "andThrow" can only be used when the function "should" precedes it');
 		}
 		
 		for (var i = 0; i < this._activeExpectations.length; i++) {
@@ -92,7 +100,7 @@ Mimic.Language = function() {
 	
 	this.using = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
 		if (this._activeExpectations.length == 0) {
-			throw('not good');
+			throw('The function "using" can only be used when the function "should" precedes it');
 		}
 		
 		if (arg0 == anything) {

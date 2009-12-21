@@ -22,25 +22,41 @@ Screw.Unit(function() {
 			Mimic.clear();
   		});
 
-		it('should successfully restore to the original state of the object', function() {
-			var map, newMap;
-			map = new Map();
-			newMap = new Map();
-			map = mimic(map);
-			expect(Mimic.mimics.length).to(equal, 1);
-			expect(Mimic.mimics[0]).to(equal, map);
-			
-			map = restore(map);
-			
-			expect(Mimic.mimics.length).to(equal, 0);
-			expect(Mimic.Util.Object.equals(map, newMap)).to(be_true);
-		});
-		
 		it('should return itself if the developer tries to mimic an object which is already a mimic object', function() {
 			var firstMimic = mimic(new Map());
 			var secondMimic = mimic(firstMimic);
 			
-			expect(Mimic.Util.Object.equals(firstMimic, secondMimic)).to(be_true);
+			expect(firstMimic).to(equal, secondMimic);
+		});
+		
+		it('should error when exactly is used without a should being used', function() {
+			this.should.say('The function "exactly" can only be used when the function "should" precedes it');
+			mimic(new Map()).exactly(3, times);
+		});
+		
+		it('should error when once is used without a should being used', function() {
+			this.should.say('The function "once" can only be used when the function "should" precedes it');
+			mimic(new Map()).once();
+		});
+		
+		it('should error when once is used without a should being used', function() {
+			this.should.say('The function "twice" can only be used when the function "should" precedes it');
+			mimic(new Map()).twice();
+		});
+		
+		it('should error when andReturn is used without a should being used', function() {
+			this.should.say('The function "andReturn" can only be used when the function "should" precedes it');
+			mimic(new Map()).andReturn();
+		});
+		
+		it('should error when andThrow is used without a should being used', function() {
+			this.should.say('The function "andThrow" can only be used when the function "should" precedes it');
+			mimic(new Map()).andThrow();
+		});
+		
+		it('should error when using is used without a should being used', function() {
+			this.should.say('The function "using" can only be used when the function "should" precedes it');
+			mimic(new Map()).using();
 		});
 	});
 });

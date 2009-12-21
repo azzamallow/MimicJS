@@ -39,7 +39,7 @@ function Mimic() {
 	};
 	
 	this.isMimic = function(mimic) {
-		if (mimic._inject != null) {
+		if (mimic._activeExpectations != null) {
 			return true;
 		}
 		
@@ -57,15 +57,13 @@ function mimic(object) {
 		
 		return mimic;
 	} else {
-		if (Mimic.isMimic(object)) {
-			mimic = object;
-		} else {
+		if (!Mimic.isMimic(object)) {
 			Mimic.Instrument(object);
 			Mimic.mimics.push(object);
 		}
+		
+		return object;
 	}
-
-	return object;
 }
 
 function times(){};
