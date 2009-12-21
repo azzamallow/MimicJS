@@ -31,7 +31,6 @@ function Mimic() {
 	};
 	
 	this.verify = function() {
-		
 		Mimic.Verify();
 		
 		if (this.jQuery != null) {

@@ -23,6 +23,8 @@ DeepObject = {
 	}
 };
 
+deepObject = mimic(DeepObject);
+
 Screw.Unit(function() {
 	describe('should()', function() {
 		before(function() {
@@ -85,10 +87,13 @@ Screw.Unit(function() {
 		});
 		
 		it('should be able to play nice with nested objects in a mimic', function() {
-			deepObject = mimic(DeepObject);
-			
 			given.	deepObject.First.Second();
 			then.	deepObject.should('First.Second');
+		});
+		
+		it('should allow shoulds for nexted objects in a mimic', function() {
+			given.	deepObject.First.Second();
+			then.	deepObject.First.should('Second');
 		});
 		
 		it('should assert an exception without the given, when, then', function() {
