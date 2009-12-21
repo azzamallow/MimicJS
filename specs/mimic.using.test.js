@@ -3,7 +3,7 @@ var Map = function() {
 	this.zoom = function() { this.iveZoomed = true; };
 	this.pan = function(distance, directions) { };
 	this.layers = {
-		markerLayer: function(layer) {}
+		markerLayer: function(layer) { }
 	};
 }
 var map;
