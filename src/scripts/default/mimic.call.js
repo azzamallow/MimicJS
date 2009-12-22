@@ -20,7 +20,7 @@ Mimic.Calls = function() {
 		return calls;
 	};
 	
-	this.withParameters = function(mimic, parameters) {
+	this.nextWithParameters = function(mimic, parameters) {
 		for (var i = 0; i < this.calls.length; i++) {
 			if (this.calls[i].isValidMimic(mimic) && 
 				Mimic.Util.Array.equals(parameters, this.calls[i].parameters) && 

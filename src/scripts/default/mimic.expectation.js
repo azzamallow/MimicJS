@@ -49,7 +49,7 @@ Mimic.Expectations = function() {
 		var failedExpectations = [];
 		
 		for (var i = 0; i < this.expectations.length; i++) {
-			var call = calls.withParameters(this.expectations[i].mimic, this.expectations[i].parameters);
+			var call = calls.nextWithParameters(this.expectations[i].mimic, this.expectations[i].parameters);
 			if (call != null) {
 				call.checked = true;
 			} else {
