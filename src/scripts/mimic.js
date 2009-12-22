@@ -24,19 +24,6 @@ function Mimic() {
 		this.mimics = [];
 	};
 	
-	this.that = function(value) {
-		Mimic._value = value;
-		return Mimic;
-	};
-	
-	this.is = function(value) {
-		if (this._value != value && !Mimic.Util.Object.equals(this._value, value)) {
-			throw('The value ' + value + ' was expected to equal ' + this._value + ', but does not.');
-		}
-		
-		this._value = null;
-	};
-	
 	this.verify = function() {
 		for (var i = 0; i < this.verifiers.length; i++) {
 			this.verifiers[i]();
@@ -53,7 +40,48 @@ function Mimic() {
 		}
 		
 		return false;
+	};
+	
+	this.that = function(value) {
+		Mimic._value = value;
+		return Mimic;
+	};
+	
+	this.is = function(value) {
+		if (this._value != value && !Mimic.Util.Object.equals(this._value, value)) {
+			throw('The value ' + value + ' was expected to equal ' + this._value + ', but does not.');
+		}
+		
+		this._value = null;
+	};
+	
+	this.inject = function(mimic) {
+		if (mimic == undefined) {
+			throw('An object to be injected must be provided');
+		}
+		
+		Mimic._mimic = mimic;
+		return Mimic;
+	};
+	
+	this.into = function(object) {
+		if (object == undefined) {
+			throw('Cannot inject object into an object which has not been provided');
+		}
+				
+		Mimic._object = object;
+		return Mimic;
 	}
+	
+	this.as = function(name) {
+		if (name == null || name == '' || typeof name != 'string') {
+			throw('Cannot inject object when a name is not provided');
+		}
+		
+		Mimic._object[name] = Mimic._mimic;
+		Mimic._object = null;
+		Mimic._mimic = null;
+	};
 };
 
 Mimic = new Mimic();
@@ -88,11 +116,13 @@ window.and = window;
 window.it = window;
 window.should = window;
 window.that = Mimic.that;
+window.inject = Mimic.inject;
 window.expect = Screw.Matchers.expect;
 window.pass = function() {};
 window.say = function(exception) {
 	thrown = exception;
 	return window;
 };
+
 
 var thrown;
