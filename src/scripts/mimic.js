@@ -5,7 +5,7 @@ function Mimic() {
 	this.jQuery = null;
 	this._value = null;
 	
-	this.addVerification = function(log, verifier) {
+	this.register = function(log, verifier) {
 		this.logs.push(log);
 		this.verifiers.push(verifier);
 	};
