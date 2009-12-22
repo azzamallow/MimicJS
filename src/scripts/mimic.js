@@ -26,11 +26,11 @@ function Mimic() {
 	
 	this.verify = function() {
 		for (var i = 0; i < this.verifiers.length; i++) {
-			this.verifiers[i]();
+			this.verifiers[i].verify();
 		}
 		
 		if (this.jQuery != null) {
-			Mimic.Verify.JQuery(this.jQuery);
+			Mimic.Verifier.JQuery(this.jQuery);
 		}
 	};
 	
@@ -61,5 +61,3 @@ function mimic(object) {
 		return object;
 	}
 };
-
-Mimic.Verify = {};
