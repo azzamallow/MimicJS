@@ -25,12 +25,11 @@ Mimic.Instrument = function(object, parentMimic, callPrefix) {
 	
 	object._activeExpectations = [];
 	
-	var language = new Mimic.Language.Default();
-	for (var member in language) {
+	for (var member in Mimic.Language.Default) {
 		var languageFunction = [];
 		
-		if (typeof language[member] == 'function') { 
-			var functionString = eval('language.' + member + '.toString()');	
+		if (typeof Mimic.Language.Default[member] == 'function') { 
+			var functionString = eval('Mimic.Language.Default.' + member + '.toString()');	
 			
 			languageFunction.push('object.');
 			languageFunction.push(member);
