@@ -49,5 +49,5 @@ Mimic.Call = function(mimic, name, parameters) {
 	
 	this.hasName = function(name) {
 		return (this.name == name || (this.mimic._callPrefix + '.' + this.name) == name);
-	}
+	};
 };

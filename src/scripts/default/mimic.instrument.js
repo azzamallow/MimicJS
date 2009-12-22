@@ -25,7 +25,7 @@ Mimic.Instrument = function(object, parentMimic, callPrefix) {
 	
 	object._activeExpectations = [];
 	
-	var language = new Mimic.Language();
+	var language = new Mimic.Language.Default();
 	for (var member in language) {
 		var languageFunction = [];
 		

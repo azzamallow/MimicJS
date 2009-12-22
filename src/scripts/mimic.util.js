@@ -89,6 +89,10 @@ Mimic.Util.Object = {
 			}
 		}
 		
+		if (typeof object1 == typeof object2 && typeof object1 != 'object' && typeof object1 != 'function' && object1 != object2) {
+			return false;
+		}
+		
 		return true;
 	},
 	

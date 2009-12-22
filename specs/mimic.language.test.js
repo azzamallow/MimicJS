@@ -46,5 +46,20 @@ Screw.Unit(function() {
 			this.	should.say('Cannot inject object when a name is not provided');
 			when.	inject(map).into(application).as([1,2,3,4]);
 		});
+		
+		it('should allow an assersion of one value against another', function() {
+			var value1 = 'hello';
+			var value2 = 'hello';
+			
+			given.	that(value1).equals(value2);
+		});
+		
+		it('should fail assersion of one value against another', function() {
+			var value1 = 'hello';
+			var value2 = 'hello2';
+			
+			this.	should.say('The value "hello" was expected to equal "hello2", but does not.');
+			when.	that(value1).equals(value2);
+		});
 	});
 });

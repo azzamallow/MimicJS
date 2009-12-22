@@ -27,4 +27,4 @@ Screw.Specifications.it = function(name, fnOriginal) {
 // Override jQuery "text" so that error messages appear as html
 jQuery.fn.text = function(text) {
 	return this.html(text);
-}
+};

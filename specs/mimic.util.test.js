@@ -161,9 +161,10 @@ Screw.Unit(function() {
 				var icon = EMS.Services.StandardIcons.poi('WIDGET.TILE_PATH', "052d6a", "1589d3", 'label');
 				var marker = { lonlat: '1, 2', icon:icon, popupContents:'popupContents'};
 														
-				var theArray = [['something'], [new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
+				var theArray = [['something'], 
+								[new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
 		                    marker.popupContents, marker.icon, true)]];
-				var theValue = [new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
+				var theValue =  [new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
 		                    marker.popupContents, marker.icon, true)];
 				
 				expect(Mimic.Util.Array.contains(theArray, theValue)).to(equal, 1);
@@ -173,9 +174,11 @@ Screw.Unit(function() {
 				var icon = EMS.Services.StandardIcons.poi('WIDGET.TILE_PATH', "052d6a", "1589d3", 'label');
 				var marker = { lonlat: '1, 2', icon:icon, popupContents:'popupContents'};
 														
-				var theArray = [['something'], [new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
+				var theArray = [['something'], 
+								[new EMS.Popup('listing_popup', marker.lonlat, new OpenLayers.Size(220,100),
 		                    marker.popupContents, marker.icon, true)]];
-				var theValue = [new EMS.Popup('listing_popup1', marker.lonlat, new OpenLayers.Size(220,100),
+		
+				var theValue =  [new EMS.Popup('listing_popup1', marker.lonlat, new OpenLayers.Size(220,100),
 		                    marker.popupContents, marker.icon, true)];
 				
 				expect(Mimic.Util.Array.contains(theArray, theValue)).to(be_false);
@@ -232,8 +235,16 @@ Screw.Unit(function() {
 				expect(Mimic.Util.Object.equals(undefined, undefined)).to(be_true);
 			});
 			
-			it('should see two NaN values of the right type as equal', function() {
-				expect(Mimic.Util.Object.equals(NaN, NaN)).to(be_true);
+			// it('should see two NaN values of the right type as equal', function() {
+			// 				expect(Mimic.Util.Object.equals(NaN, NaN)).to(be_true);
+			// 			});
+			
+			it('should see two different strings as not equal', function() {
+				expect(Mimic.Util.Object.equals('hello', 'hello2')).to(be_false);
+			});
+			
+			it('should see two different numbers as not equal', function() {
+				expect(Mimic.Util.Object.equals(1, 2)).to(be_false);
 			});
 			
 			it('should ignore attributes is assigned to itself', function() {

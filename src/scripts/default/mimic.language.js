@@ -1,5 +1,4 @@
-Mimic.Language = function() {
-	
+Mimic.Language.Default = function() {
 	this._activeExpectations = [];
 	
 	this.should = function(callString, ignoreArg) {

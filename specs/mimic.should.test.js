@@ -68,21 +68,21 @@ Screw.Unit(function() {
 		it('should return its original return value', function() {
 			var original = new Map();
 			
-			given.	that(original.draw()).is(true);
+			given.	that(original.draw()).equals(true);
 			when.	expect(map.draw()).to(be_true);
 		});
 		
 		it('should mimic simple objects from the original object', function() {
 			var original = new Map();
 			
-			given.	that(original.iveZoomed).is(false);
+			given.	that(original.iveZoomed).equals(false);
 			then.	expect(map.iveZoomed).to(be_false);
 		});
 		
 		it('should mimic an array from the original object', function() {
 			var original = new Map();
 			
-			given.	that(original.zoomLevels).is([1, 2, 3, 4]);
+			given.	that(original.zoomLevels).equals([1, 2, 3, 4]);
 			then.	expect(map.zoomLevels).to(equal, [1, 2, 3, 4]);
 		});
 		
