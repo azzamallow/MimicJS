@@ -3,7 +3,7 @@ var banker, account;
 jQuery = mimic(jQuery);
 account = mimic(new Account());
 banker = new Banker();
-account.injectedInto(banker).as('account');
+inject(account).into(banker).as('account');
 
 Screw.Unit(function() {
 	describe('Banker', function() {
