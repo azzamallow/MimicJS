@@ -9,6 +9,8 @@
             <arg value="--type"/>
             <arg value="js"/>
             <arg value="--preserve-semi"/>
+			<arg value="--line-break"/>
+			<arg value="0"/>
             <arg value="--charset"/>
             <arg value="ISO-8859-1"/>
             <arg value="-o"/>
