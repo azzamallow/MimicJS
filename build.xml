@@ -24,6 +24,7 @@
 		<concat destfile="target/mimic.js">
 			<fileset dir="src/scripts">
 				<include name="*-min.js"/>
+				<exclude name="mimic.init-min.js"/>
             </fileset>
 			<fileset dir="src/scripts/default">
 				<include name="*-min.js"/>
@@ -31,6 +32,9 @@
 			<fileset dir="src/scripts/jquery">
 				<include name="*-min.js"/>
             </fileset>	
+			<fileset dir="src/scripts">
+				<include name="mimic.init-min.js"/>
+            </fileset>
 		</concat>
 		
 		<delete failonerror="false">

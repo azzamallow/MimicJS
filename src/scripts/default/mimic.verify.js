@@ -1,9 +1,9 @@
-Mimic.Default.Verify = function() {
-	var expectations = Mimic.Default.Log.expectations;
-	var calls = Mimic.Default.Log.calls;
+Mimic.Verify.Default = function() {
+	var expectations = Mimic.Log.Default.expectations;
+	var calls = Mimic.Log.Default.calls;
 	
-	for (var i = 0; i < Mimic.Default.Log.expectations.expectations.length; i++) {
-		var expectation = Mimic.Default.Log.expectations.expectations[i];
+	for (var i = 0; i < Mimic.Log.Default.expectations.expectations.length; i++) {
+		var expectation = Mimic.Log.Default.expectations.expectations[i];
 		
 		if (eval('expectation.mimic.' + expectation.name) == null) {
 			throw('Your specification did not pass!<br/><p><b>' + expectation.name + '()</b> does not exist, however it is referenced in the specification');

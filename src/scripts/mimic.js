@@ -1,13 +1,20 @@
 function Mimic() {
 	this.mimics = [];
+	this.verifiers = [];
+	this.logs = [];
 	this.jQuery = null;
 	this._value = null;
 	
+	this.addVerification = function(log, verifier) {
+		this.logs.push(log);
+		this.verifiers.push(verifier);
+	};
+	
 	this.reset = function() {
-		if (Mimic.Default) {
-			Mimic.Default.Log.empty();			
+		for (var i = 0; i < this.logs.length; i++) {
+			this.logs[i].empty();
 		}
-		
+				
 		if (this.jQuery != null) {
 			this.jQuery._reset();
 		}
@@ -31,10 +38,12 @@ function Mimic() {
 	};
 	
 	this.verify = function() {
-		Mimic.Verify();
+		for (var i = 0; i < this.verifiers.length; i++) {
+			this.verifiers[i]();
+		}
 		
 		if (this.jQuery != null) {
-			Mimic.Verify(this.jQuery);
+			Mimic.Verify.JQuery(this.jQuery);
 		}
 	};
 	
@@ -48,6 +57,7 @@ function Mimic() {
 };
 
 Mimic = new Mimic();
+Mimic.Verify = {};
 
 function mimic(object) {
 	var mimic;

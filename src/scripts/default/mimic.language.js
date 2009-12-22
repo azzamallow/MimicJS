@@ -1,6 +1,3 @@
-Mimic.Default = {};
-Mimic.Default.Log = new Mimic.Log(new Mimic.Calls(), new Mimic.Expectations());
-
 Mimic.Language = function() {
 	
 	this._activeExpectations = [];
@@ -21,7 +18,7 @@ Mimic.Language = function() {
 		
 		var expectation = new Mimic.Expectation(this, callString, true, parameterCount);
 		expectation.unlimited = true;
-		Mimic.Default.Log.expectations.add(expectation);
+		Mimic.Log.Default.expectations.add(expectation);
 		this._activeExpectations = [];
 		this._activeExpectations.push(expectation);
 
@@ -40,7 +37,7 @@ Mimic.Language = function() {
 		
 		var expectation = new Mimic.Expectation(this, callString, false, parameterCount);
 		expectation.unlimited = true;
-		Mimic.Default.Log.expectations.add(expectation);
+		Mimic.Log.Default.expectations.add(expectation);
 		this._activeExpectations = [];
 		this._activeExpectations.push(expectation);
 		
@@ -74,8 +71,8 @@ Mimic.Language = function() {
 		
 		this._activeExpectations[0].unlimited = false;
 		for (var i = 0; i < callCount - 1; i++) {
-			var expectation = Mimic.Default.Log.expectations.copy(this._activeExpectations[0]);
-			Mimic.Default.Log.expectations.add(expectation);
+			var expectation = Mimic.Log.Default.expectations.copy(this._activeExpectations[0]);
+			Mimic.Log.Default.expectations.add(expectation);
 			this._activeExpectations.push(expectation);
 		}
 		
