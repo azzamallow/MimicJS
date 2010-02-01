@@ -59,6 +59,10 @@ Mimic.Util.Array = {
 
 Mimic.Util.Object = {
 	equals: function(object1, object2) {
+		if (isNaN(object1) && isNaN(object2)) {
+			return true;
+		}
+		
 		if (typeof object1 == 'object' && object1 == null && 
 			typeof object2 == 'object' && object2 == null) {
 			return true;
@@ -68,7 +72,7 @@ Mimic.Util.Object = {
 			typeof object2 == 'undefined' && object2 == undefined) {
 			return true;
 		}
-		
+				
 		if (object1 == null || object2 == null) {
 			return false;
 		}
@@ -77,10 +81,10 @@ Mimic.Util.Object = {
 			if (object1 == object1[i] && typeof object1 == typeof object1[i]) {
 				continue;
 			}
-			
+						
 			if (typeof object1[i] != typeof object2[i]) {
 				return false;
-			} else if (typeof object1[i] == 'object' || typeof object1[i] == 'function') {
+			} else if (typeof object1[i] == 'object' || typeof object1[i] == 'function' || isNaN(object1[i])) {
 				if (this.equals(object1[i], object2[i]) == false) {
 					return false;
 				}	

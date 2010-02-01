@@ -198,6 +198,7 @@ Screw.Unit(function() {
 		describe('when checking the equality of two objects', function() {
 			it('should work with complex objects', function() {
 				var object = {
+					x: NaN,
 					'here': function() {
 						this.something = 'more';
 						this.array = [1, 2, 3, 4];
