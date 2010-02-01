@@ -64,6 +64,14 @@ Screw.Unit(function() {
 			and.	map.pan();
 			then.	it.should.say('Ive decided to throw');
 		});
+				
+		it('should show an alert when the function given is called', function() {
+			map.pan = function() {
+				alert('here is my alert message');
+			}
+			
+			then.it.should.alert('here is my alert message').when.map.pan();
+		});
 		
 		it('should return its original return value', function() {
 			var original = new Map();

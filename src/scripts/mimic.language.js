@@ -51,14 +51,25 @@ window.when = window;
 window.then = window;
 window.and = window;
 window.it = window;
-window.should = window;
 window.that = Mimic.Language.that;
 window.inject = Mimic.Language.inject;
 window.expect = Screw.Matchers.expect;
-window.pass = function() {};
-window.say = function(exception) {
-	thrown = exception;
-	return window;
+window.should = {
+	alert: function(msg) {
+		message = msg;
+		return window;
+	},
+	
+	pass: function() {},
+	
+	say: function(exception) {
+		thrown = exception;
+		return window;
+	}
 };
 
-var thrown;
+window.alert = function(actualMessage) {
+	Screw.Matchers.expect(actualMessage).to(Screw.Matchers.equal, message);
+}
+
+var thrown, message;
