@@ -134,6 +134,25 @@ Screw.Unit(function() {
 				expect(originalObject['secondObject']['anArray'][0]).to(equal, 5);
 				expect(originalObject['firstArray'][1][1]).to(equal, 2);
 			});
+			
+			// it('should clone objects with circular dependencies', function() {
+			// 				var originalObject = {
+			// 					firstObject: { 1:2, 3:4 },
+			// 					secondObject: {
+			// 						thirdObject: null
+			// 					},
+			// 					firstArray: [
+			// 						function() {},
+			// 						{
+			// 							1:2, 3:4
+			// 						}
+			// 					]
+			// 				};
+			// 				originalObject.secondObject.thirdObject = originalObject;
+			// 				
+			// 				var newObject = Mimic.Util.Object.clone(originalObject);
+			// 				expect(Mimic.Util.Object.equals(newObject, originalObject)).to(be_true);
+			// 			});
 		});
 		
 		describe('when taking parameters from the string representation of a function', function() {
@@ -171,7 +190,7 @@ Screw.Unit(function() {
 			});
 
 			it('should fail with more complicated values', function() {
-				var icon = EMS.Services.StandardIcons.poi('WIDGET.TILE_PATH', "052d6a", "1589d3", 'label');
+				var icon = 1;
 				var marker = { lonlat: '1, 2', icon:icon, popupContents:'popupContents'};
 														
 				var theArray = [['something'], 

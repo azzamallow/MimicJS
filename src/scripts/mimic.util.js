@@ -59,7 +59,8 @@ Mimic.Util.Array = {
 
 Mimic.Util.Object = {
 	equals: function(object1, object2) {
-		if (isNaN(object1) && isNaN(object2)) {
+		if (typeof object1 == 'number' && isNaN(object1) && 
+			typeof object2 == 'number' && isNaN(object2)) {
 			return true;
 		}
 		
@@ -134,7 +135,9 @@ Mimic.Util.Object = {
 		}
 		
 	  	for (var key in object) {
-	    	if (object[key] && typeof object[key] == "object") {
+			if (object[key] == object) {
+				newObject[key] = newObject;
+			} else if (object[key] && typeof object[key] == 'object') {
 	      		newObject[key] = Mimic.Util.Object.clone(object[key]);
 	    	} else {
 		 		newObject[key] = object[key];
