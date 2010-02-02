@@ -14,6 +14,16 @@ Mimic.Util.Array = {
 		
   		return false;
   	},
+
+	position: function(array, value) {
+		for (var i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return i;
+			}
+		}
+		
+		return -1;
+	},
 	
 	equals: function(array1, array2) {
 		if (array1 == null || array2 == null) {
@@ -58,7 +68,13 @@ Mimic.Util.Array = {
 }
 
 Mimic.Util.Object = {
-	equals: function(object1, object2) {
+	equals: function(object1, object2, parents) {
+		if (parents == null) {
+			parents = [];
+		}
+		
+		parents.push(object1);
+		
 		if (typeof object1 == 'number' && isNaN(object1) && 
 			typeof object2 == 'number' && isNaN(object2)) {
 			return true;
@@ -82,11 +98,16 @@ Mimic.Util.Object = {
 			if (object1 == object1[i] && typeof object1 == typeof object1[i]) {
 				continue;
 			}
-						
-			if (typeof object1[i] != typeof object2[i]) {
+			
+			var position = Mimic.Util.Array.position(parents, object1[i]);
+			if (position != -1) {
+				if (object1[i] != object2[i]) {
+					return false;
+				}
+			} else if (typeof object1[i] != typeof object2[i]) {
 				return false;
 			} else if (typeof object1[i] == 'object' || typeof object1[i] == 'function' || isNaN(object1[i])) {
-				if (this.equals(object1[i], object2[i]) == false) {
+				if (this.equals(object1[i], object2[i], parents) == false) {
 					return false;
 				}	
 			} else if (object1[i] != object2[i]) {
@@ -127,18 +148,25 @@ Mimic.Util.Object = {
 		return string.join(', ');
 	},
 	
-	clone: function(object) {
+	clone: function(object, parents) {
 		var newObject = (object instanceof Array) ? [] : {};
+		
+		if (parents == null) {
+			parents = [];
+		}
+		
+		parents.push(object);
 		
 		if (typeof object != 'object') {
 			return object;
 		}
 		
 	  	for (var key in object) {
-			if (object[key] == object) {
-				newObject[key] = newObject;
+			var position = Mimic.Util.Array.position(parents, object[key]);
+			if (position != -1) {
+				newObject[key] = parents[position];
 			} else if (object[key] && typeof object[key] == 'object') {
-	      		newObject[key] = Mimic.Util.Object.clone(object[key]);
+	      		newObject[key] = Mimic.Util.Object.clone(object[key], parents);
 	    	} else {
 		 		newObject[key] = object[key];
 			}

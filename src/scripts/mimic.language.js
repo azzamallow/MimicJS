@@ -68,8 +68,13 @@ window.should = {
 	}
 };
 
+window.realAlert = window.alert;
 window.alert = function(actualMessage) {
-	Screw.Matchers.expect(actualMessage).to(Screw.Matchers.equal, message);
+	if (message != undefined && message != null) {
+		Screw.Matchers.expect(actualMessage).to(Screw.Matchers.equal, message);		
+	} else {
+		realAlert(actualMessage);
+	}
 }
 
 var thrown, message;
