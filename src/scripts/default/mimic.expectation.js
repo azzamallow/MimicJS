@@ -13,7 +13,7 @@ Mimic.Expectations = function() {
 	
 	this.returnFor = function(name, parameters) {
 		for (var i in this.expectations) {
-			if (this.expectations[i].name == name && Mimic.Util.Array.equals(this.expectations[i].parameters, parameters)) {
+			if (this.expectations[i].name == name && Mimic.Util.Object.equals(this.expectations[i].parameters, parameters)) {
 				return this.expectations[i].returns;
 			}
 		}

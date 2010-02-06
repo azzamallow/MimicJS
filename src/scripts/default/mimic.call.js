@@ -23,7 +23,7 @@ Mimic.Calls = function() {
 	this.nextWithParameters = function(mimic, parameters) {
 		for (var i = 0; i < this.calls.length; i++) {
 			if (this.calls[i].isValidMimic(mimic) && 
-				Mimic.Util.Array.equals(parameters, this.calls[i].parameters) && 
+				Mimic.Util.Object.equals(parameters, this.calls[i].parameters) && 
 				this.calls[i].checked == false) {
 				return this.calls[i];
 			}

@@ -316,7 +316,7 @@ Screw.Unit(function() {
 					}, 
 					[1,2,3,{
 						'deeper': 'object',
-						'anotherArray': [1,2,3,4,5,6],
+						'anotherArray': [1,2,3,4,5,[6]],
 						'function': function() {
 							this.isCool = true;
 							[1,2,3,4,5].join(geometry, this);
@@ -333,20 +333,20 @@ Screw.Unit(function() {
 					Array.prototype.join.apply(this, ['arguments'])
 				]
 				
-				expect(Mimic.Util.Array.equals(array, array)).to(be_true);
+				expect(Mimic.Util.Object.equals(array, array)).to(be_true);
 			});
 			
 			it('should be false if an array given is not valid', function() {
-				expect(Mimic.Util.Array.equals([], null)).to(be_false);
-				expect(Mimic.Util.Array.equals([], undefined)).to(be_false);
+				expect(Mimic.Util.Object.equals([], null)).to(be_false);
+				expect(Mimic.Util.Object.equals([], undefined)).to(be_false);
 			});
 			
 			it('should be true if the array contains nothing but nulls', function() {
-				expect(Mimic.Util.Array.equals([null, null], [null, null])).to(be_true);
+				expect(Mimic.Util.Object.equals([null, null], [null, null])).to(be_true);
 			});
 
 			it('should be true if the array contains nothing but undefined', function() {
-				expect(Mimic.Util.Array.equals([undefined, undefined], [undefined, undefined])).to(be_true);
+				expect(Mimic.Util.Object.equals([undefined, undefined], [undefined, undefined])).to(be_true);
 			});
 		});
 	});

@@ -7,7 +7,7 @@ Mimic.Util.Array = {
 		}
 		
   		for (var i = 0; i < array1.length; i++) {
-    		if (this.equals(array1[i], array2) == true) {
+    		if (Mimic.Util.Object.equals(array1[i], array2) == true) {
       			return i;
     		}
   		}
@@ -23,35 +23,6 @@ Mimic.Util.Array = {
 		}
 		
 		return -1;
-	},
-	
-	equals: function(array1, array2) {
-		if (array1 == null || array2 == null) {
-			return false;
-		}
-		
-		if (array1.length != array2.length) {
-			return false;
-		}
-		
-		for (var i = 0; i < array1.length; i++) {
-			if (typeof array1[i] == 'object' && typeof array2[i] == 'object') {
-				if (array1[i] != null && array1[i].join != null && 
-					array2[i] != null && array2[i].join != null) {
-					if (this.equals(array1[i], array2[i]) == false) {
-						return false;
-					}					
-				} else {
-					if (Mimic.Util.Object.equals(array1[i], array2[i]) == false) {
-						return false;
-					}
-				}
-			} else if (array1[i] != array2[i]) {
-				return false;
-			}
-		}
-		
-		return true;
 	},
 	
 	clean: function(array) {
