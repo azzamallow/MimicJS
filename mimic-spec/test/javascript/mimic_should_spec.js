@@ -77,13 +77,6 @@ Screw.Unit(function() {
 			then.it.should.alert('here is my alert message').when.map.pan();
 		});
 		
-		it('should return its original return value', function() {
-			var original = new Map();
-			
-			given.	that(original.draw()).equals(true);
-			when.	expect(map.draw()).to(be_true);
-		});
-		
 		it('should mimic simple objects from the original object', function() {
 			var original = new Map();
 			

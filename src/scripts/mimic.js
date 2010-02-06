@@ -45,7 +45,7 @@ function Mimic() {
 
 Mimic = new Mimic();
 
-function mimic(object) {
+function mimic(object, asPartial) {
 	var mimic;
 	if (object.fn && object.fn.jquery) {
 		mimic = Mimic.Object.JQuery;
@@ -54,7 +54,7 @@ function mimic(object) {
 		return mimic;
 	} else {
 		if (!Mimic.isMimic(object)) {
-			Mimic.Instrument(object);
+			Mimic.Instrument(object, asPartial);
 			Mimic.mimics.push(object);
 		}
 		
