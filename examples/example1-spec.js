@@ -32,7 +32,9 @@ Screw.Unit(function() {
 			it('should not be allowed as there is no money in the account', function() {
 				given.	account.should('checkBalance').andReturn(0);
 				and.	account.shouldNot('subtract');
-				this.	should.say('There was no money in the bank account');
+				
+				itShould.say('There was no money in the bank account');
+				
 				when.	banker.withdraw(5000);
 				and.	jQuery().usingSelector('#status').neverHappens();
 			});			
