@@ -48,8 +48,8 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_mimic-test_session',
-    :secret      => 'cdec095636bb68d4a8f95cf306b9baa0de036020876c461f0ebe739a7f021343d52feb49b796ec069057fb6e296b261f2e67a1c3c899abe707fce58cc8a18630'
+    :session_key => '_mimic-jasmine_session',
+    :secret      => 'b9ffa66fa8465a79d270f39fed142c9ab367f782637b6c265d758b1fc542b7139d85a6edf9a608f825a0370a6efd93fac423c71d42b69d06bcd4f56e8a4e10d6'
   }
 
   # Use the database for sessions instead of the cookie-based default,

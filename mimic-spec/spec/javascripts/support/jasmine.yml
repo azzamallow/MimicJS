@@ -1,0 +1,33 @@
+#  Return an array of filepaths relative to src_dir to include before jasmine specs.
+src_files:
+  - scripts/mimic.js
+  - scripts/mimic.util.js
+  - scripts/mimic.verify.js
+  - scripts/mimic.language.js
+  - scripts/mimic.log.js
+  - scripts/overrides/mimic.overrides.jasmine.js
+  - scripts/default/mimic.expectation.js
+  - scripts/default/mimic.call.js
+  - scripts/default/mimic.language.js
+  - scripts/default/mimic.instrument.js
+  - scripts/default/mimic.verify.js
+  - scripts/jquery/mimic.expectation.js
+  - scripts/jquery/mimic.call.js
+  - scripts/jquery/mimic.object.js
+  - scripts/jquery/mimic.object.overrides.js
+  - scripts/jquery/mimic.verify.js
+  - scripts/mimic.init.js
+
+#  Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.
+stylesheets:
+  - stylesheets/**/*.css
+  
+#  Return an array of filepaths relative to spec_dir to include before jasmine specs.
+spec_files:
+  - **/*_spec.js
+
+#  Source directory path. Your src_files must be returned relative to this path. Will use root if left blank.
+src_dir: ../src
+
+#  Spec directory path. Your spec_files must be returned relative to this path.
+spec_dir: spec/javascripts

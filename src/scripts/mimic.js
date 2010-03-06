@@ -20,10 +20,6 @@ function Mimic() {
 		}
 	};
 	
-	this.clear = function() {
-		this.mimics = [];
-	};
-	
 	this.verify = function() {
 		for (var i = 0; i < this.verifiers.length; i++) {
 			this.verifiers[i].verify();

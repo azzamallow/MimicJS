@@ -52,7 +52,8 @@ window.then = window;
 window.and = window;
 window.that = Mimic.Language.that;
 window.inject = Mimic.Language.inject;
-window.should = {
+
+window.itShould = {
 	alert: function(msg) {
 		message = msg;
 		return window;
@@ -69,7 +70,7 @@ window.should = {
 window.realAlert = window.alert;
 window.alert = function(actualMessage) {
 	if (message != undefined && message != null) {
-		Screw.Matchers.expect(actualMessage).to(Screw.Matchers.equal, message);		
+		expect(actualMessage).toEqual(message);		
 	} else {
 		realAlert(actualMessage);
 	}
