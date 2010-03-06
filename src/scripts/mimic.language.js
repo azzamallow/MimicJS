@@ -50,10 +50,6 @@ window.given = window;
 window.when = window;
 window.then = window;
 window.and = window;
-
-// FIXME
-// window.it = window;
-
 window.that = Mimic.Language.that;
 window.inject = Mimic.Language.inject;
 window.should = {

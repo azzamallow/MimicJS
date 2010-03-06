@@ -1,3 +1,7 @@
+require("../../../lib/jasmine/jasmine-0.10.1.js")
+require("../../../lib/jasmine/TrivialReporter.js")
+require("../../../lib/jasmine/consolex.js")
+
 require("../../../jquery-extras/ui.core.js")
 require("../../../jquery-extras/ui.tabs.js")
 
@@ -8,6 +12,7 @@ require("../../../src/scripts/mimic.language.js");
 require("../../../src/scripts/mimic.log.js");
 
 require("../../../src/scripts/overrides/mimic.overrides.screwunit.js");
+require("../../../src/scripts/overrides/mimic.overrides.jasmine.js");
 
 require("../../../src/scripts/default/mimic.expectation.js");
 require("../../../src/scripts/default/mimic.call.js");
