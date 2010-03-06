@@ -17,10 +17,3 @@ module Jasmine
     end
   end
 end
-
-module Jasmine
-  class Config
-    def stop_servers
-    end
-  end
-end
