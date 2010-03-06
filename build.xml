@@ -28,6 +28,9 @@
 				<include name="*-min.js"/>
 				<exclude name="mimic.init-min.js"/>
             </fileset>
+            <fileset dir="src/scripts/overrides">
+				<include name="*-min.js"/>
+            </fileset>
 			<fileset dir="src/scripts/default">
 				<include name="*-min.js"/>
             </fileset>
