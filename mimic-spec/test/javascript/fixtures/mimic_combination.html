@@ -2,43 +2,48 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Application | JavaScript Testing Results</title>
-        <link rel="stylesheet" href="screw.css" type="text/css" charset="utf-8" />
+        <title>Mimic Combination | JavaScript Testing Results</title>
+        <!-- <link rel="stylesheet" href="screw.css" type="text/css" charset="utf-8" /> -->
+        <link rel="stylesheet" type="text/css" href="../../../../lib/jasmine/jasmine.css" />
         
-        <script src="../../../vendor/plugins/blue-ridge/vendor/jquery-1.2.6.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/jquery.fn.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/jquery.print.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/screw.builder.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/screw.matchers.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/screw.events.js"></script>
-        <script src="../../../vendor/plugins/blue-ridge/vendor/screw.behaviors.js"></script>
-        <script src="../../../../jquery-extras/ui.core.js"></script>
-        <script src="../../../../jquery-extras/ui.tabs.js"></script>
+        <!-- <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/jquery-1.2.6.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/jquery.fn.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/jquery.print.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/screw.builder.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/screw.matchers.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/screw.events.js"></script>
+        <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/vendor/screw.behaviors.js"></script> -->
+        <script type="text/javascript" src="../../../../lib/jasmine/jasmine-0.10.1.js"></script>
+        <script type="text/javascript" src="../../../../lib/jasmine/TrivialReporter.js"></script>
+        <script type="text/javascript" src="../../../../lib/jasmine/consolex.js"></script>
+        <!-- <script type="text/javascript" src="../../../../jquery-extras/ui.core.js"></script>
+        <script type="text/javascript" src="../../../../jquery-extras/ui.tabs.js"></script> -->
 
-    	<script src="../../../../src/scripts/mimic.js"></script>
-    	<script src="../../../../src/scripts/mimic.overrides.js"></script>
-    	<script src="../../../../src/scripts/mimic.util.js"></script>
-    	<script src="../../../../src/scripts/mimic.verify.js"></script>
-    	<script src="../../../../src/scripts/mimic.language.js"></script>
-    	<script src="../../../../src/scripts/mimic.log.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/mimic.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/mimic.util.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/mimic.verify.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/mimic.language.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/mimic.log.js"></script>
+        
+        <script type="text/javascript" src="../../../../src/scripts/overrides/mimic.overrides.screwunit.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/overrides/mimic.overrides.jasmine.js"></script>
 
-    	<script src="../../../../src/scripts/default/mimic.default.js"></script>
-    	<script src="../../../../src/scripts/default/mimic.expectation.js"></script>
-    	<script src="../../../../src/scripts/default/mimic.call.js"></script>
-    	<script src="../../../../src/scripts/default/mimic.language.js"></script>
-    	<script src="../../../../src/scripts/default/mimic.instrument.js"></script>
-    	<script src="../../../../src/scripts/default/mimic.verify.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.default.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.expectation.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.call.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.language.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.instrument.js"></script>
+        <script type="text/javascript" src="../../../../src/scripts/default/mimic.verify.js"></script>
+        
+        <script type="text/javascript" src="../../../../src/scripts/mimic.init.js"></script>
     	
-    	<script src="../../../../src/scripts/jquery/mimic.expectation.js"></script>
-    	<script src="../../../../src/scripts/jquery/mimic.call.js"></script>
-    	<script src="../../../../src/scripts/jquery/mimic.object.js"></script>
-    	<script src="../../../../src/scripts/jquery/mimic.object.overrides.js"></script>
-    	<script src="../../../../src/scripts/jquery/mimic.verify.js"></script>
-
-    	<script src="../../../../src/scripts/mimic.init.js"></script>
-    	
-    	<script src="../mimic_combination_spec.js"></script>
+    	<script type="text/javascript" src="../mimic_combination_spec.js"></script>
     </head>
     <body>
+        <script type="text/javascript">
+          var jasmineEnv = jasmine.getEnv();
+          jasmineEnv.reporter = new jasmine.TrivialReporter();
+          jasmineEnv.execute();
+        </script>
     </body>
 </html>

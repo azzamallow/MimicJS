@@ -50,10 +50,12 @@ window.given = window;
 window.when = window;
 window.then = window;
 window.and = window;
-window.it = window;
+
+// FIXME
+// window.it = window;
+
 window.that = Mimic.Language.that;
 window.inject = Mimic.Language.inject;
-window.expect = Screw.Matchers.expect;
 window.should = {
 	alert: function(msg) {
 		message = msg;
