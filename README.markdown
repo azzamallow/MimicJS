@@ -31,7 +31,7 @@ Mimic currently works with all Webkit browsers (such as Safari and Google Chrome
 How To
 ======
 
-Basic examples of how to use Mimic have been provided in the /examples folder. There are more complex examples on how to use Mimic the specs/ folder.
+Working examples of how to use Mimic have been provided in the /examples folder. There are more complex examples on how to use Mimic the mimic-spec/ folder.
 
 Creating a Mimic is easy. 
 
