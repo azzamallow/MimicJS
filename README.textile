@@ -37,7 +37,6 @@ Instantiate a new object and wrap it in the mimic function.
 From here you can now monitor the behaviour of the object and do assertion against it.
 
     john.enrolInSubject('Math');
-
     john.should('enrolInSubject').using('Math');
     
 To verify the assertion, you will need to put Mimic in the context of a testing framework, either Jasmine or ScrewUnit will be fine. Mimic has been tailored to work with these frameworks, and hides the noisy overheads of verifying your assertions, keeping your tests as concise as possible.
@@ -80,9 +79,28 @@ You can also specify verify the following outcomes.
     itShould.say(message); ` Verify an exception was thrown with the given message.
     itShould.pass(); ` Doesn't do much, but is sometimes nice to explicitly say the spec should pass.
     itShould.alert(message); ` Verify an alert was given with the given message.
-    
-h2. Other features
 
+h2. jQuery
+
+Mimic offers assertions against jQuery calls within your objects as well.
+
+To Mimic jQuery, simple do the following.
+
+    mimic(jQuery);
+
+Which allows you to do the following.
+
+    it('should assert against selector', function() {
+        given.  mimic(jQuery);
+        when.	jQuery('.enqueued').show('something');
+    	then.	jQuery().usingSelector('.enqueued').should('show').using('something');
+    	and.    jQuery().usingSelector('.it').neverHappens();
+    });
+
+Mimic supports jQuery-1.2.6 currently and will support later versions soon :)
+  
+h2. Other features
+    
 h3. Partials
 
 Mimic allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial.
@@ -124,8 +142,7 @@ When creating a Mimic for a deep object, Mimic will recurse through the object a
     	then.	deepObject.First.should('Second');
     });
 
-
-h1. Resources
+h1. Links to cool stuff
 
  * Wikipedia BDD (http://en.wikipedia.org/wiki/Behavior_Driven_Development)
  * Jasmine (http://github.com/pivotal/jasmine)
