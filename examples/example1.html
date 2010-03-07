@@ -3,22 +3,31 @@
 	<head>
 		<title>Mimic Example 1</title>
 		
-		<script src="jquery-1.2.6.js"></script>
-	    <script src="jquery.fn.js"></script>
-	    <script src="jquery.print.js"></script>
-	    <script src="screw.builder.js"></script>
-	    <script src="screw.matchers.js"></script>
-	    <script src="screw.events.js"></script>
-	    <script src="screw.behaviors.js"></script>
-
-		<script src="mimic.js"></script>
+		<link rel="stylesheet" type="text/css" href="jasmine.css">
 		
-		<script src="example1.js"></script>
-		<script src="example1-spec.js"></script>
+		<script type="text/javascript" src="jasmine-0.10.1.js"></script>
+		<script type="text/javascript" src="consolex.js"></script>
+		<script type="text/javascript" src="TrivialReporter.js"></script>
+		
+		<script type="text/javascript" src="jquery-1.2.6.js"></script>
+	    <script type="text/javascript" src="jquery.fn.js"></script>
+	    <script type="text/javascript" src="jquery.print.js"></script>
+
+		<script type="text/javascript" src="mimic.js"></script>
+		
+		<script type="text/javascript" src="example1.js"></script>
+		<script type="text/javascript" src="example1-spec.js"></script>
 		
 		<link rel="stylesheet" href="screw.css">
 	</head>
 	<body>
 		<div id="status"></div>
+		
+		<script type="text/javascript">
+          var jasmineEnv = jasmine.getEnv();
+          jasmineEnv.reporter = new jasmine.TrivialReporter();
+          jasmineEnv.execute();
+        </script>
+        
 	</body>
 </html>
