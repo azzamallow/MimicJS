@@ -13,6 +13,7 @@ Mission Statement
 =================
 
 The primary goals for Mimic:
+
 * Bring the goodness of BDD, such as ubiquitous language and readable error messages, closer to the code base,
 * Force the developer to provide function and variable names that make the specification readable, hence making the codebase more meaningful,
 * Deter the use of technical grammar in the specification,
