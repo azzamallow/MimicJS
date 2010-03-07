@@ -30,23 +30,23 @@ Basic examples of how to use Mimic have been provided in the /examples folder. T
 
 Creating a Mimic is easy. 
 
-Instantiate a new object and wrap it in the mimic function.
+Instantiate a new object and wrap it in the mimic function:
 
     john = mimic(new Student());
 
-From here you can now monitor the behaviour of the object and do assertion against it.
+From here you can now monitor the behaviour of the object and do assertion against it:
 
     john.enrolInSubject('Math');
     john.should('enrolInSubject').using('Math');
     
-To verify the assertion, you will need to put Mimic in the context of a testing framework, either Jasmine or ScrewUnit will be fine. Mimic has been tailored to work with these frameworks, and hides the noisy overheads of verifying your assertions, keeping your tests as concise as possible.
+To verify the assertion, you will need to put Mimic in the context of a testing framework, either Jasmine or ScrewUnit will be fine. Mimic has been tailored to work with these frameworks, and hides the noisy overheads of verifying your assertions, keeping your tests as concise as possible:
 
     it('should allow a student to enrol in a subject, function() {
         john.enrolInSubject('Math');
         john.should('enrolInSubject').using('Math');
     });
     
-You can take this further and write your specifications in BDD 'Given, When, Then, And' format. Here is the complete example.
+You can take this further and write your specifications in BDD 'Given, When, Then, And' format. Here is the complete example:
 
     it('should allow a student to enrol in a subject, function() {
         aStudent = new Student();
@@ -60,35 +60,35 @@ All existing features within the testing frameworks (Jasmine and ScrewUnit) can 
     
 h2. Other assertions
 
-Mimic offers all the assertions you would expect.
+Mimic offers all the assertions you would expect:
 
-    should(functionName);` Assert that an object should call the function given.
-    shouldNot(functionName);` Assert that an object should not call the function given.
+    >`should(functionName);` Assert that an object should call the function given.
+    >`shouldNot(functionName);` Assert that an object should not call the function given.
 
-In the context of a should or shouldNot, you can do the following.
+In the context of a should or shouldNot, you can do the following:
 
-    exactly(numberOfTimes, times);` e.g. exactly(3, times) will assert that a function was called exactly three times.
-    once();` will assert that a function was called exactly once.
-    twice();` will assert that a function was called exactly twice.
-    using(params);` e.g. using('John') will assert that a function was called using the given params. Up to ten parameters can be given.
-    andReturn(returnValue);` e.g. andReturn('Math') will stub the function call and force it to return the value given.
-    andThrow(message);` e.g. andThrow('Something went wrong') will force a function call to throw with the message given.
+    >`exactly(numberOfTimes, times);` e.g. exactly(3, times) will assert that a function was called exactly three times.
+    >`once();` will assert that a function was called exactly once.
+    >`twice();` will assert that a function was called exactly twice.
+    >`using(params);` e.g. using('John') will assert that a function was called using the given params. Up to ten parameters can be given.
+    >`andReturn(returnValue);` e.g. andReturn('Math') will stub the function call and force it to return the value given.
+    >`andThrow(message);` e.g. andThrow('Something went wrong') will force a function call to throw with the message given.
 
 You can also specify verify the following outcomes.
 
-    itShould.say(message); ` Verify an exception was thrown with the given message.
-    itShould.pass(); ` Doesn't do much, but is sometimes nice to explicitly say the spec should pass.
-    itShould.alert(message); ` Verify an alert was given with the given message.
+    >`itShould.say(message); ` Verify an exception was thrown with the given message.
+    >`itShould.pass(); ` Doesn't do much, but is sometimes nice to explicitly say the spec should pass.
+    >`itShould.alert(message); ` Verify an alert was given with the given message.
 
 h2. jQuery
 
 Mimic offers assertions against jQuery calls within your objects as well.
 
-To Mimic jQuery, simple do the following.
+To Mimic jQuery, simple do the following:
 
     mimic(jQuery);
 
-Which allows you to do the following.
+Which allows you to do the following:
 
     it('should assert against selector', function() {
         given.  mimic(jQuery);
@@ -103,7 +103,7 @@ h2. Other features
     
 h3. Partials
 
-Mimic allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial.
+Mimic allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial:
 
     Student = function() {
         this.enrolInSubject = function(subject) {
@@ -118,7 +118,7 @@ Mimic allows you to monitor the behaviour of the object you are actually testing
     student = new Student();
     john = mimic(student, asPartial);
 
-A specification may look like this.
+A specification may look like this:
 
     it('should really enrol in a subject', function() {
         student = new Student();
@@ -130,7 +130,7 @@ A specification may look like this.
 
 h3. Deep monitoring
 
-When creating a Mimic for a deep object, Mimic will recurse through the object and Mimic those objects as well. This allows for deep assertions, like the following.
+When creating a Mimic for a deep object, Mimic will recurse through the object and Mimic those objects as well. This allows for deep assertions, like the following:
 
     it('should monitor my deep object', function() {
     	given.	deepObject.First.Second();
