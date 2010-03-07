@@ -31,7 +31,7 @@ Mimic currently works with all Webkit browsers (such as Safari and Google Chrome
 How To
 ======
 
-Working examples of how to use Mimic have been provided in the /examples folder. There are more complex examples on how to use Mimic the mimic-spec/ folder.
+Working examples of how to use Mimic have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples on how to use Mimic the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
 
 Creating a Mimic is easy. 
 
@@ -166,7 +166,7 @@ When creating a Mimic for a deep object, Mimic will recurse through the object a
 Links to cool stuff
 ===================
 
- * Wikipedia BDD (http://en.wikipedia.org/wiki/Behavior_Driven_Development)
- * Jasmine (http://github.com/pivotal/jasmine)
- * ScrewUnit (http://github.com/nkallen/screw-unit)
- * jQuery (http://jquery.com/)
+ * Wikipedia BDD [http://en.wikipedia.org/wiki/Behavior_Driven_Development](http://en.wikipedia.org/wiki/Behavior_Driven_Development)
+ * Jasmine [http://github.com/pivotal/jasmine](http://github.com/pivotal/jasmine)
+ * ScrewUnit [http://github.com/nkallen/screw-unit](http://github.com/nkallen/screw-unit)
+ * jQuery [http://jquery.com/](http://jquery.com/)
