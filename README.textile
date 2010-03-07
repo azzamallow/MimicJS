@@ -62,23 +62,23 @@ h2. Other assertions
 
 Mimic offers all the assertions you would expect:
 
-    >`should(functionName);` Assert that an object should call the function given.
-    >`shouldNot(functionName);` Assert that an object should not call the function given.
+>`should(functionName);` Assert that an object should call the function given.
+>`shouldNot(functionName);` Assert that an object should not call the function given.
 
 In the context of a should or shouldNot, you can do the following:
 
-    >`exactly(numberOfTimes, times);` e.g. exactly(3, times) will assert that a function was called exactly three times.
-    >`once();` will assert that a function was called exactly once.
-    >`twice();` will assert that a function was called exactly twice.
-    >`using(params);` e.g. using('John') will assert that a function was called using the given params. Up to ten parameters can be given.
-    >`andReturn(returnValue);` e.g. andReturn('Math') will stub the function call and force it to return the value given.
-    >`andThrow(message);` e.g. andThrow('Something went wrong') will force a function call to throw with the message given.
+>`exactly(numberOfTimes, times);` e.g. exactly(3, times) will assert that a function was called exactly three times.
+>`once();` will assert that a function was called exactly once.
+>`twice();` will assert that a function was called exactly twice.
+>`using(params);` e.g. using('John') will assert that a function was called using the given params. Up to ten parameters can be given.
+>`andReturn(returnValue);` e.g. andReturn('Math') will stub the function call and force it to return the value given.
+>`andThrow(message);` e.g. andThrow('Something went wrong') will force a function call to throw with the message given.
 
 You can also specify verify the following outcomes.
 
-    >`itShould.say(message); ` Verify an exception was thrown with the given message.
-    >`itShould.pass(); ` Doesn't do much, but is sometimes nice to explicitly say the spec should pass.
-    >`itShould.alert(message); ` Verify an alert was given with the given message.
+>`itShould.say(message); ` Verify an exception was thrown with the given message.
+>`itShould.pass(); ` Doesn't do much, but is sometimes nice to explicitly say the spec should pass.
+>`itShould.alert(message); ` Verify an alert was given with the given message.
 
 h2. jQuery
 
