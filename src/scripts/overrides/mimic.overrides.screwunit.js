@@ -30,8 +30,10 @@ if (typeof Screw != 'undefined') {
 		return this.html(text);
 	};
 	
-	// Allow these to be called within the context of given, when, then
-	window.expect = Screw.Matchers.expect;
-	window.it = window;
+	// Allow these to be called within the context of given, when, then, and
+	if (!window.expect && !window.it) {
+		window.expect = Screw.Matchers.expect;
+		window.it = window;
+	}
 }
 

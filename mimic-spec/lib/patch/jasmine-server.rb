@@ -11,9 +11,12 @@ module Jasmine
         "/__spec__/jquery/jquery.fn.js",
         "/__spec__/jquery/jquery.print.js",
         "/__spec__/jquery/ui.core.js",
-        "/__spec__/jquery/ui.tabs.js"
+        "/__spec__/jquery/ui.tabs.js",
+        "/__spec__/SpecHelper.js"
       ]
-      @jasmine_stylesheets = ["/__JASMINE_ROOT__/lib/jasmine.css"]
+      @jasmine_stylesheets = [
+        "/__JASMINE_ROOT__/lib/jasmine.css"
+        ]
     end
   end
 end
