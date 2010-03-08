@@ -31,7 +31,11 @@ task :artifact do
   first_set = Dir.glob('target/*-min.js')
   first_set = first_set - ['target/mimic.init-min.js']
   
-  ordered_files = first_set + Dir.glob('target/overrides/*-min.js') + Dir.glob('target/default/*-min.js') + Dir.glob('target/jquery/*-min.js') + Dir.glob('target/mimic.init-min.js')  
+  ordered_files = first_set + 
+                  Dir.glob('target/overrides/*-min.js') + 
+                  Dir.glob('target/default/*-min.js') + 
+                  Dir.glob('target/jquery/*-min.js') + 
+                  Dir.glob('target/mimic.init-min.js')  
   `cat #{ordered_files.join(' ')} > target/mimic-#{@@version}.js`
   
   puts 'Cleaning up minified files...'
