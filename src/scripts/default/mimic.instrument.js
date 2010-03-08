@@ -20,7 +20,9 @@ Mimic.Instrument = function(object, asPartial, parentMimic, callPrefix) {
 
 			eval(instrumentedFunction);
 		} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
-			Mimic.Instrument(object[member], asPartial, object, callString);
+			if (!Mimic.isMimic(object[member])) {
+				Mimic.Instrument(object[member], asPartial, object, callString);
+			}
 		}
 	}
 	

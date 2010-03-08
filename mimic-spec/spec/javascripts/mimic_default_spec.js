@@ -59,4 +59,21 @@ describe('defaults', function() {
 		itShould.say('The function "using" can only be used when the function "should" precedes it');
 		mimic(new Map()).using();
 	});
+	
+	it('should reference the same mimic object if a reference to the same object is defined in two different places', function() {
+		var Apple = function() {
+			this.eat = function() {}
+		};
+		var theApple = new Apple();
+		
+		var Person = function() {
+			this.apple = theApple;
+			this.children = {
+				apple: theApple
+			}
+		}
+		var thePerson = mimic(new Person());
+		
+		expect(thePerson.apple).toEqual(thePerson.children.apple);
+	});
 });
