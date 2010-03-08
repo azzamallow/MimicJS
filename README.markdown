@@ -5,14 +5,18 @@ Mimic is a specification framework for Javascript designed with Behaviour Driven
 
 On top of this, Mimic provides the developer with the ability to assert the behaviour of jQuery. A developer can "mimic" the jQuery object, and any use of the object will be recorded and can be asserted in a specification.
 
-Mimic is being developed more and more each day, and the effort will continue until Mimic is complete & consistent.
-
 Mimic was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
+
+Mimic doesn't replace other BDD frameworks
+==========================================
+Mimic is designed to be used in conjunction with the testing framework of your choice. Working with these frameworks, Mimic help developers write meaningful unit tests using BDD syntax.
+
+Mimic currently works seamlessly with both Jasmine and ScrewUnit, though is not limited to just these frameworks.
 
 Releases
 ========
 
-* [Mimic version 0.2](http://github.com/azzamallow/Mimic/tree/master/release/mimic-0.2.js)
+* [Version 0.2](http://github.com/azzamallow/Mimic/tree/master/release/mimic-0.2.js)
 
 Mission Statement
 =================
