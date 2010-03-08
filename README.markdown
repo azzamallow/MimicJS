@@ -9,6 +9,11 @@ Mimic is being developed more and more each day, and the effort will continue un
 
 Mimic was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
 
+Releases
+========
+
+* [Mimic version 0.2](http://github.com/azzamallow/Mimic/tree/master/release/mimic-0.2.js)
+
 Mission Statement
 =================
 

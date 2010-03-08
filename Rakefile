@@ -1,4 +1,4 @@
-@@version = '0.2'
+@@version = '0.3'
 
 desc 'Start Jasmine Server'
 task :start do
@@ -44,6 +44,9 @@ task :dist do
   
   puts 'Copying target file to examples directory...'
   `cp target/mimic-#{@@version}.js examples`
+  
+  puts 'Copying target file to release directory...'
+  `cp target/mimic-#{@@version}.js release`
   
   puts ''
   puts 'DONE!'
