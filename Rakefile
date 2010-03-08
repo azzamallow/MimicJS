@@ -1,3 +1,4 @@
+@@current_release = '0.2'
 @@version = '0.3'
 
 desc 'Start Jasmine Server'
@@ -9,6 +10,7 @@ desc 'Run Continous Integration'
 task :ci do
   sh 'cd mimic-spec && rake jasmine:ci'
 end
+task :default => ['ci']
 
 desc 'Build Mimic'
 task :dist do
@@ -42,11 +44,13 @@ task :dist do
   `rm #{js_src_files.concat(Dir.glob('target/**/*-min.js')).join(' ')}`  
   `rmdir target/default target/jquery target/overrides`
   
-  puts 'Copying target file to examples directory...'
-  `cp target/mimic-#{@@version}.js examples`
+  if @@current_release.eql?(@@version)
+    puts 'Copying target file to examples directory...'
+    `cp target/mimic-#{@@version}.js examples`
   
-  puts 'Copying target file to release directory...'
-  `cp target/mimic-#{@@version}.js release`
+    puts 'Copying target file to release directory...'
+    `cp target/mimic-#{@@version}.js release`
+  end
   
   puts ''
   puts 'DONE!'
