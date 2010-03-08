@@ -11,7 +11,7 @@ task :ci do
 end
 
 desc 'Build Mimic'
-task :artifact do
+task :dist do
   puts "Building Mimic version #{@@version}"
   
   puts 'Prepare target...'
