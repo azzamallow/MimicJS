@@ -33,7 +33,7 @@ Technology
 
 Mimic is built with raw Javascript and does not rely on any Javascript framework to be fully functional.
 
-As it currently stands, Mimic is best used in conjunction with both the ScrewUnit & Jasmine testing framework. For the best experience it is recommended that Mimic is used with Jasmine or ScrewUnit, however Mimic is not limited to these frameworks and can be used with other testing frameworks out there (such as JSSpec).
+As it currently stands, Mimic is best used in conjunction with both the ScrewUnit and Jasmine testing frameworks. For the best experience it is recommended that Mimic is used with Jasmine or ScrewUnit, however Mimic is not limited to these frameworks and can be used with other testing frameworks out there (such as JSSpec).
 
 Mimic currently works with all Webkit browsers (such as Safari and Google Chrome) and Gecko (Mozilla Firefox).
 
