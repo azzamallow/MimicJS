@@ -2,12 +2,12 @@
 
 desc 'Start Jasmine Server'
 task :start do
-  `cd mimic-spec && rake jasmine`
+  sh 'cd mimic-spec && rake jasmine'
 end
 
 desc 'Run Continous Integration'
 task :ci do
-  `cd mimic-spec && rake jasmine:ci`
+  sh 'cd mimic-spec && rake jasmine:ci'
 end
 
 desc 'Build Mimic'
