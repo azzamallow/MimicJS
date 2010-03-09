@@ -1,0 +1,11 @@
+Mimic version 0.2 Release Notes
+
+- Added Jasmine support, can now use mimic with both Jasmine and ScrewUnit
+- Moved automation from blueridge to jasmine-ruby
+- Performance improvements when instrumenting an object
+- Fixed a glitch in instances where the same object was referenced in two different spots. When instrumented they now reference the same mimic
+- Changed 'it.should' syntax. It has been removed and replaced with itShould. the object 'it' was conflicting with the testing frameworks in some instances
+- Replaced ANT script with Rakefile, much nicer now :)
+- Introduced the concept of versions, thats why there is no 0.1
+- Re-arranged examples so there are both Jasmine and ScrewUnit examples.
+- Updated README with a more comprehensive description of Mimic.
