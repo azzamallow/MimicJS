@@ -40,7 +40,7 @@ Mimic currently works with all Webkit browsers (such as Safari and Google Chrome
 How To
 ======
 
-Working examples of how to use Mimic have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples on how to use Mimic the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
+Working examples of how to use Mimic have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples of how to use Mimic in the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
 
 Creating a Mimic is easy. 
 
@@ -48,7 +48,7 @@ Instantiate a new object and wrap it in the mimic function:
 
     john = mimic(new Student());
 
-From here you can now monitor the behaviour of the object and do assertion against it:
+From here you can now monitor the behaviour of the object and do assertions against it:
 
     john.enrolInSubject('Math');
     john.should('enrolInSubject').using('Math');

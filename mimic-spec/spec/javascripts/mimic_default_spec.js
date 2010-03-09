@@ -74,6 +74,8 @@ describe('defaults', function() {
 		}
 		var thePerson = mimic(new Person());
 		
+		thePerson.apple.eat();
+		thePerson.children.apple.should('eat');
 		expect(thePerson.apple).toEqual(thePerson.children.apple);
 	});
 });
