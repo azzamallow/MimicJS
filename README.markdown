@@ -1,17 +1,17 @@
-What is Mimic?
+What is MimicJS?
 ==============
 
-Mimic is a specification framework for Javascript designed with Behaviour Driven Development (BDD) and agile in mind. Rather than simply providing the mechanics of most frameworks (such as stubbing, mocking), Mimic allows a developer to clearly specify the behaviour of an object using its natural syntax, making their unit tests concise and easy to read.
+MimicJS is a specification framework for Javascript designed with Behaviour Driven Development (BDD) and agile in mind. Rather than simply providing the mechanics of most frameworks (such as stubbing, mocking), MimicJS allows a developer to clearly specify the behaviour of an object using its natural syntax, making their unit tests concise and easy to read.
 
-On top of this, Mimic provides the developer with the ability to assert the behaviour of jQuery. A developer can "mimic" the jQuery object, and any use of the object will be recorded and can be asserted in a specification.
+On top of this, MimicJS provides the developer with the ability to assert the behaviour of jQuery. A developer can "mimic" the jQuery object, and any use of the object will be recorded and can be asserted in a specification.
 
-Mimic was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
+MimicJS was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
 
-Mimic doesn't replace other BDD frameworks
+MimicJS doesn't replace other BDD frameworks
 ==========================================
-Mimic is designed to be used in conjunction with the testing framework of your choice. Working with these frameworks, Mimic help developers write meaningful unit tests using BDD syntax.
+MimicJS is designed to be used in conjunction with the testing framework of your choice. Working with these frameworks, MimicJS help developers write meaningful unit tests using BDD syntax.
 
-Mimic currently works seamlessly with both Jasmine and ScrewUnit, though is not limited to just these frameworks.
+MimicJS currently works seamlessly with both Jasmine and ScrewUnit, though is not limited to just these frameworks.
 
 Releases
 ========
@@ -21,7 +21,7 @@ Releases
 Mission Statement
 =================
 
-The primary goals for Mimic:
+The primary goals for MimicJS:
 
 * Bring the goodness of BDD, such as ubiquitous language and readable error messages, closer to the code base,
 * Force the developer to provide function and variable names that make the specification readable, hence making the codebase more meaningful,
@@ -31,16 +31,16 @@ The primary goals for Mimic:
 Technology
 ==========
 
-Mimic is built with raw Javascript and does not rely on any Javascript framework to be fully functional.
+MimicJS is built with raw Javascript and does not rely on any Javascript framework to be fully functional.
 
-As it currently stands, Mimic is best used in conjunction with both the ScrewUnit and Jasmine testing frameworks. For the best experience it is recommended that Mimic is used with Jasmine or ScrewUnit, however Mimic is not limited to these frameworks and can be used with other testing frameworks out there (such as JSSpec).
+As it currently stands, MimicJS is best used in conjunction with both the ScrewUnit and Jasmine testing frameworks. For the best experience it is recommended that MimicJS is used with Jasmine or ScrewUnit, however MimicJS is not limited to these frameworks and can be used with other testing frameworks out there (such as JSSpec).
 
-Mimic currently works with all Webkit browsers (such as Safari and Google Chrome) and Gecko (Mozilla Firefox).
+MimicJS currently works with all Webkit browsers (such as Safari and Google Chrome) and Gecko (Mozilla Firefox).
 
 How To
 ======
 
-Working examples of how to use Mimic have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples of how to use Mimic in the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
+Working examples of how to use MimicJS have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples of how to use MimicJS in the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
 
 Creating a Mimic is easy. 
 
@@ -53,7 +53,7 @@ From here you can now monitor the behaviour of the object and do assertions agai
     john.enrolInSubject('Math');
     john.should('enrolInSubject').using('Math');
     
-To verify the assertion, you will need to put Mimic in the context of a testing framework, either Jasmine or ScrewUnit will be fine. Mimic has been tailored to work with these frameworks, and hides the noisy overheads of verifying your assertions, keeping your tests as concise as possible:
+To verify the assertion, you will need to put Mimic in the context of a testing framework, either Jasmine or ScrewUnit will be fine. MimicJS has been tailored to work with these frameworks, and hides the noisy overheads of verifying your assertions, keeping your tests as concise as possible:
 
     it('should allow a student to enrol in a subject, function() {
         john.enrolInSubject('Math');
@@ -70,7 +70,7 @@ You can take this further and write your specifications in BDD 'Given, When, The
         then.   john.should('enrolInSubject').using('Math');
     });
     
-All existing features within the testing frameworks (Jasmine and ScrewUnit) can be used in conjunction with Mimic.
+All existing features within the testing frameworks (Jasmine and ScrewUnit) can be used in conjunction with MimicJS.
     
 Other assertions
 ----------------
@@ -109,7 +109,7 @@ You can also specify verify the following outcomes.
 jQuery
 ------
 
-Mimic offers assertions against jQuery calls within your objects as well.
+MimicJS offers assertions against jQuery calls within your objects as well.
 
 To Mimic jQuery, simple do the following:
 
@@ -124,7 +124,7 @@ Which allows you to do the following:
     	and.    jQuery().usingSelector('.it').neverHappens();
     });
 
-Mimic supports jQuery-1.2.6 currently and will support later versions soon :)
+MimicJS supports jQuery-1.2.6 currently and will support later versions soon :)
   
 Other features
 ==============
@@ -132,7 +132,7 @@ Other features
 Partials
 --------
 
-Mimic allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial:
+MimicJS allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial:
 
     Student = function() {
         this.enrolInSubject = function(subject) {
@@ -160,7 +160,7 @@ A specification may look like this:
 Deep monitoring
 ---------------
 
-When creating a Mimic for a deep object, Mimic will recurse through the object and Mimic those objects as well. This allows for deep assertions, like the following:
+When creating a Mimic for a deep object, MimicJS will recurse through the object and Mimic those objects as well. This allows for deep assertions, like the following:
 
     it('should monitor my deep object', function() {
     	given.	deepObject.First.Second();
