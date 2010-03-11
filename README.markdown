@@ -1,5 +1,5 @@
 What is MimicJS?
-==============
+================
 
 MimicJS is a specification framework for Javascript designed with Behaviour Driven Development (BDD) and agile in mind. Rather than simply providing the mechanics of most frameworks (such as stubbing, mocking), MimicJS allows a developer to clearly specify the behaviour of an object using its natural syntax, making their unit tests concise and easy to read.
 
@@ -8,7 +8,7 @@ On top of this, MimicJS provides the developer with the ability to assert the be
 MimicJS was conceived by azzamallow, and has the continued support of DiUS Computing Pty Ltd. Thanks guys :)
 
 MimicJS doesn't replace other BDD frameworks
-==========================================
+============================================
 MimicJS is designed to be used in conjunction with the testing framework of your choice. Working with these frameworks, MimicJS help developers write meaningful unit tests using BDD syntax.
 
 MimicJS currently works seamlessly with both Jasmine and ScrewUnit, though is not limited to just these frameworks.
