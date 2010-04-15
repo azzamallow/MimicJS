@@ -67,13 +67,12 @@ Mimic.JQuery = function() {
 	this._inject = function(object) {
 		for(var member in object) {
 			if (typeof object[member] == 'function') {
-				var theFunction = ['this.', member, ' = function(arg0, arg1, arg2, arg3, arg4) { ',
+				eval(['this.', member, ' = function(', Mimic.Util.Parameters.arguments(object[member]), ') { ',
 					'    var call = new Mimic.Call.JQuery(); ',
-					'	 call.set("', member, '", Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4));',
+					'	 call.set("', member, '", Mimic.Util.Object.clone([', Mimic.Util.Parameters.arguments(object[member]), ']));',
 					'	 this._called.push(call);', 
 			 		'    return this;',
-			 		'}'].join('');
-				eval(theFunction);
+			 		'}'].join(''));
 			} else {
 				eval(['this.', member, ' =  object[member];'].join(''));
 			}

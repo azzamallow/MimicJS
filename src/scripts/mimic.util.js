@@ -122,6 +122,10 @@ Mimic.Util.Object = {
 	clone: function(object, parents) {
 		var newObject = (object instanceof Array) ? [] : {};
 		
+		if (object == null) {
+			return null;
+		}
+		
 		if (parents == null) {
 			parents = [];
 		}
@@ -148,22 +152,6 @@ Mimic.Util.Object = {
 }
 
 Mimic.Util.Parameters = {
-	evaluate: function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
-		var parameters = [];
-		for (var i = 0; i < 10; i++) {
-			var evaluated = eval('arg' + i);
-			if (typeof evaluated != 'undefined') {
-				if (evaluated == null) {
-					parameters.push(evaluated);
-				} else {
-					parameters.push(Mimic.Util.Object.clone(evaluated));
-				}
-			}
-		}
-		
-		return parameters;
-	},
-	
 	arguments: function(theFunction) {
 		return theFunction.toString().replace(/ /g, "").split("(")[1].split(")")[0];
 	}

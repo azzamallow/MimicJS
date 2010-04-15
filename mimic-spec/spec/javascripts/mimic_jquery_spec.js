@@ -79,24 +79,24 @@ describe('jquery', function() {
 	});
 	
 	it('should allow for an assertion of a function with a parameter', function() {
-		given.	jQuery('.enqueued').show('speed');
-		then.	jQuery().usingSelector('.enqueued').should('show').using('speed');
+		given.	jQuery('.enqueued').show('speed', 1);
+		then.	jQuery().usingSelector('.enqueued').should('show').using('speed', 1);
 	});
 	
 	it('should fail for an assertion of a function with a parameter', function() {
-		given.	jQuery('.enqueued').show('sp33d');
-		when.	jQuery().usingSelector('.enqueued').should('show').using('speed');
-		then.	itShould.say('Your specification did not pass!<br/><p>The function <b>show()</b> was expected to be called with <b>("speed")</b> but was called with <b>("sp33d")</b>');
+		given.	jQuery('.enqueued').show('sp33d', 1);
+		when.	jQuery().usingSelector('.enqueued').should('show').using('speed', 1);
+		then.	itShould.say('Your specification did not pass!<br/><p>The function <b>show()</b> was expected to be called with <b>("speed", 1)</b> but was called with <b>("sp33d", 1)</b>');
 	});
 	
 	it('should allow for an assertion of multiple functions with parameters', function() {
-		given.	jQuery('.enqueued').show().tabs('select', 1);
-		then.	jQuery().usingSelector('.enqueued').should('show').and('tabs').using('select', 1);
+		given.	jQuery('.enqueued').show().tabs('select');
+		then.	jQuery().usingSelector('.enqueued').should('show').and('tabs').using('select');
 	});
 	
-	it('should fail for an assertion of a function with a parameter', function() {
-		given.	jQuery('.enqueued').show().tabs('select', 1);
-		when.	jQuery().usingSelector('.enqueued').should('show').and('tabz').using('select', 1);
+	it('should fail for an assertion of a multiepl functions with a parameter', function() {
+		given.	jQuery('.enqueued').show().tabs('select');
+		when.	jQuery().usingSelector('.enqueued').should('show').and('tabz').using('select');
 		then.	itShould.say('Your specification did not pass!<br/><p>The function <b>tabz()</b> was expected but did not get called!');
 	});
 	
@@ -105,14 +105,9 @@ describe('jquery', function() {
 		then.	jQuery().usingSelector('.enqueued').should('attr').using({'key':'value'}, 'theName', [1,2,3,4]);
 	});
 	
-	it('should fail for an assertion of a function with a parameter', function() {
+	it('should fail for an assertion of a function with multiple parameters', function() {
 		given.	jQuery('.enqueued').attr({'k3y':'valu3'}, 'theNam3', [1,2,3,'4']);
 		when.	jQuery().usingSelector('.enqueued').should('attr').using({'key':'value'}, 'theName', [1,2,3,'4']);
 		then.	itShould.say('Your specification did not pass!<br/><p>The function <b>attr()</b> was expected to be called with <b>({"key": "value"}, "theName", [1, 2, 3, "4"])</b> but was called with <b>({"k3y": "valu3"}, "theNam3", [1, 2, 3, "4"])</b>');
-	});
-	
-	it('should allow calls to jquery objects with up to four parameters', function() {
-		when.	jQuery('.enqueued').addClass('passed', 1);
-		then.	jQuery().usingSelector('.enqueued').should('addClass').using('passed', 1);
 	});
 });

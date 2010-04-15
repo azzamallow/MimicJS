@@ -5,6 +5,7 @@ src_files:
   - scripts/mimic.verify.js
   - scripts/mimic.language.js
   - scripts/mimic.log.js
+  - scripts/dom/mimic.matchers.js
   - scripts/overrides/mimic.overrides.jasmine.js
   - scripts/overrides/mimic.overrides.screwunit.js
   - scripts/default/mimic.expectation.js
@@ -17,7 +18,6 @@ src_files:
   - scripts/jquery/mimic.object.js
   - scripts/jquery/mimic.object.overrides.js
   - scripts/jquery/mimic.verify.js
-  - scripts/coverage/mimic.coverage.js
   - scripts/mimic.init.js
 
 #  Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.

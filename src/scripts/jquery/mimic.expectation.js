@@ -29,8 +29,8 @@ Mimic.Expectation.JQuery = function(selector, context) {
 		return this;
 	};
 	
-	this.using = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
-		this.functions[this.functions.length - 1].value = Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+	this.using = function() {
+		this.functions[this.functions.length - 1].value = Mimic.Util.Object.clone(Array.apply(null, arguments));
 		
 		return this;
 	};

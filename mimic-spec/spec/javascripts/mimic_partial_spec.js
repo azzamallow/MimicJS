@@ -5,7 +5,7 @@ var Gun = function() {
 }
 var theGun;
 
-describe('partial', function() {		
+describe('mimic types', function() {		
 	it('should be able to monitor the behaviour of a partially mimicd object', function() {
 		given.	theGun = new Gun();
 		when.	mimic(theGun, asPartial);

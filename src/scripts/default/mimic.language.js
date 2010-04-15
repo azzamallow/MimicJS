@@ -98,17 +98,17 @@ Mimic.Language.Default = {
 		}
 	},
 	
-	using: function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
+	using: function() {
 		if (this._activeExpectations.length == 0) {
 			throw('The function "using" can only be used when the function "should" precedes it');
 		}
 		
-		if (arg0 == anything) {
+		if (arguments[0] == anything) {
 			return;
 		}
 		
 		for (var i = 0; i < this._activeExpectations.length; i++) {
-			this._activeExpectations[i].parameters = Mimic.Util.Parameters.evaluate(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+			this._activeExpectations[i].parameters = Mimic.Util.Object.clone(Array.apply(null, arguments));
 		}
 		
 		return this;

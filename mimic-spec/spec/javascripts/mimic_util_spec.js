@@ -71,35 +71,10 @@ OpenLayers = {
 };
 
 describe('Util', function() {
-	describe('when evaluating parameters', function() {
-		it('should evaluate three parameters and return them as an array', function() {
-			expect(Mimic.Util.Parameters.evaluate('string', 3, 4)).toEqual(['string', 3, 4]);
-  		});
-		
-		it('should evaluate no parameters and return an empty array', function() {
-			expect(Mimic.Util.Parameters.evaluate()).toEqual([]);
-  		});
-		
-		it('should evaluate an object parameter and return it in an array', function() {
-			expect(Mimic.Util.Parameters.evaluate({'stuff': 4})).toEqual([{'stuff': 4}]);
-  		});
-		
-		it('should evaluate a function parameter and return it in an array', function() {
-			var theFunction = function() { return true; };
-			expect(Mimic.Util.Parameters.evaluate(theFunction)).toEqual([theFunction]);
-  		});
-		
-		it('should evaluate up to ten parameters', function() {
-			expect(Mimic.Util.Parameters.evaluate(0,1,2,3,4,5,6,7,8,9)).toEqual([0,1,2,3,4,5,6,7,8,9]);
-		});
-		
-		it('should evaluate nulls', function() {
-			expect(Mimic.Util.Parameters.evaluate(null, null)).toEqual([null, null]);
-		});
-		
+	describe('when cloning', function() {
 		it('should clone array when evaluating parameters', function() {
 			var originalArray = [1, 2, 3];
-			var evaluated = Mimic.Util.Parameters.evaluate(originalArray);
+			var evaluated = Mimic.Util.Object.clone(originalArray);
 			evaluated[0] = 4;
 			
 			expect(originalArray[0]).toEqual(1);
@@ -107,7 +82,7 @@ describe('Util', function() {
 		
 		it('should clone object when evaluating parameters', function() {
 			var originalObject = {'key': 'value'};
-			var evaluated = Mimic.Util.Parameters.evaluate(originalObject);
+			var evaluated = Mimic.Util.Object.clone(originalObject);
 			evaluated['key'] = 'anothervalue';
 			
 			expect(originalObject['key']).toEqual('value');
@@ -126,9 +101,9 @@ describe('Util', function() {
 					}
 				]
 			};
-			var evaluated = Mimic.Util.Parameters.evaluate(originalObject);
-			evaluated[0]['secondObject']['anArray'][0] = 1;
-			evaluated[0]['firstArray'][1][1] = 3;
+			var evaluated = Mimic.Util.Object.clone(originalObject);
+			evaluated['secondObject']['anArray'][0] = 1;
+			evaluated['firstArray'][1][1] = 3;
 			
 			expect(originalObject['secondObject']['anArray'][0]).toEqual(5);
 			expect(originalObject['firstArray'][1][1]).toEqual(2);
@@ -151,6 +126,20 @@ describe('Util', function() {
 			
 			var newObject = Mimic.Util.Object.clone(originalObject);
 			expect(Mimic.Util.Object.equals(newObject, originalObject)).toBeTruthy();
+		});
+		
+		it('should clone null by simply returning null', function() {
+			expect(Mimic.Util.Object.clone(null)).toEqual(null);
+		});
+		
+		it('should clone undefined by simply returning undefined', function() {
+			expect(Mimic.Util.Object.clone(undefined)).toEqual(undefined);
+		});
+		
+		it('should clone an array', function() {
+			var array = [1, {}, [], "string"];
+			expect(Mimic.Util.Object.clone(array) == array).toBeFalsy();
+			expect(Mimic.Util.Object.clone(array)).toEqual([1, {}, [], "string"]);
 		});
 	});
 	
