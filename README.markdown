@@ -16,7 +16,7 @@ MimicJS currently works seamlessly with both Jasmine and ScrewUnit, though is no
 Releases
 ========
 
-* [Version 0.2](http://github.com/azzamallow/Mimic/tree/master/release/mimic-0.2.js) ([Release Notes](http://github.com/azzamallow/Mimic/tree/master/release/mimic-0.2.txt))
+* [Version 0.2](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.2.js) ([Release Notes](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.2.txt))
 
 Mission Statement
 =================
@@ -40,7 +40,7 @@ MimicJS currently works with all Webkit browsers (such as Safari and Google Chro
 How To
 ======
 
-Working examples of how to use MimicJS have been provided in the [examples](http://github.com/azzamallow/Mimic/tree/master/examples/) folder. There are more complex examples of how to use MimicJS in the [mimic-spec](http://github.com/azzamallow/Mimic/tree/master/mimic-spec/spec/javascripts/) folder.
+Working examples of how to use MimicJS have been provided in the [examples](http://github.com/azzamallow/MimicJS/tree/master/examples/) folder. There are more complex examples of how to use MimicJS in the [mimic-spec](http://github.com/azzamallow/MimicJS/tree/master/mimic-spec/spec/javascripts/) folder.
 
 Creating a Mimic is easy. 
 
