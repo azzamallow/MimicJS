@@ -1,6 +1,8 @@
 #  Return an array of filepaths relative to src_dir to include before jasmine specs.
 src_files:
   - scripts/mimic.js
+  - scripts/ajax/mimic.ajax.js
+  - scripts/ajax/mimic.instrument.js
   - scripts/mimic.util.js
   - scripts/mimic.verify.js
   - scripts/mimic.language.js

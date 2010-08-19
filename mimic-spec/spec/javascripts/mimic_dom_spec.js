@@ -278,6 +278,49 @@ describe('DOM element', function() {
 				});
 			});
 		});
+	});
+	
+	describe('for form element assertions', function() {
+		describe('when matching the value of elements', function() {
+			describe('and positively matching, then', function() {
+				it('should match when input element has the expected value', function() {
+					var input = document.createElement('input');
+					input.value = 'this is the value';
+					expect(match(input).toHaveValue('this is the value')).toBeTruthy();
+				});
+				
+				it('should not match when the input element does not have the expected value', function() {
+					var input = document.createElement('input');
+					input.value = 'this is the value';
+					expect(match(input).toHaveValue('nah, this is really the value')).toBeFalsy();
+				});
+				
+				xit('should match when the select element has the expected value', function() {
+					var select = document.createElement('select');
+					var option1 = document.createElement('option');
+					option1.value = 'first value';
+					var option2 = document.createElement('option');
+					option2.value = 'second value';
+					select.appendChild(option1);
+					select.appendChild(option2);
+					expect(match(select).toHaveValue('second value')).toBeTruthy();
+				});
+			});
+			
+			describe('and negatively matching, then', function() {
+				it('should match when input element does not have the expected value', function() {
+					var input = document.createElement('input');
+					input.value = 'this is the value';
+					expect(match(input).toNotHaveValue('nah, this is really the value')).toBeTruthy();
+				});
+				
+				it('should not match when the input element does not have the expected value', function() {
+					var input = document.createElement('input');
+					input.value = 'this is the value';
+					expect(match(input).toNotHaveValue('this is the value')).toBeFalsy();
+				});
+			});
+		});
 	});	
 });
 
@@ -286,6 +329,7 @@ describe('DOM element', function() {
 // Form
 // -toHaveValue
 // -toHaveField
+// -toBeEditable
 // Events
 // -toHaveClickEvent
 // -toHaveDoubleClickEvent

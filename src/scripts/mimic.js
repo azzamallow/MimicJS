@@ -42,18 +42,10 @@ function Mimic() {
 Mimic = new Mimic();
 
 function mimic(object, asPartial) {
-	var mimic;
-	if (object.fn && object.fn.jquery) {
-		mimic = Mimic.Object.JQuery;
-		Mimic.jQuery = mimic();
-		
-		return mimic;
-	} else {
-		if (!Mimic.isMimic(object)) {
-			Mimic.Instrument(object, asPartial);
-			Mimic.mimics.push(object);
-		}
-		
-		return object;
+	if (!Mimic.isMimic(object)) {
+		Mimic.Instrument(object, asPartial);
+		Mimic.mimics.push(object);
 	}
+	
+	return object;
 };

@@ -5,6 +5,14 @@ Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
 			callString = [callPrefix, '.', callString].join('');
 		}
 		
+		try {
+			object[member];
+		} catch(e) {
+			if (e.message.indexOf('Permission denied') != -1) {
+				continue;
+			}
+		}
+		
 		if (typeof object[member] == 'function') { 
 			var instrumentedFunction = ['object.', member, ' = function(', Mimic.Util.Parameters.arguments(object[member]), ') { ',
 				'    Mimic.Log.Default.calls.add(new Mimic.Call(this, "', member, '", Mimic.Util.Object.clone([', Mimic.Util.Parameters.arguments(object[member]), '])));', 
@@ -17,7 +25,6 @@ Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
 			}
 			
 			instrumentedFunction = instrumentedFunction.concat(' } }');
-
 			eval(instrumentedFunction.join(''));
 		} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
 			if (!Mimic.isMimic(object[member])) {
@@ -29,8 +36,6 @@ Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
 	object._activeExpectations = [];
 	
 	for (var member in Mimic.Language.Default) {
-		var languageFunction = [];
-		
 		if (typeof Mimic.Language.Default[member] == 'function') { 
 			var functionString = eval('Mimic.Language.Default.' + member + '.toString()');	
 			eval(['object.', member, ' = ', functionString, ';'].join(''));

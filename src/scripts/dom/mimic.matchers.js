@@ -47,6 +47,14 @@ if (typeof jasmine != 'undefined') {
 			
 			toNotHaveSibling: function(expected) {
 				return !this.toHaveSibling(expected);
+			},
+			
+			toHaveValue: function(expected) {
+				return this.actual.value == expected;
+			},
+			
+			toNotHaveValue: function(expected) {
+				return !this.toHaveValue(expected);
 			}
 		});
 	});

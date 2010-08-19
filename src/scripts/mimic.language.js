@@ -78,3 +78,4 @@ window.alert = function(actualMessage) {
 
 var thrown, message;
 var asPartial = true;
+var ajax = Mimic.Ajax;

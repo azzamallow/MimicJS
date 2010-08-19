@@ -11,14 +11,12 @@ describe('screwunit', function() {
 	});
 	
 	it('should change jquerys text function to use jquerys html function', function() {
-		jQuery = originalJQuery; // other tests in the suite have changed jQuery, change it back momentarily
 		jQuery('body').append('<div id="example"><span>exampleText</span></div>');
 		
 		expect(jQuery('#example').text()).toEqual(jQuery('#example').html());
 		expect(jQuery('#example').text()).toEqual('<span>exampleText</span>');
 		
 		jQuery('#example').remove();
-		jQuery = mimic(jQuery);
 	});
 	
 	
