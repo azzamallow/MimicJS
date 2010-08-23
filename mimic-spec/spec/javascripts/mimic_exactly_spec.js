@@ -21,7 +21,7 @@ describe('exactly', function() {
 		and.	map.draw();
 		and.	map.draw();
 		when.	map.should('draw').twice();
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification executed <b>draw() 3</b> times, however the specification expected <b>draw()</b> to be executed <b>2</b> times');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification executed <b>draw() 3</b> times, however the specification expected <b>draw()</b> to be executed <b>2</b> times');
 	});
 	
 	it('should pass as the function given was received multiple times', function() {
@@ -36,7 +36,7 @@ describe('exactly', function() {
 		and.	map.draw();
 		and.	map.draw();
 		when.	map.should('draw').exactly(4, times);
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification executed <b>draw() 3</b> times, however the specification expected <b>draw()</b> to be executed <b>4</b> times');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification executed <b>draw() 3</b> times, however the specification expected <b>draw()</b> to be executed <b>4</b> times');
 	});
 	
 	it('should not append the number of occurrences as more specifications are added', function() {
@@ -51,7 +51,7 @@ describe('exactly', function() {
 	
 	it('should only allow a number to be passed in when specifying number of occurrences', function() {
 		given.	map.draw();
-		then.	itShould.say('A number must be provided when specifying the number of occurrences');
+		then.	itShould.error('A number must be provided when specifying the number of occurrences');
 		when.	map.should('draw').exactly([], times);
 	});
 });

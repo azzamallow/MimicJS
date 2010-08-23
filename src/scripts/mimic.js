@@ -31,19 +31,15 @@ function Mimic() {
 	};
 	
 	this.isMimic = function(mimic) {
-		if (mimic._activeExpectations != null) {
-			return true;
-		}
-		
-		return false;
+		return mimic._activeExpectations != null;
 	};
 };
 
 Mimic = new Mimic();
 
-function mimic(object, asPartial) {
+function mimic(object, withImplementation) {
 	if (!Mimic.isMimic(object)) {
-		Mimic.Instrument(object, asPartial);
+		Mimic.Instrument(object, withImplementation);
 		Mimic.mimics.push(object);
 	}
 	

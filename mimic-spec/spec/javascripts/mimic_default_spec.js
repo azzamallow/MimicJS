@@ -31,32 +31,32 @@ describe('defaults', function() {
 	});
 	
 	it('should error when exactly is used without a should being used', function() {
-		itShould.say('The function "exactly" can only be used when the function "should" precedes it');
+		itShould.error('The function "exactly" can only be used when the function "should" precedes it');
 		mimic(new Map()).exactly(3, times);
 	});
 	
 	it('should error when once is used without a should being used', function() {
-		itShould.say('The function "once" can only be used when the function "should" precedes it');
+		itShould.error('The function "once" can only be used when the function "should" precedes it');
 		mimic(new Map()).once();
 	});
 	
 	it('should error when once is used without a should being used', function() {
-		itShould.say('The function "twice" can only be used when the function "should" precedes it');
+		itShould.error('The function "twice" can only be used when the function "should" precedes it');
 		mimic(new Map()).twice();
 	});
 	
 	it('should error when andReturn is used without a should being used', function() {
-		itShould.say('The function "andReturn" can only be used when the function "should" precedes it');
+		itShould.error('The function "andReturn" can only be used when the function "should" precedes it');
 		mimic(new Map()).andReturn();
 	});
 	
 	it('should error when andThrow is used without a should being used', function() {
-		itShould.say('The function "andThrow" can only be used when the function "should" precedes it');
+		itShould.error('The function "andThrow" can only be used when the function "should" precedes it');
 		mimic(new Map()).andThrow();
 	});
 	
 	it('should error when using is used without a should being used', function() {
-		itShould.say('The function "using" can only be used when the function "should" precedes it');
+		itShould.error('The function "using" can only be used when the function "should" precedes it');
 		mimic(new Map()).using();
 	});
 	

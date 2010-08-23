@@ -61,7 +61,7 @@ window.itShould = {
 	
 	pass: function() {},
 	
-	say: function(exception) {
+	error: function(exception) {
 		thrown = exception;
 		return window;
 	}
@@ -77,5 +77,5 @@ window.alert = function(actualMessage) {
 }
 
 var thrown, message;
-var asPartial = true;
+var withImplementation = true;
 var ajax = Mimic.Ajax;

@@ -54,7 +54,7 @@ describe('multiple', function() {
 	it('should not mix up should expectation between two mimic objects', function() {
 		given.	map.zoom();
 		when.	form.should('zoom');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
+		then.	itShould.error('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
 	});
 	
 	it('should not mix up exactly expectation between two mimic objects', function() {
@@ -62,6 +62,6 @@ describe('multiple', function() {
 		and.	map.zoom();
 		and.	map.zoom();
 		when.	form.should('zoom').exactly(3, times);
-		then.	itShould.say('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
+		then.	itShould.error('Your specification did not pass!<br/><p><b>zoom()</b> was expected but did not get called!')
 	});
 });

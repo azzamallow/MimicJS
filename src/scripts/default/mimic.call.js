@@ -12,7 +12,7 @@ Mimic.Calls = function() {
 	this.withName = function(mimic, name) {
 		var calls = [];
 		for (var i = 0; i < this.calls.length; i++) {
-			if (this.calls[i].isValidMimic(mimic) && this.calls[i].hasName(name)) {
+			if (this.calls[i].isRelatedTo(mimic) && this.calls[i].hasName(name)) {
 				calls.push(this.calls[i]);
 			}
 		}
@@ -22,7 +22,7 @@ Mimic.Calls = function() {
 	
 	this.nextWithParameters = function(mimic, parameters) {
 		for (var i = 0; i < this.calls.length; i++) {
-			if (this.calls[i].isValidMimic(mimic) && 
+			if (this.calls[i].isRelatedTo(mimic) && 
 				Mimic.Util.Object.equals(parameters, this.calls[i].parameters) && 
 				this.calls[i].checked == false) {
 				return this.calls[i];
@@ -39,15 +39,28 @@ Mimic.Call = function(mimic, name, parameters) {
 	this.parameters = parameters;
 	this.checked = false;
 	
-	this.isValidMimic = function(mimic) {
-		if (this.mimic == mimic || this.mimic._parentMimic == mimic) {
-			return true;
+	this.isRelatedTo = function(thisMimic) {
+		var current = this.mimic;
+		while (current != thisMimic) {
+			current = current._parentMimic;
+			if (!current) {
+				return false;
+			}			
 		}
-		
-		return false;
+		return true;
 	};
 	
-	this.hasName = function(name) {
-		return (this.name == name || (this.mimic._callPrefix + '.' + this.name) == name);
+	this.hasName = function(thisName) {
+		var current = this.mimic;
+		var name = this.name;
+		
+		while (thisName != name) {
+			name = current._callPrefix + '.' + name;
+			current = current._parentMimic;
+			if (!current) {
+				return false;
+			}
+		}
+		return true;
 	};
 };

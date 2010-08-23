@@ -42,14 +42,14 @@ describe('combination', function() {
 		and.	map.pan(3, 'left');
 		and.	map.pan(3, 'left');
 		when.	map.should('pan').exactly(3, times).using(3, 'left');
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b></p>');
 	});
 	
 	it('should not pass using a combination of two occurrences and specifying parameters', function() {
 		given.	map.pan(2, 'left');
 		and.	map.pan(3, 'left');
 		when.	map.should('pan').twice().using(2, 'left');
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
 	});
 	
 	it('should not pass using a combination of specifying parameters and number of occurrences', function() {
@@ -57,14 +57,14 @@ describe('combination', function() {
 		and.	map.pan(3, 'left');
 		and.	map.pan(3, 'left');
 		when.	map.should('pan').using(3, 'left').exactly(3, times);
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b></p>');
 	});
 	
 	it('should not pass using a combination of specifying parameters and two occurrences', function() {
 		given.	map.pan(3, 'left');
 		and.	map.pan(2, 'left');
 		when.	map.should('pan').using(2, 'left').twice();
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
 	});
 	
 	it('should pass specifying parameters and using return values', function() {

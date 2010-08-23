@@ -1,10 +1,5 @@
-Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
+Mimic.Instrument = function(object, withImplementation, parentMimic, callPrefix) {
 	for (var member in object) {
-		var callString = member;
-		if (callPrefix != null) {
-			callString = [callPrefix, '.', callString].join('');
-		}
-		
 		try {
 			object[member];
 		} catch(e) {
@@ -20,7 +15,7 @@ Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
 		 		'    	return Mimic.Log.Default.expectations.returnFor("', member, '", Mimic.Util.Array.clean([', Mimic.Util.Parameters.arguments(object[member]), ']));', 
 		 		'    } else {'];
 
-			if (doPartial == true) {
+			if (withImplementation == true) {
 				instrumentedFunction = instrumentedFunction.concat([' return (', object[member].toString(), ')(', Mimic.Util.Parameters.arguments(object[member]), ');']);
 			}
 			
@@ -28,7 +23,7 @@ Mimic.Instrument = function(object, doPartial, parentMimic, callPrefix) {
 			eval(instrumentedFunction.join(''));
 		} else if (typeof object[member] == 'object' && object[member] != null && object[member].join == null) {
 			if (!Mimic.isMimic(object[member])) {
-				Mimic.Instrument(object[member], asPartial, object, callString);
+				Mimic.Instrument(object[member], withImplementation, object, member);
 			}
 		}
 	}

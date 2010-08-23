@@ -5,7 +5,9 @@ DeepObject = {
       	Second: function() {}
   	},
   	Third: {
-		Fourth: function() {}
+		Fourth: {
+			Fifth: function() {}
+		}
 	}
 };
 
@@ -40,12 +42,12 @@ describe('should', function() {
 	it('should not pass as the function given was not received', function() {
 		given.	map.zoom();
 		when.	map.should('draw');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>draw()</b> was expected but did not get called!');
+		then.	itShould.error('Your specification did not pass!<br/><p><b>draw()</b> was expected but did not get called!');
  	});
 	
 	it('should not pass as the function expected does not exist', function() {
 		when.	map.should('nothing');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>nothing()</b> does not exist, however it is referenced in the specification');
+		then.	itShould.error('Your specification did not pass!<br/><p><b>nothing()</b> does not exist, however it is referenced in the specification');
 	});
 	
 	it('should pass when override should not with a should', function() {
@@ -62,7 +64,7 @@ describe('should', function() {
 	it('should throw an exception when the function given is called', function() {
 		when.	map.should('pan').andThrow('Ive decided to throw');
 		and.	map.pan();
-		then.	itShould.say('Ive decided to throw');
+		then.	itShould.error('Ive decided to throw');
 	});
 			
 	it('should show an alert when the function given is called', function() {
@@ -84,13 +86,13 @@ describe('should', function() {
 	});
 	
 	it('should be able to play nice with nested objects in a mimic', function() {
-		given.	deepObject.First.Second();
-		then.	deepObject.should('First.Second');
+		given.	deepObject.Third.Fourth.Fifth();
+		then.	deepObject.should('Third.Fourth.Fifth');
 	});
 	
-	it('should allow shoulds for nexted objects in a mimic', function() {
-		given.	deepObject.First.Second();
-		then.	deepObject.First.should('Second');
+	it('should allow shoulds for nested objects in a mimic', function() {
+		given.	deepObject.Third.Fourth.Fifth();
+		then.	deepObject.Third.should('Fourth.Fifth');
 	});
 	
 	it('should assert an exception without the given, when, then', function() {
@@ -98,11 +100,11 @@ describe('should', function() {
 			throw('an exception was thrown');
 		}
 		
-		itShould.say('an exception was thrown').when.throwing();
+		itShould.error('an exception was thrown').when.throwing();
 	});
 	
 	it('should error when the user tries to provide more than one parameter for should function', function() {
-		itShould.say('Only one parameter can be provided for <b>should()</b>. To provide extra parameters try the following:<br/><p><b>should("pan").using(5000, ...)</b></p>');
+		itShould.error('Only one parameter can be provided for <b>should()</b>. To provide extra parameters try the following:<br/><p><b>should("pan").using(5000, ...)</b></p>');
 		when.	map.should('pan', 5000);
 	});
 });

@@ -20,11 +20,11 @@ describe('shouldNot', function() {
 	it('should not pass as the function given was received', function() {
 		when.	map.draw();
 		and.	map.shouldNot('draw');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>draw()</b> was called, but was not expected to be called');
+		then.	itShould.error('Your specification did not pass!<br/><p><b>draw()</b> was called, but was not expected to be called');
  	});
 	
 	it('should not pass as the function expected does not exist', function() {
 		when.	map.shouldNot('doAnything');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>doAnything()</b> does not exist, however it is referenced in the specification');
+		then.	itShould.error('Your specification did not pass!<br/><p><b>doAnything()</b> does not exist, however it is referenced in the specification');
 	});
 });

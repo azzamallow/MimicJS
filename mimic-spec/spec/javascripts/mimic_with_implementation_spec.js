@@ -6,23 +6,23 @@ var Gun = function() {
 var theGun;
 
 describe('mimic types', function() {		
-	it('should be able to monitor the behaviour of a partially mimicd object', function() {
+	it('should be able to monitor the behaviour of a mimic object with implementation', function() {
 		given.	theGun = new Gun();
-		when.	mimic(theGun, asPartial);
+		when.	mimic(theGun, withImplementation);
 		then.	expect(theGun.shoot('distance', 'direction')).toEqual('distance');
 		and.	theGun.should('shoot').using('distance', 'direction');
 	});
 	
-	it('should create a standard mimic object without monitoring partial behaviour', function() {
+	it('should create a standard mimic object without implementation included', function() {
 		given.	theGun = new Gun();
 		when.	mimic(theGun);
 		then.	expect(theGun.shoot('distance', 'direction')).toEqual(undefined);
 		and.	theGun.should('shoot').using('distance', 'direction');
 	});
 	
-	it('should allow overriding the return value of a partially mimicd object', function() {
+	it('should allow overriding the return value of a mimic object with implementation', function() {
 		given.	theGun = new Gun();
-		when.	mimic(theGun, asPartial);
+		when.	mimic(theGun, withImplementation);
 		and.	theGun.should('shoot').using('distance', 'direction').andReturn('another value');
 		then.	expect(theGun.shoot('distance', 'direction')).toEqual('another value');
 	});

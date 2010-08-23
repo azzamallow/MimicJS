@@ -75,7 +75,7 @@ All existing features within the testing frameworks (Jasmine and ScrewUnit) can 
 Other assertions
 ----------------
 
-Mimic offers all the assertions you would expect:
+MimicJS offers all the assertions you would expect:
 
 >`should(functionName);` Assert that an object should call the function given.
 >
@@ -106,33 +106,70 @@ You can also specify verify the following outcomes.
 >`itShould.alert(message); ` Verify an alert was given with the given message.
 >
 
-jQuery
-------
+DOM Testing
+===========
 
-MimicJS offers assertions against jQuery calls within your objects as well.
+DOM Testing allows a developer to make assertions against the state of the DOM. This feature is currently available for use with Jasmine.
 
-To Mimic jQuery, simple do the following:
-
-    mimic(jQuery);
-
-Which allows you to do the following:
-
-    it('should assert against selector', function() {
-        given.  mimic(jQuery);
-        when.	jQuery('.enqueued').show('something');
-    	then.	jQuery().usingSelector('.enqueued').should('show').using('something');
-    	and.    jQuery().usingSelector('.it').neverHappens();
+    it('should ensure the item has the correct class', function() {
+		item = document.getElementById('item');
+	
+		given.	expect(item).toNotHaveClass('selected');
+		when.	object.selectItem();
+		then.	expect(item).toHaveClass('selected');
     });
 
-MimicJS supports jQuery-1.2.6 currently and will support later versions soon :)
-  
+Other matchers
+--------------
+
+MimicJS offers the following matchers:
+
+>`toHaveClass;` Asserts that an element has a class
+>
+>`toHaveText;` Asserts that an element has specific text
+>
+>`toHaveParent;` Asserts that an element has a specified element as its parent
+>
+>`toHaveChild;` Asserts that an element has a specified element as its child
+>
+>`toHaveSibling;` Asserts that an element has a specified element as its sibling
+>
+>`toHaveValue;` Asserts that an element has a value. 
+>
+
+All matchers can be used negatively as well. For example, toHaveClass has a matching assertion called toNotHaveClass.
+
+More to come soon!
+
+Ajax Testing
+============
+
+MimicJS also provides a simple ajax testing feature. This feature is still under development and will be improved over the coming months.
+
+Ajax testing is not tied to any particular javascript framework. jQuery is being used in the example below.
+
+    var callback = function(response) {
+	    $('#response').text(response);
+    }
+
+    it('should do a basic ajax test', function() {
+    	ajax.monitor();
+
+        when.ajax.requestsFrom('http://www.twitter.com').then.ajax.respondsWith('hello world');
+
+        when.	$.ajax({'url': 'http://www.twitter.com', 'success': callback });
+		then.	expect($('#response').text()).toEqual('hello world');
+
+        ajax.stop();    
+    });
+
 Other features
 ==============
     
-Partials
---------
+Including Implementation
+------------------------
 
-MimicJS allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic as a partial:
+MimicJS allows you to monitor the behaviour of the object you are actually testing. Simple declare a mimic withImplementation:
 
     Student = function() {
         this.enrolInSubject = function(subject) {
@@ -145,14 +182,14 @@ MimicJS allows you to monitor the behaviour of the object you are actually testi
     }
 
     student = new Student();
-    john = mimic(student, asPartial);
+    john = mimic(student, withImplementation);
 
 A specification may look like this:
 
     it('should really enrol in a subject', function() {
         student = new Student();
         
-    	given.	john = mimic(student, asPartial);
+    	given.	john = mimic(student, withImplementation);
 	    when.	john.enrolInSubject('Math');
 	    then.   john.should('reallyEnrolInSubject').using('Math');
     });

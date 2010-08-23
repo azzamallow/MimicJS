@@ -22,13 +22,13 @@ describe('using', function() {
 	it('should not pass as the function given is not called with the right parameters', function() {
 		given.	map.pan(3, 'right');
 		when.	map.should('pan').using(2, 'left');
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(2, "left")</b></p>');
 	});
 	
 	it('should not pass the expectation asserts against null', function() {
 		given.	map.pan(3, 'right');
 		when.	map.should('pan').using(null, null);
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(null, null)</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(null, null)</b></p>');
 	});
 	
 	it('should pass as the function given was called twice with the two different sets of parameters', function() {
@@ -43,13 +43,13 @@ describe('using', function() {
 		and.    map.pan(2, 'left');
 		when.   map.should('pan').using(3, 'left');
 		and.    map.should('pan').using(2, 'right');
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b> or <b>pan(2, "right")</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>pan(3, "left")</b> or <b>pan(2, "right")</b></p>');
 	});
 	
 	it('should not pass when too many parameters are specified', function() {
 		given.  map.pan(2, 'left');
 		when.	map.should('pan').using(3, 'left', 'shouldnt be here', {}, []);
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification executed <b>pan()</b> with <b>5</b> parameters, however the specification expected <b>pan()</b> with <b>2</b> parameters');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification executed <b>pan()</b> with <b>5</b> parameters, however the specification expected <b>pan()</b> with <b>2</b> parameters');
 	});
 	
 	it('should allow "anything" to be given as a parameter', function() {
@@ -60,7 +60,7 @@ describe('using', function() {
 	it('should not pass when a parameter is specified for a function that does not accept parameters', function() {
 		given.	map.draw();
 		when.	map.should('draw').using([], {}, 'something');
-		then.	itShould.say('Your specification did not pass!<br/><p><b>draw()</b> does not accept any parameters. You must remove the parameters from the specification <b>draw()</b>');
+		then.	itShould.error('Your specification did not pass!<br/><p><b>draw()</b> does not accept any parameters. You must remove the parameters from the specification <b>draw()</b>');
 	});
 	
 	it('should be able to test parameters with nested objects as a mimic', function(){
@@ -71,6 +71,6 @@ describe('using', function() {
 	it('should fail as the parameter given with the nested mimic is incorrect', function(){
 		given.	map.layers.markerLayer(['null', 1, [1,2,3,4]]);
 		when.	map.should('layers.markerLayer').using(['null', 2, [1,2,3,4]]);
-		then.	itShould.say('Your specification did not pass!<br/><p>The specification expected <b>layers.markerLayer(["null", 2, [1, 2, 3, 4]])</b></p>');
+		then.	itShould.error('Your specification did not pass!<br/><p>The specification expected <b>layers.markerLayer(["null", 2, [1, 2, 3, 4]])</b></p>');
 	});
 });

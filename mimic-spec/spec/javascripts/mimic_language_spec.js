@@ -17,32 +17,32 @@ describe('inject', function() {
 	});
 	
 	it('should not allow a mimic to be injected because no mimic is provided', function() {
-		itShould.say('An object to be injected must be provided');
+		itShould.error('An object to be injected must be provided');
 		when.	inject().into(application).as('map');
 	});
 	
 	it('should not allow a mimic to be injected because no object to be injected into is provided', function() {
-		itShould.say('Cannot inject object into an object which has not been provided');
+		itShould.error('Cannot inject object into an object which has not been provided');
 		when.	inject(map).into().as('map');
 	});
 	
 	it('should not allow a mimic to be injected because no name was provided for the injected object', function() {
-		itShould.say('Cannot inject object when a name is not provided');
+		itShould.error('Cannot inject object when a name is not provided');
 		when.	inject(map).into(application).as();
 	});
 	
 	it('should not allow a mimic to be injected because a null name was provided for the injected object', function() {
-		itShould.say('Cannot inject object when a name is not provided');
+		itShould.error('Cannot inject object when a name is not provided');
 		when.	inject(map).into(application).as(null);
 	});
 	
 	it('should not allow a mimic to be injected because an empty name was provided for the injected object', function() {
-		itShould.say('Cannot inject object when a name is not provided');
+		itShould.error('Cannot inject object when a name is not provided');
 		when.	inject(map).into(application).as('');
 	});
 	
 	it('should not allow a mimic to be injected because an invalid name type was provided for the injected object', function() {
-		itShould.say('Cannot inject object when a name is not provided');
+		itShould.error('Cannot inject object when a name is not provided');
 		when.	inject(map).into(application).as([1,2,3,4]);
 	});
 	
@@ -57,7 +57,7 @@ describe('inject', function() {
 		var value1 = 'hello';
 		var value2 = 'hello2';
 		
-		itShould.say('The value "hello" was expected to equal "hello2", but does not.');
+		itShould.error('The value "hello" was expected to equal "hello2", but does not.');
 		when.	that(value1).equals(value2);
 	});
 });

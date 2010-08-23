@@ -39,7 +39,7 @@ describe('screwunit', function() {
 			then.	theGun.shouldNot('handle');
 		}
 		
-		itShould.say('Your specification did not pass!<br/><p><b>handle()</b> was called, but was not expected to be called');
+		itShould.error('Your specification did not pass!<br/><p><b>handle()</b> was called, but was not expected to be called');
 		
 		Screw.Specifications.it('simple failing test', simpleFailingTest);
 	});
