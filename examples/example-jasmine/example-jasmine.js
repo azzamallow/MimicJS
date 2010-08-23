@@ -29,7 +29,7 @@ Banker = function() {
 			throw('There was no money in the bank account');
 		} else {
 			this.account.subtract(amount);
-			jQuery('#status')[0].value = 'Subtracted ' + amount + ' from the account!';
+			jQuery('#status').text('Subtracted ' + amount + ' from the account!');
 			jQuery('#status').show();
 		}
 	};

@@ -16,7 +16,13 @@ MimicJS currently works seamlessly with both Jasmine and ScrewUnit, though is no
 Releases
 ========
 
+* [Version 0.3](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.3.js) ([Release Notes](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.3.txt))
+
+Older releases
+--------------
+
 * [Version 0.2](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.2.js) ([Release Notes](http://github.com/azzamallow/MimicJS/tree/master/release/mimic-0.2.txt))
+
 
 Mission Statement
 =================

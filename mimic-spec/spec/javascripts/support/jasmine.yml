@@ -15,11 +15,6 @@ src_files:
   - scripts/default/mimic.language.js
   - scripts/default/mimic.instrument.js
   - scripts/default/mimic.verify.js
-  - scripts/jquery/mimic.expectation.js
-  - scripts/jquery/mimic.call.js
-  - scripts/jquery/mimic.object.js
-  - scripts/jquery/mimic.object.overrides.js
-  - scripts/jquery/mimic.verify.js
   - scripts/mimic.init.js
 
 #  Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.

@@ -1,4 +1,4 @@
-@@current_release = '0.2'
+@@current_release = '0.3'
 @@version = '0.3'
 
 desc 'Start Jasmine Server'
@@ -17,6 +17,7 @@ task :dist do
   puts "Building Mimic version #{@@version}"
   
   puts 'Prepare target...'
+  `mkdir target`
   `rm target/*.js`
   `cp -R src/scripts/* target`
   
@@ -31,18 +32,20 @@ task :dist do
   
   puts 'Creating new target file...'
   first_set = Dir.glob('target/*-min.js')
-  first_set = first_set - ['target/mimic.init-min.js']
+  first_set = first_set - ['target/mimic.init-min.js', 'target/mimic-min.js']
   
-  ordered_files = first_set + 
+  ordered_files = Dir.glob('target/mimic-min.js') + 
+                  Dir.glob('target/ajax/*-min.js') +
+                  first_set +  
+                  Dir.glob('target/dom/*-min.js') + 
                   Dir.glob('target/overrides/*-min.js') + 
                   Dir.glob('target/default/*-min.js') + 
-                  Dir.glob('target/jquery/*-min.js') + 
-                  Dir.glob('target/mimic.init-min.js')  
+                  Dir.glob('target/mimic.init-min.js')
   `cat #{ordered_files.join(' ')} > target/mimic-#{@@version}.js`
   
   puts 'Cleaning up minified files...'
   `rm #{js_src_files.concat(Dir.glob('target/**/*-min.js')).join(' ')}`  
-  `rmdir target/default target/jquery target/overrides`
+  `rmdir target/default target/dom target/ajax target/overrides`
   
   if @@current_release.eql?(@@version)
     puts 'Copying target file to examples directory...'

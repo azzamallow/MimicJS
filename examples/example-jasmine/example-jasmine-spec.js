@@ -1,6 +1,6 @@
 var banker, account;
 
-jQuery = mimic(jQuery);
+// jQuery = mimic(jQuery);
 account = mimic(new Account());
 banker = new Banker();
 inject(account).into(banker).as('account');
@@ -16,26 +16,23 @@ describe('Banker', function() {
 			given.	account.should('checkBalance').andReturn(10000);
 			when.	banker.withdraw(5000);
 			then.	account.should('subtract').using(5000);
-			and.	expect(jQuery('#status')[0].value).toEqual('Subtracted 5000 from the account!');
-			and.	jQuery().usingSelector('#status').should('show');
+			and.	expect(jQuery('#status')[0]).toHaveText('Subtracted 5000 from the account!');
 		});
 		
 		it('should allow the account to be overdrawn even though there is not enough money in the account', function() {
 			given.	account.should('checkBalance').andReturn(2000);
 			when.	banker.withdraw(5000);
 			then.	account.should('subtract').using(5000);
-			and.	expect(jQuery('#status')[0].value).toEqual('Subtracted 5000 from the account!');
-			and.	jQuery().usingSelector('#status').should('show');
+			and.	expect(jQuery('#status')[0]).toHaveText('Subtracted 5000 from the account!');
 		});
 		
 		it('should not be allowed as there is no money in the account', function() {
 			given.	account.should('checkBalance').andReturn(0);
 			and.	account.shouldNot('subtract');
 			
-			itShould.say('There was no money in the bank account');
+			itShould.error('There was no money in the bank account');
 			
 			when.	banker.withdraw(5000);
-			and.	jQuery().usingSelector('#status').neverHappens();
 		});			
 	});
 	

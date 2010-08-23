@@ -1,0 +1,9 @@
+MimicJS version 0.3 Release Notes
+
+- DOM matchers created for Jasmine
+- jQuery behaviour testing has been completely removed for now
+- Simple ajax implementation. Can now test ajax request/responses although this feature is not nearly complete
+- Fixed some issues with deep monitoring feature, had trouble with objects nested more than two levels deep
+- Removed the keyword "say" and have now replaced it with "error". This will hopefully make the fact that an exception has occurred
+- Updated README for DOM matchers and ajax testing
+- Minor code cleanup
