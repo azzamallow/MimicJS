@@ -9,7 +9,7 @@ Mimic.Ajax.Instrument = function() {
 	
 		this.open = function(method, url, async, user, password) { 
 			for (var data in Mimic.Ajax.ajaxData) {
-				if (Mimic.Ajax.ajaxData[data].request == url) {
+				if (Mimic.Ajax.ajaxData[data].request === url) {
 					this.responseText = Mimic.Ajax.ajaxData[data].response;
 					this.status = 200;
 					this.readyState = 4;

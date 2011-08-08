@@ -1,18 +1,20 @@
 describe('Mimic.Ajax', function() {
 	beforeEach(function() {
-		ajax.monitor();
-		if (jQuery('#hello').length == 0) {
+		if (jQuery('#hello').length === 0) {
 			jQuery('body').append('<div id="hello"></div>');			
 		}
 	});
 	
 	afterEach(function() {
-		ajax.reset();
 		jQuery('#hello').empty();
 	});
+	
+	it('should provide a request', function (request) {
+		expect(request).toBeDefined();
+	});
 
-	it('should provide basic ajax request and response stubbing', function() {
-		when.ajax.requestsFrom('http://www.twitter.com').then.ajax.respondsWith('hello world');
+	it('should provide basic ajax request and response stubbing', function(request) {
+		request('http://www.twitter.com').toHaveResponse(Mimic.Ajax.SUCCESS, 'hello world');
 
 		tweet = new XMLHttpRequest();
 		tweet.onreadystatechange = function(response) {
@@ -24,8 +26,8 @@ describe('Mimic.Ajax', function() {
 		then.expect(jQuery('#hello')[0]).toHaveText('hello world');
 	});
 	
-	it('should set the neccassary variables on the XMLHttpRequest with a successful response', function() {
-		when.ajax.requestsFrom('http://www.twitter2.com').then.ajax.respondsWith('hello world');
+	it('should set the neccassary variables on the XMLHttpRequest with a successful response', function(request) {
+		request('http://www.twitter2.com').toHaveResponse(Mimic.Ajax.SUCCESS, 'hello world');
 		
 		tweet = new XMLHttpRequest();
 		tweet.onreadystatechange = function(response) {}
@@ -36,8 +38,8 @@ describe('Mimic.Ajax', function() {
 		and.expect(tweet.readyState).toEqual(4);
 	});
 	
-	it('should allow basic ajax request and response stubbing when using jQuery ajax call', function() {
-		when.ajax.requestsFrom('http://www.twitter3.com').then.ajax.respondsWith('called with jquery');
+	it('should allow basic ajax request and response stubbing when using jQuery ajax call', function(request) {
+		request('http://www.twitter3.com').toHaveResponse(Mimic.Ajax.SUCCESS, 'called with jquery');
 		
 		var success = function(response, status) {
 			jQuery('#hello').text(response);
@@ -47,8 +49,8 @@ describe('Mimic.Ajax', function() {
 		then.	expect(jQuery('#hello').text()).toEqual('called with jquery');
 	});	
 	
-	it('should allow ajax stubbing when using jQuery getJSON call', function() {
-		when.ajax.requestsFrom('http://www.twitter4.com').then.ajax.respondsWith('[1,2,3,4]');
+	it('should allow ajax stubbing when using jQuery getJSON call', function(request) {
+		request('http://www.twitter4.com').toHaveResponse(Mimic.Ajax.SUCCESS, '[1,2,3,4]');
 		
 		var success = function(data) {
 			jQuery('#hello').text(data.join(','));

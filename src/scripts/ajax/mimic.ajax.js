@@ -1,4 +1,6 @@
 Mimic.Ajax = {
+	SUCCESS: 200,
+	
 	requestMimic: {},
 	
 	_XMLHttpRequest: XMLHttpRequest,
@@ -7,24 +9,26 @@ Mimic.Ajax = {
 	
 	ajaxData: [],
 	
-	monitor: function() {
+	monitor: function () {
 		Mimic.Ajax.Instrument();
 	},
 	
-	reset: function() {
+	reset: function () {
 		XMLHttpRequest = this._XMLHttpRequest;
 		this.ajaxData = [];
 	},
 	
-	requestsFrom: function(request) {
-		this._request = request;
-		return window;
+	Request: function (url) {
+		Mimic.Ajax._request = url;
+		return Mimic.Ajax.matchers;
 	},
 	
-	respondsWith: function(response) {
-		this.ajaxData.push({
-			'request': this._request,
-			'response': response
-		});
+	matchers: {
+		toHaveResponse: function (status, text) {
+			Mimic.Ajax.ajaxData.push({
+				'request': Mimic.Ajax._request,
+				'response': text
+			});
+		}
 	}
 }

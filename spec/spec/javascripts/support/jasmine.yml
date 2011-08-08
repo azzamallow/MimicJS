@@ -9,7 +9,6 @@ src_files:
   - scripts/mimic.log.js
   - scripts/dom/mimic.matchers.js
   - scripts/overrides/mimic.overrides.jasmine.js
-  - scripts/overrides/mimic.overrides.screwunit.js
   - scripts/default/mimic.expectation.js
   - scripts/default/mimic.call.js
   - scripts/default/mimic.language.js
