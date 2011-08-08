@@ -3,11 +3,7 @@ Mimic.Ajax = function () {
 	var matchers = function (url) {
 		return {
 			toHaveResponse: function (status, text) {
-				data.push({
-					'url': url,
-					'text': text,
-					'status': status
-				});
+				data.push({ 'url': url, 'text': text, 'status': status });
 			}
 		};
 	};
@@ -25,10 +21,10 @@ Mimic.Ajax = function () {
 			this.status = -1;
 			this.statusText = null;
 			this.open = function (method, url, async, user, password) { 
-				for (var item in data) {
-					if (data[item].url === url) {
-						this.responseText = data[item].text;
-						this.status = data[item].status;
+				for (var i = 0; i< data.length; i++) {
+					if (data[i].url === url) {
+						this.responseText = data[i].text;
+						this.status = data[i].status;
 						this.readyState = 4;
 					}
 				}
@@ -44,7 +40,8 @@ Mimic.Ajax = function () {
 	};
 };
 
-Mimic.Ajax.Codes = {
+Mimic.HTTP = {
 	'SUCCESS': 200,
-	'INTERNAL_SERVER_ERROR': 500	
+	'INTERNAL_SERVER_ERROR': 500,
+	'NOT_FOUND': 404	
 };
