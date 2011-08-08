@@ -27,7 +27,7 @@ describe('Mimic.Ajax', function() {
 	});
 	
 	it('should set the neccassary variables on the XMLHttpRequest with a successful response', function(request) {
-		request('http://www.twitter2.com').toHaveResponse(Mimic.Ajax.SUCCESS, 'hello world');
+		request('http://www.twitter2.com').toHaveResponse(Mimic.Ajax.Codes.SUCCESS, 'hello world');
 		
 		tweet = new XMLHttpRequest();
 		tweet.onreadystatechange = function(response) {}
@@ -39,7 +39,7 @@ describe('Mimic.Ajax', function() {
 	});
 	
 	it('should allow basic ajax request and response stubbing when using jQuery ajax call', function(request) {
-		request('http://www.twitter3.com').toHaveResponse(Mimic.Ajax.SUCCESS, 'called with jquery');
+		request('http://www.twitter3.com').toHaveResponse(Mimic.Ajax.Codes.SUCCESS, 'called with jquery');
 		
 		var success = function(response, status) {
 			jQuery('#hello').text(response);
@@ -50,7 +50,7 @@ describe('Mimic.Ajax', function() {
 	});	
 	
 	it('should allow ajax stubbing when using jQuery getJSON call', function(request) {
-		request('http://www.twitter4.com').toHaveResponse(Mimic.Ajax.SUCCESS, '[1,2,3,4]');
+		request('http://www.twitter4.com').toHaveResponse(Mimic.Ajax.Codes.SUCCESS, '[1,2,3,4]');
 		
 		var success = function(data) {
 			jQuery('#hello').text(data.join(','));
@@ -58,5 +58,16 @@ describe('Mimic.Ajax', function() {
 		
 		when.	jQuery.getJSON('http://www.twitter4.com', success );
 		then.	expect(jQuery('#hello').text()).toEqual('1,2,3,4');
+	});
+	
+	it('should allow a 500 response', function (request) {
+		request('http://www.twitter.com').toHaveResponse(Mimic.Ajax.Codes.INTERNAL_SERVER_ERROR);
+		
+		var error = function(response, status) {
+			jQuery('#hello').text(response.status);
+		}
+		
+		when.	jQuery.ajax({'url': 'http://www.twitter.com', 'error': error });
+		then.	expect(parseInt(jQuery('#hello').text())).toEqual(Mimic.Ajax.Codes.INTERNAL_SERVER_ERROR);
 	});
 });
