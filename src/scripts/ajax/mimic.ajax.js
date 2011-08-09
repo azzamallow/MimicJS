@@ -5,10 +5,10 @@ if (typeof Mimic === 'undefined') {
 Mimic.Ajax = function () {
 	var that = this;
 	this.data = [];
-	var matchers = function (url, context) {
+	var matchers = function (url, ajax) {
 		return {
 			toHaveResponse: function (status, text) {
-				context.data.push({ 'url': url, 'text': text, 'status': status });
+				ajax.data.push({ 'url': url, 'text': text, 'status': status });
 			}
 		};
 	};
