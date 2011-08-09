@@ -11,9 +11,9 @@ describe('exactly', function() {
 	});
 	
 	it('should pass as the function given was received twice', function() {
-		when.	map.draw();
-		and.	map.draw();
-		then.	map.should('draw').twice();
+		map.draw();
+		map.draw();
+		map.should('draw').twice();
 	});
 	
 	it('should not pass as the function given was not received twice', function() {

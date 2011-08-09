@@ -2,13 +2,13 @@
 src_files:
   - scripts/mimic.js
   - scripts/ajax/mimic.ajax.js
-  - scripts/ajax/mimic.instrument.js
   - scripts/mimic.util.js
   - scripts/mimic.verify.js
   - scripts/mimic.language.js
   - scripts/mimic.log.js
   - scripts/dom/mimic.matchers.js
   - scripts/overrides/mimic.overrides.jasmine.js
+  - scripts/ajax/mimic.ajax.overrides.js
   - scripts/default/mimic.expectation.js
   - scripts/default/mimic.call.js
   - scripts/default/mimic.language.js

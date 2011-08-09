@@ -19,7 +19,7 @@ task :dist_ajax do
   print 'Prepare target...'
   `mkdir target`
   `rm target/*.js`
-  `cp -R src/scripts/mimic.js src/scripts/mimic.language.js src/scripts/ajax/* src/scripts/overrides/* target`
+  `cp -R src/scripts/ajax/* target`
   puts 'done!'
   
   print 'Creating minified files...'
