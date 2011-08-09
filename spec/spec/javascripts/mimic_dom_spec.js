@@ -33,6 +33,20 @@ describe('DOM element', function() {
 		
 	describe('For style assertions', function() {
 		describe('when matching class names', function() {
+			describe('and matching a jquery object', function () {
+				it('should match when a single element is provided', function () {
+					expect(match($('<div class="theClassName" />')).toHaveClass('theClassName')).toPass();
+				});
+				
+				it('should match when multiple elements are provided', function () {
+					expect(match($('<div class="theClassName" /><div class="theClassName" /><div class="theClassName" />')).toHaveClass('theClassName')).toPass();
+				});
+				
+				it('should match when multiple elements are provided but not all have the class expected', function () {
+					expect(match($('<div class="theClassName" /><div class="anotherClassName" /><div class="theClassName" />')).toHaveClass('theClassName')).toPass();
+				});
+			});
+			
 			describe('and positively matching, then', function() {
 				it('should match when only one class name is available', function() {
 					var element = document.createElement('div');
