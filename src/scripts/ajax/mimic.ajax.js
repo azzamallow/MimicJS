@@ -17,7 +17,7 @@ Mimic.Ajax = function () {
 	};
 	
 	this.start = function () {
-		XMLHttpRequest = function() {
+		XMLHttpRequest = function () {
 			this.onreadystatechange = undefined;
 			this.readyState = -1;
 			this.responseText = null;
@@ -45,6 +45,14 @@ Mimic.Ajax = function () {
 		};
 	};
 };
+
+Mimic.Ajax.getInstance = function() {
+	if (Mimic.Ajax.instance == null) {
+	    Mimic.Ajax.instance = new Mimic.Ajax();
+	}
+
+	return Mimic.Ajax.instance;
+}
 
 Mimic.HTTP = {
 	'SUCCESS': 200,

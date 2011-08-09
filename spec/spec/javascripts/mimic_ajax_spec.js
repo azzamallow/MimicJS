@@ -12,6 +12,21 @@ describe('Mimic.Ajax', function() {
 	it('should provide a request', function (request) {
 		expect(request).toBeDefined();
 	});
+	
+	describe('nested describe with a before stubbing ajax', function (request) {
+		beforeEach(function(request) {
+			request('http://www.twitter3.com').toHaveResponse(Mimic.HTTP.SUCCESS, 'called with jquery');
+		});
+		
+		it('should still pass', function () {
+			var success = function(response) {
+				jQuery('#hello').text(response);
+			}
+			jQuery.ajax({'url': 'http://www.twitter3.com', 'success': success });
+
+			expect(jQuery('#hello').text()).toEqual('called with jquery');
+		});
+	});
 
 	it('should provide basic ajax request and response stubbing', function (request) {
 		request('http://www.twitter.com').toHaveResponse(Mimic.HTTP.SUCCESS, 'hello world');
