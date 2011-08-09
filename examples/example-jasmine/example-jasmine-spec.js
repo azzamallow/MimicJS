@@ -1,6 +1,5 @@
 var banker, account;
 
-// jQuery = mimic(jQuery);
 account = mimic(new Account());
 banker = new Banker();
 inject(account).into(banker).as('account');

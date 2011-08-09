@@ -30,7 +30,6 @@ describe('Mimic.Ajax', function() {
 		request('http://www.twitter2.com').toHaveResponse(Mimic.HTTP.SUCCESS, 'hello world');
 		
 		tweet = new XMLHttpRequest();
-		tweet.onreadystatechange = function(response) {}
 		tweet.open("GET", "http://www.twitter2.com", true);
 		tweet.send();
 		
@@ -44,8 +43,8 @@ describe('Mimic.Ajax', function() {
 		var success = function(response) {
 			jQuery('#hello').text(response);
 		}
-		
 		jQuery.ajax({'url': 'http://www.twitter3.com', 'success': success });
+		
 		expect(jQuery('#hello').text()).toEqual('called with jquery');
 	});	
 	
